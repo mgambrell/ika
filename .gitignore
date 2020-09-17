@@ -1,0 +1,7 @@
+/common/Debug
+/engine/Debug
+/ikaMap/Debug
+/iked/Debug
+/rho/obj
+.vs
+*.user
