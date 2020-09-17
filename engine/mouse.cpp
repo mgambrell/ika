@@ -1,4 +1,4 @@
-#include "SDL/SDL.h"
+#include "SDL/include/SDL.h"
 #include "mouse.h"
 
 Mouse::Mouse()

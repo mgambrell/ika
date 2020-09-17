@@ -2,7 +2,7 @@
 #include "ObjectDefs.h"
 #include "main.h"
 #include "timer.h"
-#include "SDL/SDL.h"
+#include "SDL/include/SDL.h"
 
 #define METHOD(x)  PyObject* x(PyObject* /*self*/, PyObject* args)
 #define METHOD1(x) PyObject* x(PyObject* /*self*/)

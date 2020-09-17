@@ -1,7 +1,5 @@
-#ifdef linux
 #include <string.h>
 #include <memory>
-#endif
 #include <limits>
 
 #include "fontfile.h"

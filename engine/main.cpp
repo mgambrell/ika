@@ -1,8 +1,8 @@
 #include <algorithm>
 #include <stdexcept>
 #include <fstream>
-#include <SDL/SDL.h>
-#include <SDL/SDL_syswm.h>
+#include "SDL/include/SDL.h"
+#include "SDL/include/SDL_syswm.h"
 
 #include "main.h"
 
@@ -272,7 +272,7 @@ void Engine::Startup(std::string& pathname) {
 #if (!defined _DEBUG)
         SDL_WM_SetCaption(title.c_str(), 0);
 #else
-        SDL_WM_SetCaption(va("%s (debug)", title), 0);
+        SDL_WM_SetCaption(va("%s (debug) _MSC_VER=%d", title.c_str(),_MSC_VER), 0);
 #endif
 
         Log::Write("Initializing Video");

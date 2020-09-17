@@ -47,18 +47,6 @@ uint lengthof(const T (&array)[N]) {
     }
 #endif
 
-template <bool B>
-struct static_assertion {
-    int static_assert_failed[B ? 1 : -1];
-};
-
-#ifndef __GNUC__
-static_assertion<sizeof(u8) == 1>;
-static_assertion<sizeof(u16) == 2>;
-static_assertion<sizeof(u32) == 4>;
-static_assertion<sizeof(u64) == 8>;
-#endif
-
 // This really belongs in the language anyway, or whatever.
 #define foreach BOOST_FOREACH
 

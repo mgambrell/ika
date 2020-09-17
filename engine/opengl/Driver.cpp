@@ -1,12 +1,12 @@
 
 #include <math.h>
 
-#include "SDL/SDL_opengl.h"
+#include "SDL/include/SDL_opengl.h"
 
 #include "Driver.h"
 #include "Image.h"
 
-#include "types.h"
+//#include "types.h"
 #include "utility.h"
 #include "Canvas.h"
 #include "log.h"

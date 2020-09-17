@@ -1,6 +1,6 @@
 #include <cassert>
 #include "joystick.h"
-#include "SDL/SDL.h"
+#include "SDL/include/SDL.h"
 #include "common/log.h"
 
 Joystick::Joystick(uint index)

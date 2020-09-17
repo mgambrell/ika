@@ -1,5 +1,5 @@
 #include <cassert>
-#include <SDL/SDL.h>
+#include "SDL/include/SDL.h"
 
 #include "input.h"
 #include "keyboard.h"

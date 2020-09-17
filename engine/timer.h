@@ -1,5 +1,5 @@
 #pragma once
-#include <SDL/SDL.h>
+#include "SDL/include/SDL.h"
 
 // Ticks in a second.
 const int timeRate = 100;

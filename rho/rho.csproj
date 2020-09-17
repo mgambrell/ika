@@ -1,449 +1,303 @@
-<VisualStudioProject>
-    <CSHARP
-        ProjectType = "Local"
-        ProductVersion = "7.10.3077"
-        SchemaVersion = "2.0"
-        ProjectGuid = "{5079A4EA-DB90-497D-8759-4ABC0EEB82C6}"
-    >
-        <Build>
-            <Settings
-                ApplicationIcon = "App.ico"
-                AssemblyKeyContainerName = ""
-                AssemblyName = "rho"
-                AssemblyOriginatorKeyFile = ""
-                DefaultClientScript = "JScript"
-                DefaultHTMLPageLayout = "Grid"
-                DefaultTargetSchema = "IE50"
-                DelaySign = "false"
-                OutputType = "WinExe"
-                PreBuildEvent = ""
-                PostBuildEvent = ""
-                RootNamespace = "rho"
-                RunPostBuildEvent = "OnBuildSuccess"
-                StartupObject = "rho.MainForm"
-            >
-                <Config
-                    Name = "Debug"
-                    AllowUnsafeBlocks = "true"
-                    BaseAddress = "285212672"
-                    CheckForOverflowUnderflow = "false"
-                    ConfigurationOverrideFile = ""
-                    DefineConstants = "DEBUG;TRACE"
-                    DocumentationFile = ""
-                    DebugSymbols = "true"
-                    FileAlignment = "4096"
-                    IncrementalBuild = "true"
-                    NoStdLib = "false"
-                    NoWarn = ""
-                    Optimize = "false"
-                    OutputPath = "bin\Debug\"
-                    RegisterForComInterop = "false"
-                    RemoveIntegerChecks = "false"
-                    TreatWarningsAsErrors = "false"
-                    WarningLevel = "4"
-                />
-                <Config
-                    Name = "Release"
-                    AllowUnsafeBlocks = "true"
-                    BaseAddress = "285212672"
-                    CheckForOverflowUnderflow = "false"
-                    ConfigurationOverrideFile = ""
-                    DefineConstants = "TRACE"
-                    DocumentationFile = ""
-                    DebugSymbols = "false"
-                    FileAlignment = "4096"
-                    IncrementalBuild = "false"
-                    NoStdLib = "false"
-                    NoWarn = ""
-                    Optimize = "true"
-                    OutputPath = "bin\Release\"
-                    RegisterForComInterop = "false"
-                    RemoveIntegerChecks = "false"
-                    TreatWarningsAsErrors = "false"
-                    WarningLevel = "4"
-                />
-            </Settings>
-            <References>
-                <Reference
-                    Name = "System"
-                    AssemblyName = "System"
-                    HintPath = "..\..\WINNT\Microsoft.NET\Framework\v1.0.3705\System.dll"
-                />
-                <Reference
-                    Name = "System.Data"
-                    AssemblyName = "System.Data"
-                    HintPath = "..\..\WINNT\Microsoft.NET\Framework\v1.0.3705\System.Data.dll"
-                />
-                <Reference
-                    Name = "System.Drawing"
-                    AssemblyName = "System.Drawing"
-                    HintPath = "..\..\WINNT\Microsoft.NET\Framework\v1.0.3705\System.Drawing.dll"
-                />
-                <Reference
-                    Name = "System.Windows.Forms"
-                    AssemblyName = "System.Windows.Forms"
-                    HintPath = "..\..\WINNT\Microsoft.NET\Framework\v1.0.3705\System.Windows.Forms.dll"
-                />
-                <Reference
-                    Name = "System.XML"
-                    AssemblyName = "System.Xml"
-                    HintPath = "..\..\WINNT\Microsoft.NET\Framework\v1.0.3705\System.XML.dll"
-                />
-                <Reference
-                    Name = "ICSharpCode.SharpZipLib"
-                    AssemblyName = "ICSharpCode.SharpZipLib"
-                    HintPath = "..\..\..\..\src\ICSharpCode.SharpZipLib.dll"
-                />
-                <Reference
-                    Name = "nunit.framework"
-                    AssemblyName = "nunit.framework"
-                    HintPath = "..\..\..\..\Program Files\NUnit 2.4\bin\nunit.framework.dll"
-                    AssemblyFolderKey = "hkcu\dn\nunit 2.4.0"
-                />
-                <Reference
-                    Name = "WeifenLuo.WinFormsUI"
-                    AssemblyName = "WeifenLuo.WinFormsUI"
-                    HintPath = "..\3rdparty\dlls\WeifenLuo.WinFormsUI.dll"
-                />
-                <Reference
-                    Name = "Scintilla.NET"
-                    AssemblyName = "Scintilla.NET"
-                    HintPath = "..\3rdparty\dlls\Scintilla.NET.dll"
-                />
-            </References>
-        </Build>
-        <Files>
-            <Include>
-                <File
-                    RelPath = "App.ico"
-                    BuildAction = "Content"
-                />
-                <File
-                    RelPath = "AssemblyInfo.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "FilterBuilder.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "MainForm.cs"
-                    SubType = "Form"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "MainForm.resx"
-                    BuildAction = "EmbeddedResource"
-                />
-                <File
-                    RelPath = "MenuBuilder.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "ResourceController.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "rhoControllers.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Aries\DataNode.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Aries\Node.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Aries\StringNode.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Aries\Tests\AriesTest.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Aries\Tests\DataNodeTest.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Aries\Tests\StringNodeTest.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Controls\BoxSizer.cs"
-                    SubType = "Component"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Controls\DictionaryGrid.cs"
-                    SubType = "Component"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Controls\GraphView.cs"
-                    SubType = "Component"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Controls\HorizontalBoxSizer.cs"
-                    SubType = "Component"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Controls\NumberTextBox.cs"
-                    SubType = "Component"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Controls\ScrollWindow.cs"
-                    SubType = "Component"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Controls\SizerFlags.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Controls\VerticalBoxSizer.cs"
-                    SubType = "Component"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Controls\Tests\SizerTest.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Dialogs\ImportFramesDialog.cs"
-                    SubType = "Form"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Dialogs\ResizeDialog.cs"
-                    SubType = "Form"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Documents\AbstractDocument.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Documents\Command.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Documents\CommandStack.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Documents\Document.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Documents\DocumentFactory.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Documents\GroupCommand.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Documents\IDocumentView.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Documents\Tests\DocumentTest.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Import\ikaSprite.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Import\ikaTileset.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Import\ImageArray.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Import\Map.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Import\TileSet.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Import\v2Map.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Import\v2rle.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Import\v2TileSet.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Import\vergepal.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Import\Tests\ikaSpriteTest.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "Import\Tests\ImageArrayTest.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "SpriteEditor\ChangeHotSpotCommand.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "SpriteEditor\DeleteAnimScriptCommand.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "SpriteEditor\DeleteFrameCommand.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "SpriteEditor\DeleteMetadataCommand.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "SpriteEditor\FrameEventArgs.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "SpriteEditor\FramePanel.cs"
-                    SubType = "UserControl"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "SpriteEditor\InsertFrameCommand.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "SpriteEditor\ReplaceFrameCommand.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "SpriteEditor\ResizeSpriteCommand.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "SpriteEditor\SpriteDetailPanel.cs"
-                    SubType = "Component"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "SpriteEditor\SpriteDocument.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "SpriteEditor\SpriteEditor.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "SpriteEditor\SpriteFactory.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "SpriteEditor\UpdateAnimScriptCommand.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "SpriteEditor\UpdateMetadataCommand.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "SpriteEditor\Tests\CommandTest.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "TextEditor\CodeView.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "TextEditor\CSharpHighlightStyle.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "TextEditor\HighlightStyle.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "TextEditor\PythonHighlightStyle.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "TextEditor\TextDocument.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-                <File
-                    RelPath = "TextEditor\TextStyle.cs"
-                    SubType = "Code"
-                    BuildAction = "Compile"
-                />
-            </Include>
-        </Files>
-    </CSHARP>
-</VisualStudioProject>
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>7.10.3077</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5079A4EA-DB90-497D-8759-4ABC0EEB82C6}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+    <AssemblyKeyContainerName />
+    <AssemblyName>rho</AssemblyName>
+    <AssemblyOriginatorKeyFile />
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>rho</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <StartupObject>rho.MainForm</StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>0.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile />
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile />
+    <DebugSymbols>true</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn />
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>full</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <BaseAddress>285212672</BaseAddress>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <ConfigurationOverrideFile />
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile />
+    <DebugSymbols>false</DebugSymbols>
+    <FileAlignment>4096</FileAlignment>
+    <NoStdLib>false</NoStdLib>
+    <NoWarn />
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>4</WarningLevel>
+    <DebugType>none</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <Name>ICSharpCode.SharpZipLib</Name>
+      <HintPath>..\..\..\..\src\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <Name>nunit.framework</Name>
+      <HintPath>..\..\..\..\Program Files\NUnit 2.4\bin\nunit.framework.dll</HintPath>
+      <AssemblyFolderKey>hkcu\dn\nunit 2.4.0</AssemblyFolderKey>
+    </Reference>
+    <Reference Include="Scintilla.NET">
+      <Name>Scintilla.NET</Name>
+      <HintPath>..\3rdparty\dlls\Scintilla.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI">
+      <Name>WeifenLuo.WinFormsUI</Name>
+      <HintPath>..\3rdparty\dlls\WeifenLuo.WinFormsUI.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Aries\DataNode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Aries\Node.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Aries\StringNode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Aries\Tests\AriesTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Aries\Tests\DataNodeTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Aries\Tests\StringNodeTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\BoxSizer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\DictionaryGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\GraphView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\HorizontalBoxSizer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\NumberTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ScrollWindow.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\SizerFlags.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\Tests\SizerTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\VerticalBoxSizer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ImportFramesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dialogs\ResizeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Documents\AbstractDocument.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Documents\Command.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Documents\CommandStack.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Documents\Document.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Documents\DocumentFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Documents\GroupCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Documents\IDocumentView.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Documents\Tests\DocumentTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="FilterBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Import\ikaSprite.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Import\ikaTileset.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Import\ImageArray.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Import\Map.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Import\Tests\ikaSpriteTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Import\Tests\ImageArrayTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Import\TileSet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Import\v2Map.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Import\v2rle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Import\v2TileSet.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Import\vergepal.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuBuilder.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ResourceController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="rhoControllers.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpriteEditor\ChangeHotSpotCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpriteEditor\DeleteAnimScriptCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpriteEditor\DeleteFrameCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpriteEditor\DeleteMetadataCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpriteEditor\FrameEventArgs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpriteEditor\FramePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SpriteEditor\InsertFrameCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpriteEditor\ReplaceFrameCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpriteEditor\ResizeSpriteCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpriteEditor\SpriteDetailPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SpriteEditor\SpriteDocument.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpriteEditor\SpriteEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SpriteEditor\SpriteFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpriteEditor\Tests\CommandTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpriteEditor\UpdateAnimScriptCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SpriteEditor\UpdateMetadataCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TextEditor\CodeView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TextEditor\CSharpHighlightStyle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TextEditor\HighlightStyle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TextEditor\PythonHighlightStyle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TextEditor\TextDocument.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TextEditor\TextStyle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Content Include="App.ico" />
+    <EmbeddedResource Include="MainForm.resx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent />
+    <PostBuildEvent />
+  </PropertyGroup>
+</Project>

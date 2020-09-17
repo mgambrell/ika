@@ -8,7 +8,7 @@
 
 //#define PREMULTIPLY_ALPHA
 
-#include "SDL/SDL.h"
+#include "SDL/include/SDL.h"
 
 #include "../video/Driver.h"
 #include "../../common/Canvas.h"

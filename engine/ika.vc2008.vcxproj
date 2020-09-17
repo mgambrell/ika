@@ -105,8 +105,8 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.;%(RootDir)%(Directory);$(SolutionDir);$(SolutionDir)/3rdparty/;$(SolutionDir)/common;$(SolutionDir)/3rdparty/audiere/src;$(SolutionDir)/3rdparty/zlib;$(SolutionDir)/3rdparty/libvorbis/include;$(SolutionDir)/3rdparty/libogg/include;$(SolutionDir)/3rdparty/corona/src/libpng-1.5.12;$(SolutionDir)/3rdparty/SDL/include;$(SolutionDir)/3rdparty/SDL/src/audio;$(SolutionDir)/3rdparty/SDL/src/thread;$(SolutionDir)/3rdparty/SDL/src/video;$(SolutionDir)/3rdparty/SDL/src/thread/win32;$(SolutionDir)/3rdparty/SDL/src/timer;$(SolutionDir)/3rdparty/SDL/src;$(SolutionDir)/3rdparty/SDL/src/events;$(SolutionDir)/3rdparty/SDL/src/video/wincommon;$(SolutionDir)/3rdparty/SDL/src/cdrom;$(SolutionDir)/3rdparty/SDL/src/joystick;$(SolutionDir)/3rdparty/pythonprebuilt/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;WIN32;_WINDOWS;MSVC;INLINE_ASM;NO_FLAC;NO_SPEEX;NO_DUMB;NO_MP3;NOMINMAX;NO_JPEG;NO_GIF;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.;%(RootDir)%(Directory);$(SolutionDir);$(SolutionDir)/3rdparty/;$(SolutionDir)/common;$(SolutionDir)/3rdparty/audiere/src;$(SolutionDir)/3rdparty/zlib;$(SolutionDir)/3rdparty/libvorbis/include;$(SolutionDir)/3rdparty/libogg/include;$(SolutionDir)/3rdparty/corona/src/libpng-1.5.12;$(SolutionDir)/3rdparty/SDL/include;$(SolutionDir)/3rdparty/SDL/src/audio;$(SolutionDir)/3rdparty/SDL/src/thread;$(SolutionDir)/3rdparty/SDL/src/video;$(SolutionDir)/3rdparty/SDL/src/thread/win32;$(SolutionDir)/3rdparty/SDL/src/timer;$(SolutionDir)/3rdparty/SDL/src;$(SolutionDir)/3rdparty/SDL/src/events;$(SolutionDir)/3rdparty/SDL/src/video/wincommon;$(SolutionDir)/3rdparty/SDL/src/cdrom;$(SolutionDir)/3rdparty/SDL/src/joystick;$(SolutionDir)/3rdparty/python/Python;$(SolutionDir)/3rdparty/python/Include;$(SolutionDir)/3rdparty/python/PC;$(SolutionDir)/3rdparty/corona/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>ENABLE_WINDIB;_CRT_SECURE_NO_WARNINGS;_DEBUG;WIN32;_WINDOWS;MSVC;INLINE_ASM;NO_FLAC;NO_SPEEX;NO_DUMB;NO_MP3;NOMINMAX;NO_JPEG;NO_GIF;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeaderOutputFile>.\Debug/ika.pch</PrecompiledHeaderOutputFile>
@@ -128,7 +128,7 @@
       <AdditionalDependencies>Ws2_32.lib;winmm.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>.\Debug/ika.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\common\;..\3rdparty\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\common\;..\3rdparty\python\libs\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>.\Debug/ika.pdb</ProgramDatabaseFile>
@@ -196,7 +196,6 @@
     <ClCompile Include="..\3rdparty\libogg\src\bitwise.c" />
     <ClCompile Include="..\3rdparty\libogg\src\framing.c" />
     <ClCompile Include="..\3rdparty\libvorbis\lib\analysis.c" />
-    <ClCompile Include="..\3rdparty\libvorbis\lib\barkmel.c" />
     <ClCompile Include="..\3rdparty\libvorbis\lib\bitrate.c" />
     <ClCompile Include="..\3rdparty\libvorbis\lib\block.c" />
     <ClCompile Include="..\3rdparty\libvorbis\lib\codebook.c" />
@@ -218,159 +217,13 @@
     <ClCompile Include="..\3rdparty\libvorbis\lib\vorbisenc.c" />
     <ClCompile Include="..\3rdparty\libvorbis\lib\vorbisfile.c" />
     <ClCompile Include="..\3rdparty\libvorbis\lib\window.c" />
-    <ClCompile Include="..\3rdparty\pyfixes.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\arraymodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\atexitmodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\audioop.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\binascii.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\cmathmodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\datetimemodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\errnomodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\fpectlmodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\fpetestmodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\gcmodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\getbuildinfo.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\getpath.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\itertoolsmodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\main.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\mathmodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\md5module.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\operator.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\parsermodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\python.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\rotatingtree.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\selectmodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\sha1module.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\sha256module.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\sha512module.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\signalmodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\socketmodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\symtablemodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\timemodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\unicodedata.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\xxmodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\xxsubtype.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\zipimport.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\zlibmodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\_bisectmodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\_codecsmodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\_collectionsmodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\_csv.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\_functoolsmodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\_heapqmodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\_json.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\_localemodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\_lsprof.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\_pickle.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\_randommodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\_sre.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\_struct.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\_testcapimodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\_threadmodule.c" />
-    <ClCompile Include="..\3rdparty\python\Modules\_weakref.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\abstract.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\boolobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\bytearrayobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\bytesobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\bytes_methods.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\capsule.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\cellobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\classobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\cobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\codeobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\complexobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\descrobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\dictobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\enumobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\exceptions.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\fileobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\floatobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\frameobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\funcobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\genobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\iterobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\listobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\longobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\memoryobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\methodobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\moduleobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\object.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\obmalloc.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\rangeobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\setobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\sliceobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\structseq.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\tupleobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\typeobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\unicodectype.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\unicodeobject.c" />
-    <ClCompile Include="..\3rdparty\python\Objects\weakrefobject.c" />
-    <ClCompile Include="..\3rdparty\python\Parser\acceler.c" />
-    <ClCompile Include="..\3rdparty\python\Parser\bitset.c" />
-    <ClCompile Include="..\3rdparty\python\Parser\firstsets.c" />
-    <ClCompile Include="..\3rdparty\python\Parser\grammar.c" />
-    <ClCompile Include="..\3rdparty\python\Parser\grammar1.c" />
-    <ClCompile Include="..\3rdparty\python\Parser\listnode.c" />
-    <ClCompile Include="..\3rdparty\python\Parser\metagrammar.c" />
-    <ClCompile Include="..\3rdparty\python\Parser\myreadline.c" />
-    <ClCompile Include="..\3rdparty\python\Parser\node.c" />
-    <ClCompile Include="..\3rdparty\python\Parser\parser.c" />
-    <ClCompile Include="..\3rdparty\python\Parser\parsetok.c" />
-    <ClCompile Include="..\3rdparty\python\Parser\pgen.c" />
-    <ClCompile Include="..\3rdparty\python\Parser\printgrammar.c" />
-    <ClCompile Include="..\3rdparty\python\Parser\tokenizer.c" />
-    <ClCompile Include="..\3rdparty\python\PC\dl_nt.c" />
-    <ClCompile Include="..\3rdparty\python\PC\frozen_dllmain.c" />
-    <ClCompile Include="..\3rdparty\python\PC\msvcrtmodule.c" />
-    <ClCompile Include="..\3rdparty\python\Python\asdl.c" />
-    <ClCompile Include="..\3rdparty\python\Python\ast.c" />
-    <ClCompile Include="..\3rdparty\python\Python\bltinmodule.c" />
-    <ClCompile Include="..\3rdparty\python\Python\ceval.c" />
-    <ClCompile Include="..\3rdparty\python\Python\codecs.c" />
-    <ClCompile Include="..\3rdparty\python\Python\compile.c" />
-    <ClCompile Include="..\3rdparty\python\Python\dtoa.c" />
-    <ClCompile Include="..\3rdparty\python\Python\errors.c" />
-    <ClCompile Include="..\3rdparty\python\Python\formatter_unicode.c" />
-    <ClCompile Include="..\3rdparty\python\Python\frozen.c" />
-    <ClCompile Include="..\3rdparty\python\Python\frozenmain.c" />
-    <ClCompile Include="..\3rdparty\python\Python\future.c" />
-    <ClCompile Include="..\3rdparty\python\Python\getargs.c" />
-    <ClCompile Include="..\3rdparty\python\Python\getcompiler.c" />
-    <ClCompile Include="..\3rdparty\python\Python\getcopyright.c" />
-    <ClCompile Include="..\3rdparty\python\Python\getopt.c" />
-    <ClCompile Include="..\3rdparty\python\Python\getplatform.c" />
-    <ClCompile Include="..\3rdparty\python\Python\getversion.c" />
-    <ClCompile Include="..\3rdparty\python\Python\graminit.c" />
-    <ClCompile Include="..\3rdparty\python\Python\import.c" />
-    <ClCompile Include="..\3rdparty\python\Python\importdl.c" />
-    <ClCompile Include="..\3rdparty\python\Python\marshal.c" />
-    <ClCompile Include="..\3rdparty\python\Python\modsupport.c" />
-    <ClCompile Include="..\3rdparty\python\Python\mysnprintf.c" />
-    <ClCompile Include="..\3rdparty\python\Python\mystrtoul.c" />
-    <ClCompile Include="..\3rdparty\python\Python\peephole.c" />
-    <ClCompile Include="..\3rdparty\python\Python\pyarena.c" />
-    <ClCompile Include="..\3rdparty\python\Python\pyctype.c" />
-    <ClCompile Include="..\3rdparty\python\Python\pyfpe.c" />
-    <ClCompile Include="..\3rdparty\python\Python\pymath.c" />
-    <ClCompile Include="..\3rdparty\python\Python\pystate.c" />
-    <ClCompile Include="..\3rdparty\python\Python\pystrcmp.c" />
-    <ClCompile Include="..\3rdparty\python\Python\pystrtod.c" />
-    <ClCompile Include="..\3rdparty\python\Python\Python-ast.c" />
-    <ClCompile Include="..\3rdparty\python\Python\pythonrun.c" />
-    <ClCompile Include="..\3rdparty\python\Python\random.c" />
-    <ClCompile Include="..\3rdparty\python\Python\sigcheck.c" />
-    <ClCompile Include="..\3rdparty\python\Python\structmember.c" />
-    <ClCompile Include="..\3rdparty\python\Python\symtable.c" />
-    <ClCompile Include="..\3rdparty\python\Python\sysmodule.c" />
-    <ClCompile Include="..\3rdparty\python\Python\thread.c" />
-    <ClCompile Include="..\3rdparty\python\Python\traceback.c" />
-    <ClCompile Include="..\3rdparty\python\Python\_warnings.c" />
     <ClCompile Include="..\3rdparty\SDL\src\audio\SDL_audio.c" />
     <ClCompile Include="..\3rdparty\SDL\src\audio\SDL_audiocvt.c" />
     <ClCompile Include="..\3rdparty\SDL\src\audio\SDL_audiodev.c" />
     <ClCompile Include="..\3rdparty\SDL\src\audio\SDL_audiomem.c" />
     <ClCompile Include="..\3rdparty\SDL\src\audio\SDL_mixer.c" />
     <ClCompile Include="..\3rdparty\SDL\src\audio\SDL_wave.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\audio\windib\SDL_dibaudio.c" />
     <ClCompile Include="..\3rdparty\SDL\src\cdrom\SDL_cdrom.c" />
     <ClCompile Include="..\3rdparty\SDL\src\cdrom\win32\SDL_syscdrom.c" />
     <ClCompile Include="..\3rdparty\SDL\src\endian\SDL_endian.c" />
@@ -383,6 +236,7 @@
     <ClCompile Include="..\3rdparty\SDL\src\events\SDL_resize.c" />
     <ClCompile Include="..\3rdparty\SDL\src\joystick\SDL_joystick.c" />
     <ClCompile Include="..\3rdparty\SDL\src\joystick\win32\SDL_mmjoystick.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\main\win32\SDL_main.c" />
     <ClCompile Include="..\3rdparty\SDL\src\SDL.c" />
     <ClCompile Include="..\3rdparty\SDL\src\SDL_error.c" />
     <ClCompile Include="..\3rdparty\SDL\src\SDL_fatal.c" />
@@ -443,6 +297,7 @@
     <ClCompile Include="mouse.cpp" />
     <ClCompile Include="opengl\Driver.cpp" />
     <ClCompile Include="opengl\Image.cpp" />
+    <ClCompile Include="path.cpp" />
     <ClCompile Include="script.cpp" />
     <ClCompile Include="scriptobject.cpp" />
     <ClCompile Include="script\CanvasObject.cpp" />
@@ -534,32 +389,6 @@
     <ClInclude Include="..\3rdparty\libvorbis\lib\scales.h" />
     <ClInclude Include="..\3rdparty\libvorbis\lib\smallft.h" />
     <ClInclude Include="..\3rdparty\libvorbis\lib\window.h" />
-    <ClInclude Include="..\3rdparty\python\Modules\addrinfo.h" />
-    <ClInclude Include="..\3rdparty\python\Modules\hashlib.h" />
-    <ClInclude Include="..\3rdparty\python\Modules\rotatingtree.h" />
-    <ClInclude Include="..\3rdparty\python\Modules\socketmodule.h" />
-    <ClInclude Include="..\3rdparty\python\Modules\sre.h" />
-    <ClInclude Include="..\3rdparty\python\Modules\sre_constants.h" />
-    <ClInclude Include="..\3rdparty\python\Modules\testcapi_long.h" />
-    <ClInclude Include="..\3rdparty\python\Modules\tkinter.h" />
-    <ClInclude Include="..\3rdparty\python\Modules\unicodedata_db.h" />
-    <ClInclude Include="..\3rdparty\python\Modules\unicodename_db.h" />
-    <ClInclude Include="..\3rdparty\python\Objects\unicodetype_db.h" />
-    <ClInclude Include="..\3rdparty\python\Parser\parser.h" />
-    <ClInclude Include="..\3rdparty\python\Parser\tokenizer.h" />
-    <ClInclude Include="..\3rdparty\python\Python\importdl.h" />
-    <ClInclude Include="..\3rdparty\python\Python\opcode_targets.h" />
-    <ClInclude Include="..\3rdparty\python\Python\thread_atheos.h" />
-    <ClInclude Include="..\3rdparty\python\Python\thread_cthread.h" />
-    <ClInclude Include="..\3rdparty\python\Python\thread_foobar.h" />
-    <ClInclude Include="..\3rdparty\python\Python\thread_lwp.h" />
-    <ClInclude Include="..\3rdparty\python\Python\thread_nt.h" />
-    <ClInclude Include="..\3rdparty\python\Python\thread_os2.h" />
-    <ClInclude Include="..\3rdparty\python\Python\thread_pth.h" />
-    <ClInclude Include="..\3rdparty\python\Python\thread_pthread.h" />
-    <ClInclude Include="..\3rdparty\python\Python\thread_sgi.h" />
-    <ClInclude Include="..\3rdparty\python\Python\thread_solaris.h" />
-    <ClInclude Include="..\3rdparty\python\Python\thread_wince.h" />
     <ClInclude Include="..\3rdparty\SDL\src\audio\SDL_audiodev_c.h" />
     <ClInclude Include="..\3rdparty\SDL\src\audio\SDL_audiomem.h" />
     <ClInclude Include="..\3rdparty\SDL\src\audio\SDL_audio_c.h" />
@@ -647,21 +476,6 @@
       <Project>{7cf113aa-d783-4e94-a0c5-03bc9f6b02a9}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\3rdparty\python\Modules\gc_weakref.txt" />
-    <Text Include="..\3rdparty\python\Objects\dictnotes.txt" />
-    <Text Include="..\3rdparty\python\Objects\listsort.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\3rdparty\python\Modules\ar_beos" />
-    <None Include="..\3rdparty\python\Modules\config.c.in" />
-    <None Include="..\3rdparty\python\Modules\ld_so_aix.in" />
-    <None Include="..\3rdparty\python\Modules\ld_so_beos" />
-    <None Include="..\3rdparty\python\Modules\makesetup" />
-    <None Include="..\3rdparty\python\Modules\makexp_aix" />
-    <None Include="..\3rdparty\python\Modules\Setup.config.in" />
-    <None Include="..\3rdparty\python\Modules\Setup.dist" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
