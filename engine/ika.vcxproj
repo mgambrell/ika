@@ -472,9 +472,8 @@
     <Image Include="ika.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\common\common.vc2008.vcxproj">
+    <ProjectReference Include="..\common\common.vcxproj">
       <Project>{7cf113aa-d783-4e94-a0c5-03bc9f6b02a9}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
