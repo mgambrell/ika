@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project InitialTargets="UNDUPOBJ" DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>ika</ProjectName>
+    <ProjectGuid>{DA8FCF02-D1DC-4E12-BD5C-E52D6F0CB01D}</ProjectGuid>
+    <RootNamespace>ika</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>16.0.30427.251</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>.\Release\</OutDir>
+    <IntDir>.\Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>.\Debug\</OutDir>
+    <IntDir>.\Debug\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\Release/ika.tlb</TypeLibraryName>
+    </Midl>
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.;%(RootDir)%(Directory);$(SolutionDir);$(SolutionDir)/3rdparty/include;$(SolutionDir)/3rdparty/include/python;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;WIN32;_WINDOWS;MSVC;INLINE_ASM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeaderOutputFile>.\Release/ika.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Release/</AssemblerListingLocation>
+      <ObjectFileName>.\Release/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release/</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x1009</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>/MACHINE:I386 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>sdl.lib;sdlmain.lib;zlib.lib;corona.lib;audiere.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>.\Release/ika.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>..\common\;..\3rdparty\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <EnableUAC>false</EnableUAC>
+      <IgnoreSpecificDefaultLibraries>libc.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ProgramDatabaseFile />
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\Debug/ika.tlb</TypeLibraryName>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.;%(RootDir)%(Directory);$(SolutionDir);$(SolutionDir)/3rdparty/;$(SolutionDir)/common;$(SolutionDir)/3rdparty/audiere/src;$(SolutionDir)/3rdparty/zlib;$(SolutionDir)/3rdparty/libvorbis/include;$(SolutionDir)/3rdparty/libogg/include;$(SolutionDir)/3rdparty/corona/src/libpng-1.5.12;$(SolutionDir)/3rdparty/SDL/include;$(SolutionDir)/3rdparty/SDL/src/audio;$(SolutionDir)/3rdparty/SDL/src/thread;$(SolutionDir)/3rdparty/SDL/src/video;$(SolutionDir)/3rdparty/SDL/src/thread/win32;$(SolutionDir)/3rdparty/SDL/src/timer;$(SolutionDir)/3rdparty/SDL/src;$(SolutionDir)/3rdparty/SDL/src/events;$(SolutionDir)/3rdparty/SDL/src/video/wincommon;$(SolutionDir)/3rdparty/SDL/src/cdrom;$(SolutionDir)/3rdparty/SDL/src/joystick;$(SolutionDir)/3rdparty/pythonprebuilt/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;WIN32;_WINDOWS;MSVC;INLINE_ASM;NO_FLAC;NO_SPEEX;NO_DUMB;NO_MP3;NOMINMAX;NO_JPEG;NO_GIF;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeaderOutputFile>.\Debug/ika.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>.\Debug/</AssemblerListingLocation>
+      <ObjectFileName>.\Debug/</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug/</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <CompileAs>Default</CompileAs>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x1009</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalOptions>/MACHINE:I386 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalDependencies>Ws2_32.lib;winmm.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>.\Debug/ika.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>..\common\;..\3rdparty\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>.\Debug/ika.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\3rdparty\audiere\src\basic_source.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\cd_win32.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\debug.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\device.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\device_mixer.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\device_mm.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\device_null.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\dumb_resample.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\dxguid.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\file_ansi.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\input.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\input_aiff.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\input_ogg.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\input_wav.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\loop_point_source.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\memory_file.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\midi_null.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\noise.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\resampler.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\sample_buffer.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\sound.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\sound_effect.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\square_wave.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\threads_win32.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\timer_win32.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\tone.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\utility.cpp" />
+    <ClCompile Include="..\3rdparty\audiere\src\version.cpp" />
+    <ClCompile Include="..\3rdparty\corona\src\Convert.cpp" />
+    <ClCompile Include="..\3rdparty\corona\src\Corona.cpp" />
+    <ClCompile Include="..\3rdparty\corona\src\Debug.cpp" />
+    <ClCompile Include="..\3rdparty\corona\src\DefaultFileSystem.cpp" />
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\example.c" />
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\png.c" />
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngerror.c" />
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngget.c" />
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngmem.c" />
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngpread.c" />
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngread.c" />
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngrio.c" />
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngrtran.c" />
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngrutil.c" />
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngset.c" />
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngtrans.c" />
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngwio.c" />
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngwrite.c" />
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngwtran.c" />
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngwutil.c" />
+    <ClCompile Include="..\3rdparty\corona\src\MemoryFile.cpp" />
+    <ClCompile Include="..\3rdparty\corona\src\OpenBMP.cpp" />
+    <ClCompile Include="..\3rdparty\corona\src\OpenPCX.cpp" />
+    <ClCompile Include="..\3rdparty\corona\src\OpenPNG.cpp" />
+    <ClCompile Include="..\3rdparty\corona\src\OpenTGA.cpp" />
+    <ClCompile Include="..\3rdparty\corona\src\SavePNG.cpp" />
+    <ClCompile Include="..\3rdparty\corona\src\SaveTGA.cpp" />
+    <ClCompile Include="..\3rdparty\libogg\src\bitwise.c" />
+    <ClCompile Include="..\3rdparty\libogg\src\framing.c" />
+    <ClCompile Include="..\3rdparty\libvorbis\lib\analysis.c" />
+    <ClCompile Include="..\3rdparty\libvorbis\lib\barkmel.c" />
+    <ClCompile Include="..\3rdparty\libvorbis\lib\bitrate.c" />
+    <ClCompile Include="..\3rdparty\libvorbis\lib\block.c" />
+    <ClCompile Include="..\3rdparty\libvorbis\lib\codebook.c" />
+    <ClCompile Include="..\3rdparty\libvorbis\lib\envelope.c" />
+    <ClCompile Include="..\3rdparty\libvorbis\lib\floor0.c" />
+    <ClCompile Include="..\3rdparty\libvorbis\lib\floor1.c" />
+    <ClCompile Include="..\3rdparty\libvorbis\lib\info.c" />
+    <ClCompile Include="..\3rdparty\libvorbis\lib\lookup.c" />
+    <ClCompile Include="..\3rdparty\libvorbis\lib\lpc.c" />
+    <ClCompile Include="..\3rdparty\libvorbis\lib\lsp.c" />
+    <ClCompile Include="..\3rdparty\libvorbis\lib\mapping0.c" />
+    <ClCompile Include="..\3rdparty\libvorbis\lib\mdct.c" />
+    <ClCompile Include="..\3rdparty\libvorbis\lib\psy.c" />
+    <ClCompile Include="..\3rdparty\libvorbis\lib\registry.c" />
+    <ClCompile Include="..\3rdparty\libvorbis\lib\res0.c" />
+    <ClCompile Include="..\3rdparty\libvorbis\lib\sharedbook.c" />
+    <ClCompile Include="..\3rdparty\libvorbis\lib\smallft.c" />
+    <ClCompile Include="..\3rdparty\libvorbis\lib\synthesis.c" />
+    <ClCompile Include="..\3rdparty\libvorbis\lib\vorbisenc.c" />
+    <ClCompile Include="..\3rdparty\libvorbis\lib\vorbisfile.c" />
+    <ClCompile Include="..\3rdparty\libvorbis\lib\window.c" />
+    <ClCompile Include="..\3rdparty\pyfixes.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\arraymodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\atexitmodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\audioop.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\binascii.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\cmathmodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\datetimemodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\errnomodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\fpectlmodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\fpetestmodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\gcmodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\getbuildinfo.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\getpath.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\itertoolsmodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\main.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\mathmodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\md5module.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\operator.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\parsermodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\python.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\rotatingtree.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\selectmodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\sha1module.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\sha256module.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\sha512module.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\signalmodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\socketmodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\symtablemodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\timemodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\unicodedata.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\xxmodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\xxsubtype.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\zipimport.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\zlibmodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\_bisectmodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\_codecsmodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\_collectionsmodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\_csv.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\_functoolsmodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\_heapqmodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\_json.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\_localemodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\_lsprof.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\_pickle.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\_randommodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\_sre.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\_struct.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\_testcapimodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\_threadmodule.c" />
+    <ClCompile Include="..\3rdparty\python\Modules\_weakref.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\abstract.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\boolobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\bytearrayobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\bytesobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\bytes_methods.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\capsule.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\cellobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\classobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\cobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\codeobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\complexobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\descrobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\dictobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\enumobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\exceptions.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\fileobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\floatobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\frameobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\funcobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\genobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\iterobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\listobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\longobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\memoryobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\methodobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\moduleobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\object.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\obmalloc.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\rangeobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\setobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\sliceobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\structseq.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\tupleobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\typeobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\unicodectype.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\unicodeobject.c" />
+    <ClCompile Include="..\3rdparty\python\Objects\weakrefobject.c" />
+    <ClCompile Include="..\3rdparty\python\Parser\acceler.c" />
+    <ClCompile Include="..\3rdparty\python\Parser\bitset.c" />
+    <ClCompile Include="..\3rdparty\python\Parser\firstsets.c" />
+    <ClCompile Include="..\3rdparty\python\Parser\grammar.c" />
+    <ClCompile Include="..\3rdparty\python\Parser\grammar1.c" />
+    <ClCompile Include="..\3rdparty\python\Parser\listnode.c" />
+    <ClCompile Include="..\3rdparty\python\Parser\metagrammar.c" />
+    <ClCompile Include="..\3rdparty\python\Parser\myreadline.c" />
+    <ClCompile Include="..\3rdparty\python\Parser\node.c" />
+    <ClCompile Include="..\3rdparty\python\Parser\parser.c" />
+    <ClCompile Include="..\3rdparty\python\Parser\parsetok.c" />
+    <ClCompile Include="..\3rdparty\python\Parser\pgen.c" />
+    <ClCompile Include="..\3rdparty\python\Parser\printgrammar.c" />
+    <ClCompile Include="..\3rdparty\python\Parser\tokenizer.c" />
+    <ClCompile Include="..\3rdparty\python\PC\dl_nt.c" />
+    <ClCompile Include="..\3rdparty\python\PC\frozen_dllmain.c" />
+    <ClCompile Include="..\3rdparty\python\PC\msvcrtmodule.c" />
+    <ClCompile Include="..\3rdparty\python\Python\asdl.c" />
+    <ClCompile Include="..\3rdparty\python\Python\ast.c" />
+    <ClCompile Include="..\3rdparty\python\Python\bltinmodule.c" />
+    <ClCompile Include="..\3rdparty\python\Python\ceval.c" />
+    <ClCompile Include="..\3rdparty\python\Python\codecs.c" />
+    <ClCompile Include="..\3rdparty\python\Python\compile.c" />
+    <ClCompile Include="..\3rdparty\python\Python\dtoa.c" />
+    <ClCompile Include="..\3rdparty\python\Python\errors.c" />
+    <ClCompile Include="..\3rdparty\python\Python\formatter_unicode.c" />
+    <ClCompile Include="..\3rdparty\python\Python\frozen.c" />
+    <ClCompile Include="..\3rdparty\python\Python\frozenmain.c" />
+    <ClCompile Include="..\3rdparty\python\Python\future.c" />
+    <ClCompile Include="..\3rdparty\python\Python\getargs.c" />
+    <ClCompile Include="..\3rdparty\python\Python\getcompiler.c" />
+    <ClCompile Include="..\3rdparty\python\Python\getcopyright.c" />
+    <ClCompile Include="..\3rdparty\python\Python\getopt.c" />
+    <ClCompile Include="..\3rdparty\python\Python\getplatform.c" />
+    <ClCompile Include="..\3rdparty\python\Python\getversion.c" />
+    <ClCompile Include="..\3rdparty\python\Python\graminit.c" />
+    <ClCompile Include="..\3rdparty\python\Python\import.c" />
+    <ClCompile Include="..\3rdparty\python\Python\importdl.c" />
+    <ClCompile Include="..\3rdparty\python\Python\marshal.c" />
+    <ClCompile Include="..\3rdparty\python\Python\modsupport.c" />
+    <ClCompile Include="..\3rdparty\python\Python\mysnprintf.c" />
+    <ClCompile Include="..\3rdparty\python\Python\mystrtoul.c" />
+    <ClCompile Include="..\3rdparty\python\Python\peephole.c" />
+    <ClCompile Include="..\3rdparty\python\Python\pyarena.c" />
+    <ClCompile Include="..\3rdparty\python\Python\pyctype.c" />
+    <ClCompile Include="..\3rdparty\python\Python\pyfpe.c" />
+    <ClCompile Include="..\3rdparty\python\Python\pymath.c" />
+    <ClCompile Include="..\3rdparty\python\Python\pystate.c" />
+    <ClCompile Include="..\3rdparty\python\Python\pystrcmp.c" />
+    <ClCompile Include="..\3rdparty\python\Python\pystrtod.c" />
+    <ClCompile Include="..\3rdparty\python\Python\Python-ast.c" />
+    <ClCompile Include="..\3rdparty\python\Python\pythonrun.c" />
+    <ClCompile Include="..\3rdparty\python\Python\random.c" />
+    <ClCompile Include="..\3rdparty\python\Python\sigcheck.c" />
+    <ClCompile Include="..\3rdparty\python\Python\structmember.c" />
+    <ClCompile Include="..\3rdparty\python\Python\symtable.c" />
+    <ClCompile Include="..\3rdparty\python\Python\sysmodule.c" />
+    <ClCompile Include="..\3rdparty\python\Python\thread.c" />
+    <ClCompile Include="..\3rdparty\python\Python\traceback.c" />
+    <ClCompile Include="..\3rdparty\python\Python\_warnings.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\audio\SDL_audio.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\audio\SDL_audiocvt.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\audio\SDL_audiodev.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\audio\SDL_audiomem.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\audio\SDL_mixer.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\audio\SDL_wave.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\cdrom\SDL_cdrom.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\cdrom\win32\SDL_syscdrom.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\endian\SDL_endian.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\events\SDL_active.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\events\SDL_events.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\events\SDL_expose.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\events\SDL_keyboard.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\events\SDL_mouse.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\events\SDL_quit.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\events\SDL_resize.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\joystick\SDL_joystick.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\joystick\win32\SDL_mmjoystick.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\SDL.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\SDL_error.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\SDL_fatal.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\SDL_getenv.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\SDL_loadso.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\thread\SDL_thread.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\thread\win32\SDL_sysmutex.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\thread\win32\SDL_syssem.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\thread\win32\SDL_systhread.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\thread\win32\win_ce_semaphore.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\timer\SDL_timer.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\timer\win32\SDL_systimer.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_blit.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_blit_0.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_blit_1.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_blit_A.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_blit_N.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_bmp.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_cursor.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_gamma.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_pixels.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_RLEaccel.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_stretch.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_surface.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_video.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_yuv.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_yuv_mmx.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_yuv_sw.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\video\wincommon\SDL_sysevents.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\video\wincommon\SDL_sysmouse.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\video\wincommon\SDL_syswm.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\video\wincommon\SDL_wingl.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\video\windib\SDL_dibevents.c" />
+    <ClCompile Include="..\3rdparty\SDL\src\video\windib\SDL_dibvideo.c" />
+    <ClCompile Include="..\3rdparty\zlib\adler32.c" />
+    <ClCompile Include="..\3rdparty\zlib\compress.c" />
+    <ClCompile Include="..\3rdparty\zlib\crc32.c" />
+    <ClCompile Include="..\3rdparty\zlib\deflate.c" />
+    <ClCompile Include="..\3rdparty\zlib\gzio.c" />
+    <ClCompile Include="..\3rdparty\zlib\infblock.c" />
+    <ClCompile Include="..\3rdparty\zlib\infcodes.c" />
+    <ClCompile Include="..\3rdparty\zlib\inffast.c" />
+    <ClCompile Include="..\3rdparty\zlib\inflate.c" />
+    <ClCompile Include="..\3rdparty\zlib\inftrees.c" />
+    <ClCompile Include="..\3rdparty\zlib\infutil.c" />
+    <ClCompile Include="..\3rdparty\zlib\trees.c" />
+    <ClCompile Include="..\3rdparty\zlib\uncompr.c" />
+    <ClCompile Include="..\3rdparty\zlib\zutil.c" />
+    <ClCompile Include="animscript.cpp" />
+    <ClCompile Include="benchmark.cpp" />
+    <ClCompile Include="entity.cpp" />
+    <ClCompile Include="font.cpp" />
+    <ClCompile Include="FPSCounter.cpp" />
+    <ClCompile Include="input.cpp" />
+    <ClCompile Include="joystick.cpp" />
+    <ClCompile Include="keyboard.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="mouse.cpp" />
+    <ClCompile Include="opengl\Driver.cpp" />
+    <ClCompile Include="opengl\Image.cpp" />
+    <ClCompile Include="script.cpp" />
+    <ClCompile Include="scriptobject.cpp" />
+    <ClCompile Include="script\CanvasObject.cpp" />
+    <ClCompile Include="script\ColoursObject.cpp" />
+    <ClCompile Include="script\ControlObject.cpp" />
+    <ClCompile Include="script\EntityObject.cpp" />
+    <ClCompile Include="script\ErrorObject.cpp" />
+    <ClCompile Include="script\FontObject.cpp" />
+    <ClCompile Include="script\ImageObject.cpp" />
+    <ClCompile Include="script\InputDeviceObject.cpp" />
+    <ClCompile Include="script\InputObject.cpp" />
+    <ClCompile Include="script\JoystickObject.cpp" />
+    <ClCompile Include="script\KeyboardObject.cpp" />
+    <ClCompile Include="script\MapObject.cpp" />
+    <ClCompile Include="script\ModuleFuncs.cpp" />
+    <ClCompile Include="script\MouseObject.cpp" />
+    <ClCompile Include="script\MusicObject.cpp" />
+    <ClCompile Include="script\SoundObject.cpp" />
+    <ClCompile Include="script\TileSetObject.cpp" />
+    <ClCompile Include="script\VideoObject.cpp" />
+    <ClCompile Include="soft32\Driver.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="soft32\Image.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="sound.cpp" />
+    <ClCompile Include="sprite.cpp" />
+    <ClCompile Include="tileset.cpp" />
+    <ClCompile Include="video\ColourHandler.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\3rdparty\audiere\src\audiere.h" />
+    <ClInclude Include="..\3rdparty\audiere\src\basic_source.h" />
+    <ClInclude Include="..\3rdparty\audiere\src\debug.h" />
+    <ClInclude Include="..\3rdparty\audiere\src\default_file.h" />
+    <ClInclude Include="..\3rdparty\audiere\src\device.h" />
+    <ClInclude Include="..\3rdparty\audiere\src\device_mixer.h" />
+    <ClInclude Include="..\3rdparty\audiere\src\device_mm.h" />
+    <ClInclude Include="..\3rdparty\audiere\src\device_null.h" />
+    <ClInclude Include="..\3rdparty\audiere\src\dsound.h" />
+    <ClInclude Include="..\3rdparty\audiere\src\dumb_resample.h" />
+    <ClInclude Include="..\3rdparty\audiere\src\input_aiff.h" />
+    <ClInclude Include="..\3rdparty\audiere\src\input_ogg.h" />
+    <ClInclude Include="..\3rdparty\audiere\src\input_wav.h" />
+    <ClInclude Include="..\3rdparty\audiere\src\internal.h" />
+    <ClInclude Include="..\3rdparty\audiere\src\mci_device.h" />
+    <ClInclude Include="..\3rdparty\audiere\src\memory_file.h" />
+    <ClInclude Include="..\3rdparty\audiere\src\resampler.h" />
+    <ClInclude Include="..\3rdparty\audiere\src\resource.h" />
+    <ClInclude Include="..\3rdparty\audiere\src\threads.h" />
+    <ClInclude Include="..\3rdparty\audiere\src\timer.h" />
+    <ClInclude Include="..\3rdparty\audiere\src\types.h" />
+    <ClInclude Include="..\3rdparty\audiere\src\utility.h" />
+    <ClInclude Include="..\3rdparty\corona\src\corona.h" />
+    <ClInclude Include="..\3rdparty\corona\src\Debug.h" />
+    <ClInclude Include="..\3rdparty\corona\src\libpng-1.5.12\png.h" />
+    <ClInclude Include="..\3rdparty\corona\src\libpng-1.5.12\pngconf.h" />
+    <ClInclude Include="..\3rdparty\corona\src\libpng-1.5.12\pngdebug.h" />
+    <ClInclude Include="..\3rdparty\corona\src\libpng-1.5.12\pnginfo.h" />
+    <ClInclude Include="..\3rdparty\corona\src\libpng-1.5.12\pnglibconf.h" />
+    <ClInclude Include="..\3rdparty\corona\src\libpng-1.5.12\pngpriv.h" />
+    <ClInclude Include="..\3rdparty\corona\src\libpng-1.5.12\pngstruct.h" />
+    <ClInclude Include="..\3rdparty\corona\src\MemoryFile.h" />
+    <ClInclude Include="..\3rdparty\corona\src\Open.h" />
+    <ClInclude Include="..\3rdparty\corona\src\Save.h" />
+    <ClInclude Include="..\3rdparty\corona\src\SimpleImage.h" />
+    <ClInclude Include="..\3rdparty\corona\src\Types.h" />
+    <ClInclude Include="..\3rdparty\corona\src\Utility.h" />
+    <ClInclude Include="..\3rdparty\libogg\src\crctable.h" />
+    <ClInclude Include="..\3rdparty\libvorbis\lib\backends.h" />
+    <ClInclude Include="..\3rdparty\libvorbis\lib\bitrate.h" />
+    <ClInclude Include="..\3rdparty\libvorbis\lib\codebook.h" />
+    <ClInclude Include="..\3rdparty\libvorbis\lib\codec_internal.h" />
+    <ClInclude Include="..\3rdparty\libvorbis\lib\envelope.h" />
+    <ClInclude Include="..\3rdparty\libvorbis\lib\highlevel.h" />
+    <ClInclude Include="..\3rdparty\libvorbis\lib\lookup.h" />
+    <ClInclude Include="..\3rdparty\libvorbis\lib\lookup_data.h" />
+    <ClInclude Include="..\3rdparty\libvorbis\lib\lpc.h" />
+    <ClInclude Include="..\3rdparty\libvorbis\lib\lsp.h" />
+    <ClInclude Include="..\3rdparty\libvorbis\lib\masking.h" />
+    <ClInclude Include="..\3rdparty\libvorbis\lib\mdct.h" />
+    <ClInclude Include="..\3rdparty\libvorbis\lib\misc.h" />
+    <ClInclude Include="..\3rdparty\libvorbis\lib\os.h" />
+    <ClInclude Include="..\3rdparty\libvorbis\lib\psy.h" />
+    <ClInclude Include="..\3rdparty\libvorbis\lib\registry.h" />
+    <ClInclude Include="..\3rdparty\libvorbis\lib\scales.h" />
+    <ClInclude Include="..\3rdparty\libvorbis\lib\smallft.h" />
+    <ClInclude Include="..\3rdparty\libvorbis\lib\window.h" />
+    <ClInclude Include="..\3rdparty\python\Modules\addrinfo.h" />
+    <ClInclude Include="..\3rdparty\python\Modules\hashlib.h" />
+    <ClInclude Include="..\3rdparty\python\Modules\rotatingtree.h" />
+    <ClInclude Include="..\3rdparty\python\Modules\socketmodule.h" />
+    <ClInclude Include="..\3rdparty\python\Modules\sre.h" />
+    <ClInclude Include="..\3rdparty\python\Modules\sre_constants.h" />
+    <ClInclude Include="..\3rdparty\python\Modules\testcapi_long.h" />
+    <ClInclude Include="..\3rdparty\python\Modules\tkinter.h" />
+    <ClInclude Include="..\3rdparty\python\Modules\unicodedata_db.h" />
+    <ClInclude Include="..\3rdparty\python\Modules\unicodename_db.h" />
+    <ClInclude Include="..\3rdparty\python\Objects\unicodetype_db.h" />
+    <ClInclude Include="..\3rdparty\python\Parser\parser.h" />
+    <ClInclude Include="..\3rdparty\python\Parser\tokenizer.h" />
+    <ClInclude Include="..\3rdparty\python\Python\importdl.h" />
+    <ClInclude Include="..\3rdparty\python\Python\opcode_targets.h" />
+    <ClInclude Include="..\3rdparty\python\Python\thread_atheos.h" />
+    <ClInclude Include="..\3rdparty\python\Python\thread_cthread.h" />
+    <ClInclude Include="..\3rdparty\python\Python\thread_foobar.h" />
+    <ClInclude Include="..\3rdparty\python\Python\thread_lwp.h" />
+    <ClInclude Include="..\3rdparty\python\Python\thread_nt.h" />
+    <ClInclude Include="..\3rdparty\python\Python\thread_os2.h" />
+    <ClInclude Include="..\3rdparty\python\Python\thread_pth.h" />
+    <ClInclude Include="..\3rdparty\python\Python\thread_pthread.h" />
+    <ClInclude Include="..\3rdparty\python\Python\thread_sgi.h" />
+    <ClInclude Include="..\3rdparty\python\Python\thread_solaris.h" />
+    <ClInclude Include="..\3rdparty\python\Python\thread_wince.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\audio\SDL_audiodev_c.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\audio\SDL_audiomem.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\audio\SDL_audio_c.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\audio\SDL_sysaudio.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\audio\SDL_wave.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\cdrom\SDL_syscdrom.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\events\SDL_events_c.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\events\SDL_sysevents.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\joystick\SDL_joystick_c.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\joystick\SDL_sysjoystick.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\SDL_error_c.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\SDL_fatal.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\SDL_loadso.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\thread\SDL_systhread.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\thread\SDL_thread_c.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\thread\win32\SDL_systhread_c.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\thread\win32\win_ce_semaphore.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\timer\SDL_systimer.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\timer\SDL_timer_c.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\video\SDL_blit.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\video\SDL_cursor_c.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\video\SDL_glfuncs.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\video\SDL_leaks.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\video\SDL_memops.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\video\SDL_pixels_c.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\video\SDL_RLEaccel_c.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\video\SDL_stretch_c.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\video\SDL_sysvideo.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\video\SDL_yuvfuncs.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\video\SDL_yuv_sw_c.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\video\wincommon\SDL_lowvideo.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\video\wincommon\SDL_sysmouse_c.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\video\wincommon\SDL_syswm_c.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\video\wincommon\SDL_wingl_c.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\video\wincommon\wmmsg.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\video\windib\SDL_dibevents_c.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\video\windib\SDL_dibvideo.h" />
+    <ClInclude Include="..\3rdparty\SDL\src\video\windib\SDL_vkeys.h" />
+    <ClInclude Include="..\3rdparty\zlib\deflate.h" />
+    <ClInclude Include="..\3rdparty\zlib\infblock.h" />
+    <ClInclude Include="..\3rdparty\zlib\infcodes.h" />
+    <ClInclude Include="..\3rdparty\zlib\inffast.h" />
+    <ClInclude Include="..\3rdparty\zlib\inffixed.h" />
+    <ClInclude Include="..\3rdparty\zlib\inftrees.h" />
+    <ClInclude Include="..\3rdparty\zlib\infutil.h" />
+    <ClInclude Include="..\3rdparty\zlib\trees.h" />
+    <ClInclude Include="..\3rdparty\zlib\zconf.h" />
+    <ClInclude Include="..\3rdparty\zlib\zlib.h" />
+    <ClInclude Include="..\3rdparty\zlib\zutil.h" />
+    <ClInclude Include="animscript.h" />
+    <ClInclude Include="benchmark.h" />
+    <ClInclude Include="entity.h" />
+    <ClInclude Include="font.h" />
+    <ClInclude Include="FPSCounter.h" />
+    <ClInclude Include="hooklist.h" />
+    <ClInclude Include="input.h" />
+    <ClInclude Include="joystick.h" />
+    <ClInclude Include="keyboard.h" />
+    <ClInclude Include="main.h" />
+    <ClInclude Include="mouse.h" />
+    <ClInclude Include="opengl\Driver.h" />
+    <ClInclude Include="opengl\Image.h" />
+    <ClInclude Include="script.h" />
+    <ClInclude Include="scriptobject.h" />
+    <ClInclude Include="script\ObjectDefs.h" />
+    <ClInclude Include="soft32\Driver.h" />
+    <ClInclude Include="soft32\Image.h" />
+    <ClInclude Include="soft32\Misc.h" />
+    <ClInclude Include="sound.h" />
+    <ClInclude Include="sprite.h" />
+    <ClInclude Include="tileset.h" />
+    <ClInclude Include="timer.h" />
+    <ClInclude Include="video\ColourHandler.h" />
+    <ClInclude Include="video\Driver.h" />
+    <ClInclude Include="video\Image.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="engine.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="ika.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\common\common.vc2008.vcxproj">
+      <Project>{7cf113aa-d783-4e94-a0c5-03bc9f6b02a9}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\3rdparty\python\Modules\gc_weakref.txt" />
+    <Text Include="..\3rdparty\python\Objects\dictnotes.txt" />
+    <Text Include="..\3rdparty\python\Objects\listsort.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\3rdparty\python\Modules\ar_beos" />
+    <None Include="..\3rdparty\python\Modules\config.c.in" />
+    <None Include="..\3rdparty\python\Modules\ld_so_aix.in" />
+    <None Include="..\3rdparty\python\Modules\ld_so_beos" />
+    <None Include="..\3rdparty\python\Modules\makesetup" />
+    <None Include="..\3rdparty\python\Modules\makexp_aix" />
+    <None Include="..\3rdparty\python\Modules\Setup.config.in" />
+    <None Include="..\3rdparty\python\Modules\Setup.dist" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <!-- ================ UNDUPOBJ ================ -->
+  <!-- relevant topics -->
+  <!-- https://stackoverflow.com/questions/3729515/visual-studio-2010-2008-cant-handle-source-files-with-identical-names-in-diff/26935613 -->
+  <!-- https://stackoverflow.com/questions/7033855/msvc10-mp-builds-not-multicore-across-folders-in-a-project -->
+  <!-- https://stackoverflow.com/questions/18304911/how-can-one-modify-an-itemdefinitiongroup-from-an-msbuild-target -->
+  <!-- other maybe related info -->
+  <!-- https://stackoverflow.com/questions/841913/modify-msbuild-itemgroup-metadata -->
+  <UsingTask TaskName="UNDUPOBJ_TASK" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <OutputDir ParameterType="System.String" Required="true" />
+      <ItemList ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
+      <OutputItemList ParameterType="Microsoft.Build.Framework.ITaskItem[]" Output="true" />
+    </ParameterGroup>
+    <Task>
+      <Code><![CDATA[
+            //general outline: for each item (in ClCompile) assign it to a subdirectory of $(IntDir) by allocating subdirectories 0,1,2, etc., as needed to prevent duplicate filenames from clobbering each other
+            //this minimizes the number of batches that need to be run, since each subdirectory will necessarily be in a distinct batch due to /Fo specifying that output subdirectory
+
+            var assignmentMap = new Dictionary<string,int>();
+            HashSet<string> neededDirectories = new HashSet<string>();
+            foreach( var item in ItemList )
+            {
+              //solve bug e.g. Checkbox.cpp vs CheckBox.cpp
+              var filename = item.GetMetadata("Filename").ToUpperInvariant(); 
+
+              //assign reused filenames to increasing numbers
+              //assign previously unused filenames to 0
+              int assignment = 0;
+              if(assignmentMap.TryGetValue(filename, out assignment))
+                assignmentMap[filename] = ++assignment;
+              else
+                assignmentMap[filename] = 0;
+
+              var thisFileOutdir = Path.Combine(OutputDir,assignment.ToString()) + "/"; //take care it ends in / so /Fo knows it's a directory and not a filename
+              item.SetMetadata( "ObjectFileName", thisFileOutdir );
+            }
+
+            foreach(var needed in neededDirectories)
+              System.IO.Directory.CreateDirectory(needed);
+
+            OutputItemList = ItemList;
+            ItemList = new Microsoft.Build.Framework.ITaskItem[0];
+
+        ]]></Code>
+    </Task>
+  </UsingTask>
+  <Target Name="UNDUPOBJ">
+    <!-- see stackoverflow topics for discussion on why we need to do some loopy copying stuff here -->
+    <ItemGroup>
+      <ClCompileCopy Include="@(ClCompile)" />
+      <ClCompile Remove="@(ClCompile)" />
+    </ItemGroup>
+    <UNDUPOBJ_TASK OutputDir="$(IntDir)" ItemList="@(ClCompileCopy)" OutputItemList="@(ClCompile)">
+      <Output ItemName="ClCompile" TaskParameter="OutputItemList" />
+    </UNDUPOBJ_TASK>
+  </Target>
+  <!-- ================ UNDUPOBJ ================ -->
+</Project>
