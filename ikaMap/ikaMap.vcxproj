@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>ikaMap</ProjectName>
+    <ProjectGuid>{71F0DE24-F543-42E5-90C7-0B5AF0517458}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>16.0.30427.251</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>Debug\</OutDir>
+    <IntDir>Debug\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>Release\</OutDir>
+    <IntDir>Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.;%(RootDir)%(Directory);$(SolutionDir);$(SolutionDir)/3rdparty/include;$(SolutionDir)/3rdparty/include/python;$(WXWIN)/include;$(WXWIN)/contrib/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>rpcrt4.lib;comctl32.lib;wsock32.lib;winmm.lib;opengl32.lib;glu32.lib;corona.lib;wxmswd.lib;wxxrcd.lib;zlibd.lib;jpegd.lib;pngd.lib;regexd.lib;tiffd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)ikaMap.exe</OutputFile>
+      <AdditionalLibraryDirectories>../common;../3rdparty/lib;$(WXWIN)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(OutDir)ikaMap.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <OmitFramePointers>true</OmitFramePointers>
+      <AdditionalIncludeDirectories>.;%(RootDir)%(Directory);$(SolutionDir);$(SolutionDir)/3rdparty/include;$(SolutionDir)/3rdparty/include/python;$(WXWIN)/include;$(WXWIN)/contrib/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <ForceConformanceInForLoopScope>false</ForceConformanceInForLoopScope>
+      <PrecompiledHeader />
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>comctl32.lib;rpcrt4.lib;wsock32.lib;winmm.lib;wxmsw.lib;png.lib;zlib.lib;jpeg.lib;tiff.lib;opengl32.lib;glu32.lib;corona.lib;wxxrc.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)ikaMap.exe</OutputFile>
+      <AdditionalLibraryDirectories>../common;../3rdparty/lib;$(WXWIN)/lib;$(WXWIN)/contrib/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>libc.lib;libci.lib;msvcrtd.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="aboutdlg.cpp" />
+    <ClCompile Include="brush.cpp" />
+    <ClCompile Include="brushstate.cpp" />
+    <ClCompile Include="command.cpp" />
+    <ClCompile Include="copypastestate.cpp" />
+    <ClCompile Include="editstate.cpp" />
+    <ClCompile Include="entitydlg.cpp" />
+    <ClCompile Include="entitystate.cpp" />
+    <ClCompile Include="exporttilesdlg.cpp" />
+    <ClCompile Include="ikamap.cpp" />
+    <ClCompile Include="imagebank.cpp" />
+    <ClCompile Include="importtilesdlg.cpp" />
+    <ClCompile Include="layerdlg.cpp" />
+    <ClCompile Include="layerlist.cpp" />
+    <ClCompile Include="mainwindow.cpp" />
+    <ClCompile Include="mapdlg.cpp" />
+    <ClCompile Include="mapview.cpp" />
+    <ClCompile Include="newmapdlg.cpp" />
+    <ClCompile Include="obstructionstate.cpp" />
+    <ClCompile Include="resource.cpp" />
+    <ClCompile Include="script.cpp" />
+    <ClCompile Include="scriptdlg.cpp" />
+    <ClCompile Include="scriptengine.cpp" />
+    <ClCompile Include="scriptstate.cpp" />
+    <ClCompile Include="script\EditorObject.cpp" />
+    <ClCompile Include="script\ErrorObject.cpp" />
+    <ClCompile Include="script\MapObject.cpp" />
+    <ClCompile Include="script\ModuleFuncs.cpp" />
+    <ClCompile Include="script\Video.cpp">
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+      <ObjectFileName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)%(Filename)1.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="settilestate.cpp" />
+    <ClCompile Include="spriteset.cpp" />
+    <ClCompile Include="tileanimdlg.cpp" />
+    <ClCompile Include="tileset.cpp" />
+    <ClCompile Include="tilesetview.cpp" />
+    <ClCompile Include="togglebitmapbutton.cpp" />
+    <ClCompile Include="userdialog.cpp" />
+    <ClCompile Include="video.cpp" />
+    <ClCompile Include="zoneeditstate.cpp" />
+    <ClCompile Include="zonepropertiesdlg.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="aboutdlg.h" />
+    <ClInclude Include="brush.h" />
+    <ClInclude Include="brushstate.h" />
+    <ClInclude Include="command.h" />
+    <ClInclude Include="controller.h" />
+    <ClInclude Include="copypastestate.h" />
+    <ClInclude Include="editstate.h" />
+    <ClInclude Include="entitydlg.h" />
+    <ClInclude Include="entitystate.h" />
+    <ClInclude Include="events.h" />
+    <ClInclude Include="executor.h" />
+    <ClInclude Include="exporttilesdlg.h" />
+    <ClInclude Include="imagebank.h" />
+    <ClInclude Include="importtilesdlg.h" />
+    <ClInclude Include="layerdlg.h" />
+    <ClInclude Include="layerlist.h" />
+    <ClInclude Include="mainwindow.h" />
+    <ClInclude Include="mapdlg.h" />
+    <ClInclude Include="mapview.h" />
+    <ClInclude Include="newmapdlg.h" />
+    <ClInclude Include="nullstate.h" />
+    <ClInclude Include="obstructionstate.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="script.h" />
+    <ClInclude Include="scriptdlg.h" />
+    <ClInclude Include="scriptengine.h" />
+    <ClInclude Include="scriptstate.h" />
+    <ClInclude Include="script\ObjectDefs.h" />
+    <ClInclude Include="settilestate.h" />
+    <ClInclude Include="spriteset.h" />
+    <ClInclude Include="tileanimdlg.h" />
+    <ClInclude Include="tileset.h" />
+    <ClInclude Include="tilesetview.h" />
+    <ClInclude Include="togglebitmapbutton.h" />
+    <ClInclude Include="userdialog.h" />
+    <ClInclude Include="video.h" />
+    <ClInclude Include="wxinc.h" />
+    <ClInclude Include="zoneeditstate.h" />
+    <ClInclude Include="zonepropertiesdlg.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="blank.ico" />
+    <Image Include="brush.bmp" />
+    <Image Include="brush.ico" />
+    <Image Include="colours.bmp" />
+    <Image Include="downarrow.ico" />
+    <Image Include="dropper.ico" />
+    <Image Include="entity.ico" />
+    <Image Include="eraser.ico" />
+    <Image Include="eye.ico" />
+    <Image Include="fill.ico" />
+    <Image Include="ikamap.ico" />
+    <Image Include="new.ico" />
+    <Image Include="obstruction.ico" />
+    <Image Include="pencil.ico" />
+    <Image Include="py.ico" />
+    <Image Include="select.ico" />
+    <Image Include="trash.ico" />
+    <Image Include="uparrow.ico" />
+    <Image Include="waypoint.ico" />
+    <Image Include="zone.ico" />
+    <Image Include="zoom.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ikamap.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\common\common.vc2008.vcxproj">
+      <Project>{7cf113aa-d783-4e94-a0c5-03bc9f6b02a9}</Project>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

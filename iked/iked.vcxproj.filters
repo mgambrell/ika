@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{10e448ef-6c68-46ff-a3a1-44fd5ac3d6da}</UniqueIdentifier>
+      <Extensions>*.cpp</Extensions>
+    </Filter>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{c6b87b78-1077-4622-bbad-a7610bd3b1c3}</UniqueIdentifier>
+      <Extensions>*.h</Extensions>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{0f691e38-0733-468a-a47e-4a58c4c49a81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Commands">
+      <UniqueIdentifier>{4d0be662-8734-486d-a383-b81c84c92076}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{47048f81-231a-451e-bb97-f4a6a3651d4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI\NYI">
+      <UniqueIdentifier>{ee3f67fe-5863-492f-a9c2-908f34a85624}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dialogs">
+      <UniqueIdentifier>{f4a04430-0f52-497b-af8e-14b135f172a6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="application.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="clipboard.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="document.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="font.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="graph.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="imagebank.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="layervisibilitycontrol.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="resource.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="spriteset.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="tileedit.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="tileset.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Commands\spritecommands.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="docview.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="fontview.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="imagearraypanel.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="imageview.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="listcontrol.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="mapview.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="projectview.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="spritesetview.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="codeview.cpp">
+      <Filter>UI\NYI</Filter>
+    </ClCompile>
+    <ClCompile Include="textview.cpp">
+      <Filter>UI\NYI</Filter>
+    </ClCompile>
+    <ClCompile Include="tilesetview.cpp">
+      <Filter>UI\NYI</Filter>
+    </ClCompile>
+    <ClCompile Include="configdlg.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="entityeditor.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="importframesdlg.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="movescripteditor.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="newmapdlg.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="newprojectdlg.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="newspritedlg.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="zoneeditor.cpp">
+      <Filter>Dialogs</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="application.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="clipboard.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="controller.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="debug.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="document.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="documentresource.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="eventlist.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="font.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="graph.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="imagebank.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="layerdlg.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="layervisibilitycontrol.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="spriteset.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tileedit.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="tileset.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\command.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\projectcommands.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Commands\spritecommands.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="docview.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="fontview.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="imagearraypanel.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="imageview.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="listcontrol.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="mapview.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="projectview.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="spritesetview.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="tilesetview.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="codeview.h">
+      <Filter>UI\NYI</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="colours.bmp">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="folder.ico">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="folderopen.ico">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="font.ico">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="iked.ico">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="map.ico">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="py.ico">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="script.ico">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="sprite.ico">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="vsp.ico">
+      <Filter>Resources</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="iked.rc">
+      <Filter>Resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="resource.xrc">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="textview.h">
+      <Filter>UI</Filter>
+    </CustomBuild>
+    <CustomBuild Include="configdlg.h">
+      <Filter>Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="entityeditor.h">
+      <Filter>Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="importframesdlg.h">
+      <Filter>Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="movescripteditor.h">
+      <Filter>Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="newmapdlg.h">
+      <Filter>Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="newprojectdlg.h">
+      <Filter>Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="newspritedlg.h">
+      <Filter>Dialogs</Filter>
+    </CustomBuild>
+    <CustomBuild Include="zoneeditor.h">
+      <Filter>Dialogs</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

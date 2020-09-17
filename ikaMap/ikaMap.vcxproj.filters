@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{5a309cec-ee13-41c3-98b4-27801ae60f70}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{3c35fefd-c022-4447-9d02-b06664809f05}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{6bdab9d8-c787-4324-9bf1-8af6d3f4a470}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="Script">
+      <UniqueIdentifier>{5f3e6b38-6578-45b9-aa77-507ce8258971}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="aboutdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="brush.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="brushstate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="command.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="copypastestate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="editstate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="entitydlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="entitystate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="exporttilesdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ikamap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="imagebank.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="importtilesdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="layerdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="layerlist.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mainwindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mapdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mapview.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="newmapdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="obstructionstate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="resource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="script.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scriptdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scriptengine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scriptstate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="settilestate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="spriteset.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tileanimdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tileset.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tilesetview.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="togglebitmapbutton.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="userdialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="video.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zoneeditstate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="zonepropertiesdlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="script\EditorObject.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="script\ErrorObject.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="script\MapObject.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="script\ModuleFuncs.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="script\Video.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="aboutdlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="brush.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="brushstate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="command.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="controller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="copypastestate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="editstate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="entitydlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="entitystate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="events.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="executor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="exporttilesdlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="imagebank.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="importtilesdlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="layerdlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="layerlist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mainwindow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mapdlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mapview.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="newmapdlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nullstate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="obstructionstate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="script.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scriptdlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scriptengine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scriptstate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="settilestate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="spriteset.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tileanimdlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tileset.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tilesetview.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="togglebitmapbutton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="userdialog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="video.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="wxinc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="zoneeditstate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="zonepropertiesdlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="script\ObjectDefs.h">
+      <Filter>Script</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="blank.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="brush.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="brush.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="colours.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="downarrow.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="dropper.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="entity.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="eraser.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="eye.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="fill.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="ikamap.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="new.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="obstruction.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="pencil.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="py.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="select.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="trash.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="uparrow.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="waypoint.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="zone.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="zoom.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ikamap.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

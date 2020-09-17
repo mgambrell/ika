@@ -1,0 +1,1085 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{6c963470-baed-4289-80b5-8de6c0b58f33}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{51bf50d4-aba6-4f28-8a16-ace78ac44376}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{7c341170-2954-402b-b50f-889eb3d5c9ad}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="Script">
+      <UniqueIdentifier>{c5e0c9ca-4f0c-4833-9085-eec82b1e9746}</UniqueIdentifier>
+      <Extensions>py*.*</Extensions>
+    </Filter>
+    <Filter Include="Video">
+      <UniqueIdentifier>{e8a3407a-43d7-47ca-a637-cfcc961616e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OpenGL">
+      <UniqueIdentifier>{ba12214c-29c8-4ff8-a9c7-ceb2975efe59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Soft32">
+      <UniqueIdentifier>{3e83ecb6-68ee-4da4-bec8-66a2fe552578}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty">
+      <UniqueIdentifier>{7e9d65da-9d78-4015-866c-c9fe115a981a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\zlib">
+      <UniqueIdentifier>{e3225deb-2fd6-499e-aaaa-fb68da612ec3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\audiere">
+      <UniqueIdentifier>{1906f043-b0dd-4849-8002-030f60578a5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\audiere\src">
+      <UniqueIdentifier>{100d5c84-5946-4832-bcdc-23473a26c4fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\libogg">
+      <UniqueIdentifier>{77abafba-f6ec-4e21-a912-df2d793c475f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\libogg\src">
+      <UniqueIdentifier>{0acd31e5-b782-4f01-a019-6ad473e75572}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\libvorbis">
+      <UniqueIdentifier>{ee39d7bb-68ba-4a64-a6d1-e9fcc7e67967}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\libvorbis\lib">
+      <UniqueIdentifier>{7193ead7-076b-43bf-a301-676f0caef18d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\corona">
+      <UniqueIdentifier>{6daaf29f-b310-4cde-ba81-1f8dd0cc2d8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\corona\libpng-1.5.12">
+      <UniqueIdentifier>{8d85f0ee-ab3a-4d3f-99e1-2d09ff311e19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\SDL">
+      <UniqueIdentifier>{526d1d12-436c-40a0-82be-fdd1e175f3b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\SDL\src">
+      <UniqueIdentifier>{c2834553-b615-4eca-9563-38346a51754b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\SDL\src\audio">
+      <UniqueIdentifier>{a8d795c5-fe69-40f5-9c1e-6c21d82a2b3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\SDL\src\audio\windx5">
+      <UniqueIdentifier>{fa30747a-89c8-4ffc-974d-5c1806ce8378}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\SDL\src\thread">
+      <UniqueIdentifier>{8f45ff6a-5dfa-4351-b0ba-0f280a5e3ba1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\SDL\src\thread\win32">
+      <UniqueIdentifier>{1e277434-f51b-48e3-a3fa-d63b9e6a1a66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\SDL\src\thread\timer">
+      <UniqueIdentifier>{19f0f240-fcec-4e4a-9071-d862d75d75a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\SDL\src\thread\timer\win32">
+      <UniqueIdentifier>{d3511332-4d56-41ac-90ba-71c78b3c6ddf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\SDL\src\video">
+      <UniqueIdentifier>{9a0a2a5f-eeb7-4cbc-aa17-78cd29bf07f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\SDL\src\video\wincommon">
+      <UniqueIdentifier>{554785b3-82f9-4541-803a-691a884ebbde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\SDL\src\cdrom">
+      <UniqueIdentifier>{ab021280-a74c-4824-9df7-28a462c163db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\SDL\src\cdrom\win32">
+      <UniqueIdentifier>{d021feec-3e24-40d5-b519-39098d0b6e1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\SDL\src\endian">
+      <UniqueIdentifier>{4582b663-38e9-4bd9-96cf-eb4203cf1e14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\SDL\src\events">
+      <UniqueIdentifier>{de872a49-57ba-4d29-aa01-a4169c4bf625}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\SDL\src\joystick">
+      <UniqueIdentifier>{f4ec7abb-63c6-4ee2-95fd-d9a4df16b8af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\SDL\src\joystick\win32">
+      <UniqueIdentifier>{017fa9cb-7736-425f-929a-a0ba29c1813e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\SDL\src\video\windib">
+      <UniqueIdentifier>{d30948de-a8c4-4c98-b3af-00332df1be4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\SDL\src\main">
+      <UniqueIdentifier>{75492072-ee3e-4f09-b2e3-06ec70eb2ebb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rdparty\SDL\src\main\win32">
+      <UniqueIdentifier>{6c24ad0c-e46e-4a9f-a8fe-c0bf29a59beb}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="animscript.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="benchmark.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="entity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="font.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FPSCounter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="joystick.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="keyboard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mouse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="script.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scriptobject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sound.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tileset.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="script\CanvasObject.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="script\ColoursObject.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="script\ControlObject.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="script\EntityObject.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="script\ErrorObject.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="script\FontObject.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="script\ImageObject.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="script\InputDeviceObject.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="script\InputObject.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="script\JoystickObject.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="script\KeyboardObject.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="script\MapObject.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="script\ModuleFuncs.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="script\MouseObject.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="script\MusicObject.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="script\SoundObject.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="script\TileSetObject.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="script\VideoObject.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="video\ColourHandler.cpp">
+      <Filter>Video</Filter>
+    </ClCompile>
+    <ClCompile Include="opengl\Driver.cpp">
+      <Filter>OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="opengl\Image.cpp">
+      <Filter>OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="soft32\Driver.cpp">
+      <Filter>Soft32</Filter>
+    </ClCompile>
+    <ClCompile Include="soft32\Image.cpp">
+      <Filter>Soft32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\zlib\zutil.c">
+      <Filter>3rdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\zlib\adler32.c">
+      <Filter>3rdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\zlib\compress.c">
+      <Filter>3rdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\zlib\crc32.c">
+      <Filter>3rdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\zlib\deflate.c">
+      <Filter>3rdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\zlib\gzio.c">
+      <Filter>3rdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\zlib\infblock.c">
+      <Filter>3rdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\zlib\infcodes.c">
+      <Filter>3rdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\zlib\inffast.c">
+      <Filter>3rdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\zlib\inflate.c">
+      <Filter>3rdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\zlib\inftrees.c">
+      <Filter>3rdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\zlib\infutil.c">
+      <Filter>3rdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\zlib\trees.c">
+      <Filter>3rdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\zlib\uncompr.c">
+      <Filter>3rdparty\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\threads_win32.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\timer_win32.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\tone.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\utility.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\version.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\basic_source.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\cd_win32.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\debug.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\device.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\device_mixer.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\device_mm.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\device_null.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\dumb_resample.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\dxguid.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\file_ansi.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\input.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\input_aiff.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\input_ogg.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\input_wav.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\loop_point_source.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\memory_file.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\midi_null.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\noise.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\resampler.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\sample_buffer.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\sound.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\sound_effect.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\audiere\src\square_wave.cpp">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\libogg\src\framing.c">
+      <Filter>3rdparty\libogg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\libogg\src\bitwise.c">
+      <Filter>3rdparty\libogg\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\libvorbis\lib\analysis.c">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\libvorbis\lib\bitrate.c">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\libvorbis\lib\block.c">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\libvorbis\lib\codebook.c">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\libvorbis\lib\envelope.c">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\libvorbis\lib\floor0.c">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\libvorbis\lib\floor1.c">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\libvorbis\lib\info.c">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\libvorbis\lib\lookup.c">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\libvorbis\lib\lpc.c">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\libvorbis\lib\lsp.c">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\libvorbis\lib\mapping0.c">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\libvorbis\lib\mdct.c">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\libvorbis\lib\psy.c">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\libvorbis\lib\registry.c">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\libvorbis\lib\res0.c">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\libvorbis\lib\sharedbook.c">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\libvorbis\lib\smallft.c">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\libvorbis\lib\synthesis.c">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\libvorbis\lib\vorbisenc.c">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\libvorbis\lib\vorbisfile.c">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\libvorbis\lib\window.c">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\OpenPNG.cpp">
+      <Filter>3rdparty\corona</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\OpenTGA.cpp">
+      <Filter>3rdparty\corona</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\SavePNG.cpp">
+      <Filter>3rdparty\corona</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\SaveTGA.cpp">
+      <Filter>3rdparty\corona</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\Convert.cpp">
+      <Filter>3rdparty\corona</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\Corona.cpp">
+      <Filter>3rdparty\corona</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\Debug.cpp">
+      <Filter>3rdparty\corona</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\DefaultFileSystem.cpp">
+      <Filter>3rdparty\corona</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\MemoryFile.cpp">
+      <Filter>3rdparty\corona</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\OpenBMP.cpp">
+      <Filter>3rdparty\corona</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\OpenPCX.cpp">
+      <Filter>3rdparty\corona</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\example.c">
+      <Filter>3rdparty\corona\libpng-1.5.12</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\png.c">
+      <Filter>3rdparty\corona\libpng-1.5.12</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngerror.c">
+      <Filter>3rdparty\corona\libpng-1.5.12</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngget.c">
+      <Filter>3rdparty\corona\libpng-1.5.12</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngmem.c">
+      <Filter>3rdparty\corona\libpng-1.5.12</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngpread.c">
+      <Filter>3rdparty\corona\libpng-1.5.12</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngread.c">
+      <Filter>3rdparty\corona\libpng-1.5.12</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngrio.c">
+      <Filter>3rdparty\corona\libpng-1.5.12</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngrtran.c">
+      <Filter>3rdparty\corona\libpng-1.5.12</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngrutil.c">
+      <Filter>3rdparty\corona\libpng-1.5.12</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngset.c">
+      <Filter>3rdparty\corona\libpng-1.5.12</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngtrans.c">
+      <Filter>3rdparty\corona\libpng-1.5.12</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngwio.c">
+      <Filter>3rdparty\corona\libpng-1.5.12</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngwrite.c">
+      <Filter>3rdparty\corona\libpng-1.5.12</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngwtran.c">
+      <Filter>3rdparty\corona\libpng-1.5.12</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\corona\src\libpng-1.5.12\pngwutil.c">
+      <Filter>3rdparty\corona\libpng-1.5.12</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\SDL_error.c">
+      <Filter>3rdparty\SDL\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\SDL_fatal.c">
+      <Filter>3rdparty\SDL\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\SDL_getenv.c">
+      <Filter>3rdparty\SDL\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\SDL_loadso.c">
+      <Filter>3rdparty\SDL\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\SDL.c">
+      <Filter>3rdparty\SDL\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\audio\SDL_audiodev.c">
+      <Filter>3rdparty\SDL\src\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\audio\SDL_audiomem.c">
+      <Filter>3rdparty\SDL\src\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\audio\SDL_mixer.c">
+      <Filter>3rdparty\SDL\src\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\audio\SDL_wave.c">
+      <Filter>3rdparty\SDL\src\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\audio\SDL_audio.c">
+      <Filter>3rdparty\SDL\src\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\audio\SDL_audiocvt.c">
+      <Filter>3rdparty\SDL\src\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\thread\SDL_thread.c">
+      <Filter>3rdparty\SDL\src\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\thread\win32\win_ce_semaphore.c">
+      <Filter>3rdparty\SDL\src\thread\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\thread\win32\SDL_sysmutex.c">
+      <Filter>3rdparty\SDL\src\thread\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\thread\win32\SDL_syssem.c">
+      <Filter>3rdparty\SDL\src\thread\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\thread\win32\SDL_systhread.c">
+      <Filter>3rdparty\SDL\src\thread\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\timer\SDL_timer.c">
+      <Filter>3rdparty\SDL\src\thread\timer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\timer\win32\SDL_systimer.c">
+      <Filter>3rdparty\SDL\src\thread\timer\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_stretch.c">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_surface.c">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_video.c">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_yuv.c">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_yuv_mmx.c">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_yuv_sw.c">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_blit.c">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_blit_0.c">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_blit_1.c">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_blit_A.c">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_blit_N.c">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_bmp.c">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_cursor.c">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_gamma.c">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_pixels.c">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\video\SDL_RLEaccel.c">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\video\wincommon\SDL_syswm.c">
+      <Filter>3rdparty\SDL\src\video\wincommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\video\wincommon\SDL_wingl.c">
+      <Filter>3rdparty\SDL\src\video\wincommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\video\wincommon\SDL_sysevents.c">
+      <Filter>3rdparty\SDL\src\video\wincommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\video\wincommon\SDL_sysmouse.c">
+      <Filter>3rdparty\SDL\src\video\wincommon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\cdrom\SDL_cdrom.c">
+      <Filter>3rdparty\SDL\src\cdrom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\cdrom\win32\SDL_syscdrom.c">
+      <Filter>3rdparty\SDL\src\cdrom\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\endian\SDL_endian.c">
+      <Filter>3rdparty\SDL\src\endian</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\events\SDL_events.c">
+      <Filter>3rdparty\SDL\src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\events\SDL_expose.c">
+      <Filter>3rdparty\SDL\src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\events\SDL_keyboard.c">
+      <Filter>3rdparty\SDL\src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\events\SDL_mouse.c">
+      <Filter>3rdparty\SDL\src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\events\SDL_quit.c">
+      <Filter>3rdparty\SDL\src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\events\SDL_resize.c">
+      <Filter>3rdparty\SDL\src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\events\SDL_active.c">
+      <Filter>3rdparty\SDL\src\events</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\joystick\SDL_joystick.c">
+      <Filter>3rdparty\SDL\src\joystick</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\joystick\win32\SDL_mmjoystick.c">
+      <Filter>3rdparty\SDL\src\joystick\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\video\windib\SDL_dibvideo.c">
+      <Filter>3rdparty\SDL\src\video\windib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\video\windib\SDL_dibevents.c">
+      <Filter>3rdparty\SDL\src\video\windib</Filter>
+    </ClCompile>
+    <ClCompile Include="path.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\main\win32\SDL_main.c">
+      <Filter>3rdparty\SDL\src\main\win32</Filter>
+    </ClCompile>
+    <ClCompile Include="..\3rdparty\SDL\src\audio\windib\SDL_dibaudio.c">
+      <Filter>3rdparty\SDL\src\audio</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="animscript.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="benchmark.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="entity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="font.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FPSCounter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hooklist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="joystick.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="keyboard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="mouse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="script.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="scriptobject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tileset.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="script\ObjectDefs.h">
+      <Filter>Script</Filter>
+    </ClInclude>
+    <ClInclude Include="video\ColourHandler.h">
+      <Filter>Video</Filter>
+    </ClInclude>
+    <ClInclude Include="video\Driver.h">
+      <Filter>Video</Filter>
+    </ClInclude>
+    <ClInclude Include="video\Image.h">
+      <Filter>Video</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\Driver.h">
+      <Filter>OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="opengl\Image.h">
+      <Filter>OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="soft32\Driver.h">
+      <Filter>Soft32</Filter>
+    </ClInclude>
+    <ClInclude Include="soft32\Image.h">
+      <Filter>Soft32</Filter>
+    </ClInclude>
+    <ClInclude Include="soft32\Misc.h">
+      <Filter>Soft32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\zlib\deflate.h">
+      <Filter>3rdparty\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\zlib\infblock.h">
+      <Filter>3rdparty\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\zlib\infcodes.h">
+      <Filter>3rdparty\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\zlib\inffast.h">
+      <Filter>3rdparty\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\zlib\inffixed.h">
+      <Filter>3rdparty\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\zlib\inftrees.h">
+      <Filter>3rdparty\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\zlib\infutil.h">
+      <Filter>3rdparty\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\zlib\trees.h">
+      <Filter>3rdparty\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\zlib\zconf.h">
+      <Filter>3rdparty\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\zlib\zlib.h">
+      <Filter>3rdparty\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\zlib\zutil.h">
+      <Filter>3rdparty\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\audiere\src\audiere.h">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\audiere\src\basic_source.h">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\audiere\src\debug.h">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\audiere\src\default_file.h">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\audiere\src\device.h">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\audiere\src\device_mixer.h">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\audiere\src\device_mm.h">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\audiere\src\device_null.h">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\audiere\src\dsound.h">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\audiere\src\dumb_resample.h">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\audiere\src\input_aiff.h">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\audiere\src\input_ogg.h">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\audiere\src\input_wav.h">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\audiere\src\internal.h">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\audiere\src\mci_device.h">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\audiere\src\memory_file.h">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\audiere\src\resampler.h">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\audiere\src\resource.h">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\audiere\src\threads.h">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\audiere\src\timer.h">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\audiere\src\types.h">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\audiere\src\utility.h">
+      <Filter>3rdparty\audiere\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\libogg\src\crctable.h">
+      <Filter>3rdparty\libogg\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\libvorbis\lib\lookup.h">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\libvorbis\lib\lookup_data.h">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\libvorbis\lib\lpc.h">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\libvorbis\lib\lsp.h">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\libvorbis\lib\masking.h">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\libvorbis\lib\mdct.h">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\libvorbis\lib\misc.h">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\libvorbis\lib\os.h">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\libvorbis\lib\psy.h">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\libvorbis\lib\registry.h">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\libvorbis\lib\scales.h">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\libvorbis\lib\smallft.h">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\libvorbis\lib\window.h">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\libvorbis\lib\backends.h">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\libvorbis\lib\bitrate.h">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\libvorbis\lib\codebook.h">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\libvorbis\lib\codec_internal.h">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\libvorbis\lib\envelope.h">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\libvorbis\lib\highlevel.h">
+      <Filter>3rdparty\libvorbis\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\corona\src\corona.h">
+      <Filter>3rdparty\corona</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\corona\src\Debug.h">
+      <Filter>3rdparty\corona</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\corona\src\MemoryFile.h">
+      <Filter>3rdparty\corona</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\corona\src\Open.h">
+      <Filter>3rdparty\corona</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\corona\src\Save.h">
+      <Filter>3rdparty\corona</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\corona\src\SimpleImage.h">
+      <Filter>3rdparty\corona</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\corona\src\Types.h">
+      <Filter>3rdparty\corona</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\corona\src\Utility.h">
+      <Filter>3rdparty\corona</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\corona\src\libpng-1.5.12\pngstruct.h">
+      <Filter>3rdparty\corona\libpng-1.5.12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\corona\src\libpng-1.5.12\png.h">
+      <Filter>3rdparty\corona\libpng-1.5.12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\corona\src\libpng-1.5.12\pngconf.h">
+      <Filter>3rdparty\corona\libpng-1.5.12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\corona\src\libpng-1.5.12\pngdebug.h">
+      <Filter>3rdparty\corona\libpng-1.5.12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\corona\src\libpng-1.5.12\pnginfo.h">
+      <Filter>3rdparty\corona\libpng-1.5.12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\corona\src\libpng-1.5.12\pnglibconf.h">
+      <Filter>3rdparty\corona\libpng-1.5.12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\corona\src\libpng-1.5.12\pngpriv.h">
+      <Filter>3rdparty\corona\libpng-1.5.12</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\SDL_error_c.h">
+      <Filter>3rdparty\SDL\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\SDL_fatal.h">
+      <Filter>3rdparty\SDL\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\SDL_loadso.h">
+      <Filter>3rdparty\SDL\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\audio\SDL_audiodev_c.h">
+      <Filter>3rdparty\SDL\src\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\audio\SDL_audiomem.h">
+      <Filter>3rdparty\SDL\src\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\audio\SDL_sysaudio.h">
+      <Filter>3rdparty\SDL\src\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\audio\SDL_wave.h">
+      <Filter>3rdparty\SDL\src\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\audio\SDL_audio_c.h">
+      <Filter>3rdparty\SDL\src\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\thread\SDL_thread_c.h">
+      <Filter>3rdparty\SDL\src\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\thread\SDL_systhread.h">
+      <Filter>3rdparty\SDL\src\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\thread\win32\SDL_systhread_c.h">
+      <Filter>3rdparty\SDL\src\thread\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\thread\win32\win_ce_semaphore.h">
+      <Filter>3rdparty\SDL\src\thread\win32</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\timer\SDL_timer_c.h">
+      <Filter>3rdparty\SDL\src\thread\timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\timer\SDL_systimer.h">
+      <Filter>3rdparty\SDL\src\thread\timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\video\SDL_stretch_c.h">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\video\SDL_sysvideo.h">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\video\SDL_yuv_sw_c.h">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\video\SDL_yuvfuncs.h">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\video\SDL_blit.h">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\video\SDL_cursor_c.h">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\video\SDL_glfuncs.h">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\video\SDL_leaks.h">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\video\SDL_memops.h">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\video\SDL_pixels_c.h">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\video\SDL_RLEaccel_c.h">
+      <Filter>3rdparty\SDL\src\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\video\wincommon\SDL_syswm_c.h">
+      <Filter>3rdparty\SDL\src\video\wincommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\video\wincommon\SDL_wingl_c.h">
+      <Filter>3rdparty\SDL\src\video\wincommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\video\wincommon\wmmsg.h">
+      <Filter>3rdparty\SDL\src\video\wincommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\video\wincommon\SDL_lowvideo.h">
+      <Filter>3rdparty\SDL\src\video\wincommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\video\wincommon\SDL_sysmouse_c.h">
+      <Filter>3rdparty\SDL\src\video\wincommon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\cdrom\SDL_syscdrom.h">
+      <Filter>3rdparty\SDL\src\cdrom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\events\SDL_events_c.h">
+      <Filter>3rdparty\SDL\src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\events\SDL_sysevents.h">
+      <Filter>3rdparty\SDL\src\events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\joystick\SDL_joystick_c.h">
+      <Filter>3rdparty\SDL\src\joystick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\joystick\SDL_sysjoystick.h">
+      <Filter>3rdparty\SDL\src\joystick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\video\windib\SDL_dibevents_c.h">
+      <Filter>3rdparty\SDL\src\video\windib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\video\windib\SDL_dibvideo.h">
+      <Filter>3rdparty\SDL\src\video\windib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\SDL\src\video\windib\SDL_vkeys.h">
+      <Filter>3rdparty\SDL\src\video\windib</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="engine.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="ika.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
