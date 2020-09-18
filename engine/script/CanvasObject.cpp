@@ -15,11 +15,10 @@ namespace Script
         template <typename T, T U, int>
         PyObject* Get(T* self, PyObject* value)
         {
-            return PyLong_FromLong(self->U);
+            return PyInt_FromLong(self->U);
         }
 
         PyTypeObject type;
-        PyObject obj;
 
         PyMethodDef methods[] =
         {
@@ -126,8 +125,8 @@ namespace Script
             {   0   }
         };
 
-        PyObject* getWidth(CanvasObject* self)  { return PyLong_FromLong(self->canvas->Width());  }
-        PyObject* getHeight(CanvasObject* self) { return PyLong_FromLong(self->canvas->Height()); }
+        PyObject* getWidth(CanvasObject* self)  { return PyInt_FromLong(self->canvas->Width());  }
+        PyObject* getHeight(CanvasObject* self) { return PyInt_FromLong(self->canvas->Height()); }
 
         PyGetSetDef properties[] =
         {
@@ -140,8 +139,8 @@ namespace Script
         {
             memset(&type, 0, sizeof type);
 
-            obj.ob_refcnt = 1;
-            obj.ob_type = &PyType_Type;
+            type.ob_refcnt = 1;
+            type.ob_type = &PyType_Type;
             type.tp_name = "Canvas";
             type.tp_basicsize = sizeof type;
             type.tp_dealloc = (destructor)Destroy;
@@ -175,9 +174,9 @@ namespace Script
             if (!PyArg_ParseTupleAndKeywords(args, kw, "O|i:__init__", keywords, &o, &y))
                 return 0;
 
-            if (o->ob_type == &PyLong_Type)
+            if (o->ob_type == &PyInt_Type)
             {
-                x = PyLong_AsLong(o);
+                x = PyInt_AsLong(o);
                 if (x < 1 || y < 1)
                 {
                     PyErr_SetString(PyExc_RuntimeError, va("Can't create %ix%i canvas.", x, y));
@@ -190,9 +189,9 @@ namespace Script
 
                 return (PyObject*)c;
             }
-            else if (o->ob_type == &PyBytes_Type)
+            else if (o->ob_type == &PyString_Type)
             {
-                char* fname = PyBytes_AsString(o);
+                char* fname = PyString_AsString(o);
                 CanvasObject* c = PyObject_New(CanvasObject, type);
                 try {
                     c->canvas = new ::Canvas(fname);
@@ -295,7 +294,7 @@ namespace Script
             if (!PyArg_ParseTuple(args, "ii:GetPixel", &x, &y))
                 return 0;
 
-            return PyLong_FromLong(self->canvas->GetPixel(x, y));
+            return PyInt_FromLong(self->canvas->GetPixel(x, y));
         }
 
         METHOD(Canvas_SetPixel)
@@ -303,7 +302,7 @@ namespace Script
             int x, y;
             u32 colour;
 
-            if (!PyArg_ParseTuple(args, "iiI:SetPixel", &x, &y, &colour))
+            if (!PyArg_ParseTuple(args, "iii:SetPixel", &x, &y, &colour))
                 return 0;
 
             self->canvas->SetPixel(x, y, colour);
@@ -318,7 +317,7 @@ namespace Script
             u32 colour;
             ::Video::BlendMode blendMode = ::Video::Normal;
 
-            if (!PyArg_ParseTuple(args, "iiiiI|i:DrawLine", &x1, &y1, &x2, &y2, &colour, &blendMode))
+            if (!PyArg_ParseTuple(args, "iiiii|i:DrawLine", &x1, &y1, &x2, &y2, &colour, &blendMode))
                 return 0;
 
             Blitter::DrawLine(*self->canvas, x1, y1, x2, y2, colour, *Blitter::GetBlender(blendMode));
@@ -334,7 +333,7 @@ namespace Script
             bool filled;
             ::Video::BlendMode blendMode = ::Video::Normal;
 
-            if (!PyArg_ParseTuple(args, "iiiiI|ii:DrawRect", &x1, &y1, &x2, &y2, &colour, &filled, &blendMode))
+            if (!PyArg_ParseTuple(args, "iiiii|ii:DrawRect", &x1, &y1, &x2, &y2, &colour, &filled, &blendMode))
                 return 0;
 
             Blitter::DrawRect(*self->canvas, x1, y1, x2, y2, colour, filled, *Blitter::GetBlender(blendMode));
@@ -362,7 +361,7 @@ namespace Script
         METHOD(Canvas_Clear)
         {
             u32 colour = 0;
-            if (!PyArg_ParseTuple(args, "|I:SetPixel", &colour))
+            if (!PyArg_ParseTuple(args, "|i:SetPixel", &colour))
                 return 0;
 
             self->canvas->Clear(colour);

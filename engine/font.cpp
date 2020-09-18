@@ -48,7 +48,7 @@ namespace Ika {
 
     uint Font::GetGlyphIndex(char c, uint subset) const {
         if (subset >= 0 && subset < _fontFile.NumSubSets()) {
-            return _fontFile.GetSubSet(subset).glyphIndex[(int)c];
+            return _fontFile.GetSubSet(subset).glyphIndex[c];
         } else {
             return 0;
         }

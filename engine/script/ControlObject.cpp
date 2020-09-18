@@ -8,7 +8,6 @@ namespace Script {
         std::map<InputControl*, ControlObject*> _instances;
 
         PyTypeObject type;
-        PyObject obj;
 
         PyMethodDef methods[] = {
             {   "Pressed",  (PyCFunction)Control_Pressed,    METH_NOARGS,   
@@ -75,8 +74,8 @@ namespace Script {
         void Init() {
             memset(&type, 0, sizeof type);
 
-            obj.ob_refcnt = 1;
-            obj.ob_type = &PyType_Type;
+            type.ob_refcnt = 1;
+            type.ob_type = &PyType_Type;
             type.tp_name = "Control";
             type.tp_basicsize = sizeof type;
             type.tp_dealloc = (destructor)Destroy;
