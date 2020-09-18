@@ -664,9 +664,6 @@
     <ClCompile Include="..\3rdparty\SDL\src\video\windib\SDL_dibevents.c">
       <Filter>3rdparty\SDL\src\video\windib</Filter>
     </ClCompile>
-    <ClCompile Include="path.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\3rdparty\SDL\src\main\win32\SDL_main.c">
       <Filter>3rdparty\SDL\src\main\win32</Filter>
     </ClCompile>

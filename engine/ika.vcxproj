@@ -105,7 +105,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.;%(RootDir)%(Directory);$(SolutionDir);$(SolutionDir)/3rdparty/;$(SolutionDir)/common;$(SolutionDir)/3rdparty/audiere/src;$(SolutionDir)/3rdparty/zlib;$(SolutionDir)/3rdparty/libvorbis/include;$(SolutionDir)/3rdparty/libogg/include;$(SolutionDir)/3rdparty/corona/src/libpng-1.5.12;$(SolutionDir)/3rdparty/SDL/include;$(SolutionDir)/3rdparty/SDL/src/audio;$(SolutionDir)/3rdparty/SDL/src/thread;$(SolutionDir)/3rdparty/SDL/src/video;$(SolutionDir)/3rdparty/SDL/src/thread/win32;$(SolutionDir)/3rdparty/SDL/src/timer;$(SolutionDir)/3rdparty/SDL/src;$(SolutionDir)/3rdparty/SDL/src/events;$(SolutionDir)/3rdparty/SDL/src/video/wincommon;$(SolutionDir)/3rdparty/SDL/src/cdrom;$(SolutionDir)/3rdparty/SDL/src/joystick;$(SolutionDir)/3rdparty/python/Python;$(SolutionDir)/3rdparty/python/Include;$(SolutionDir)/3rdparty/python/PC;$(SolutionDir)/3rdparty/corona/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(RootDir)%(Directory);$(SolutionDir);$(SolutionDir)/3rdparty/;$(SolutionDir)/common;$(SolutionDir)/3rdparty/audiere/src;$(SolutionDir)/3rdparty/zlib;$(SolutionDir)/3rdparty/libvorbis/include;$(SolutionDir)/3rdparty/libogg/include;$(SolutionDir)/3rdparty/corona/src/libpng-1.5.12;$(SolutionDir)/3rdparty/SDL/include;$(SolutionDir)/3rdparty/SDL/src/audio;$(SolutionDir)/3rdparty/SDL/src/thread;$(SolutionDir)/3rdparty/SDL/src/video;$(SolutionDir)/3rdparty/SDL/src/thread/win32;$(SolutionDir)/3rdparty/SDL/src/timer;$(SolutionDir)/3rdparty/SDL/src;$(SolutionDir)/3rdparty/SDL/src/events;$(SolutionDir)/3rdparty/SDL/src/video/wincommon;$(SolutionDir)/3rdparty/SDL/src/cdrom;$(SolutionDir)/3rdparty/SDL/src/joystick;$(SolutionDir)/3rdparty/Include/Python;$(SolutionDir)/3rdparty/corona/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>ENABLE_WINDIB;_CRT_SECURE_NO_WARNINGS;_DEBUG;WIN32;_WINDOWS;MSVC;INLINE_ASM;NO_FLAC;NO_SPEEX;NO_DUMB;NO_MP3;NOMINMAX;NO_JPEG;NO_GIF;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -128,7 +128,7 @@
       <AdditionalDependencies>Ws2_32.lib;winmm.lib;opengl32.lib;glu32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>.\Debug/ika.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>..\common\;..\3rdparty\python\libs\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\common\;..\3rdparty\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>.\Debug/ika.pdb</ProgramDatabaseFile>
@@ -297,7 +297,6 @@
     <ClCompile Include="mouse.cpp" />
     <ClCompile Include="opengl\Driver.cpp" />
     <ClCompile Include="opengl\Image.cpp" />
-    <ClCompile Include="path.cpp" />
     <ClCompile Include="script.cpp" />
     <ClCompile Include="scriptobject.cpp" />
     <ClCompile Include="script\CanvasObject.cpp" />
