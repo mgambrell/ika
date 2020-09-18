@@ -1,7 +1,7 @@
 
 #include "ObjectDefs.h"
 #include "input.h"
-#include "debug.h"
+#include "debug.cpp"
 
 namespace Script {
     namespace InputDevice {
