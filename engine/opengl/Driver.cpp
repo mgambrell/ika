@@ -5,6 +5,7 @@
 
 #include "Driver.h"
 #include "Image.h"
+#include "log.h"
 
 
 static void IKA_STDCALL glBlendEquationStub(int) {}
