@@ -12,16 +12,16 @@ namespace Script {
         PyTypeObject type;
 
         PyMethodDef methods[] = {
-            {   (char*)"Blit",         (PyCFunction)Image_Blit,         METH_VARARGS,
-                (char*)"Image.Blit(x, y[, blendmode])\n\n"
+            {   "Blit",         (PyCFunction)Image_Blit,         METH_VARARGS,
+                "Image.Blit(x, y[, blendmode])\n\n"
                 "Draws the image at (x, y).\n"
 				"blendmode specifies the algorithm used to blend pixels.  It is one of\n"
 				"the available blend modes defined in ika's constants section.\n"
                 "blendmode defaults to ika.AlphaBlend."
             },
 
-            {   (char*)"ClipBlit",        (PyCFunction)Image_ClipBlit,   METH_VARARGS,
-                (char*)"ClipBlit(x, y, ix, iy, iw, ih[, blendmode])\n\n"
+            {   "ClipBlit",        (PyCFunction)Image_ClipBlit,   METH_VARARGS,
+                "ClipBlit(x, y, ix, iy, iw, ih[, blendmode])\n\n"
                 "Draws a portion of the image defined by the coordinates (ix, iy, iw, ih)\n"
 				"at screen coordinates (x, y).\n"
                 "blendmode specifies the algorithm used to blend pixels.  It is one of\n"
@@ -29,8 +29,8 @@ namespace Script {
                 "blendmode defaults to ika.AlphaBlend."
             },
 
-            {   (char*)"ScaleBlit",    (PyCFunction)Image_ScaleBlit,    METH_VARARGS,
-                (char*)"Image.ScaleBlit(x, y, width, height[, blendmode])\n\n"
+            {   "ScaleBlit",    (PyCFunction)Image_ScaleBlit,    METH_VARARGS,
+                "Image.ScaleBlit(x, y, width, height[, blendmode])\n\n"
                 "Blits the image, but stretches it out to the dimensions\n"
                 "specified in (width, height)."
 				"blendmode specifies the algorithm used to blend pixels.  It is one of\n"
@@ -38,8 +38,8 @@ namespace Script {
                 "blendmode defaults to ika.AlphaBlend."
             },
 
-			{   (char*)"RotateBlit",  (PyCFunction)Image_RotateBlit,  METH_VARARGS,
-                (char*)"RotateBlit(x, y, angle, [scalex[, scaley [, blendmode]]])\n\n"
+			{   "RotateBlit",  (PyCFunction)Image_RotateBlit,  METH_VARARGS,
+                "RotateBlit(x, y, angle, [scalex[, scaley [, blendmode]]])\n\n"
                 "Draws the image at (x, y), rotating to the angle given.\n"
                 "scalex and scaley are floating point values used as a scale factor.  The default is 1.\n"
 				"blendmode specifies the algorithm used to blend pixels.  It is one of\n"
@@ -47,16 +47,16 @@ namespace Script {
                 "blendmode defaults to ika.AlphaBlend."
             },
 
-            {   (char*)"DistortBlit",  (PyCFunction)Image_DistortBlit,  METH_VARARGS,
-                (char*)"Image.DistortBlit((x1, y1), (x2, y2), (x3, y3), (x4, y4)[, blendmode])\n\n"
+            {   "DistortBlit",  (PyCFunction)Image_DistortBlit,  METH_VARARGS,
+                "Image.DistortBlit((x1, y1), (x2, y2), (x3, y3), (x4, y4)[, blendmode])\n\n"
                 "Blits the image scaled to the four points specified."
 				"blendmode specifies the algorithm used to blend pixels.  It is one of\n"
 				"the available blend modes defined in ika's constants section.\n"
                 "blendmode defaults to ika.AlphaBlend."
             },
 
-			{   (char*)"TileBlit",  (PyCFunction)Image_TileBlit,  METH_VARARGS,
-                (char*)"Image.TileBlit(x, y, width, height[, scalex[, scaley[, blendmode]]])\n\n"
+			{   "TileBlit",  (PyCFunction)Image_TileBlit,  METH_VARARGS,
+                "Image.TileBlit(x, y, width, height[, scalex[, scaley[, blendmode]]])\n\n"
                 "Draws the image onscreen, \"tiling\" it as necessary to fit the rectangle specified.\n"
                 "scalex and scaley are floating point values used as a scale factor.  The default is 1.\n"
 				"blendmode specifies the algorithm used to blend pixels.  It is one of\n"
@@ -64,8 +64,8 @@ namespace Script {
                 "blendmode defaults to ika.AlphaBlend."
 			},
 
-            {   (char*)"TintBlit",  (PyCFunction)Image_TintBlit,  METH_VARARGS,
-                (char*)"Image.TintBlit(x, y, tintColour[, blendMode])\n\n"
+            {   "TintBlit",  (PyCFunction)Image_TintBlit,  METH_VARARGS,
+                "Image.TintBlit(x, y, tintColour[, blendMode])\n\n"
                 "Draws the image onscreen, using tintColour to 'tint' the image.\n"
                 "Each pixel is multiplied by tintColour.  The resultant values are then\n"
                 "scaled before the pixel is plotted.\n\n"
@@ -79,15 +79,15 @@ namespace Script {
                 "Lots of effects could be created by using this creatively.  Experiment!"
             },
 
-            {   (char*)"TintDistortBlit",  (PyCFunction)Image_TintDistortBlit, METH_VARARGS,
-                (char*)"Image.TintDistortBlit((upleftX, upleftY, upleftTint), (uprightX, uprightY, uprightTint), (downrightX, downrightY, downrightTint), (downleftX, downleftY, downrightTint)[, blendmode])\n\n"
+            {   "TintDistortBlit",  (PyCFunction)Image_TintDistortBlit, METH_VARARGS,
+                "Image.TintDistortBlit((upleftX, upleftY, upleftTint), (uprightX, uprightY, uprightTint), (downrightX, downrightY, downrightTint), (downleftX, downleftY, downrightTint)[, blendmode])\n\n"
                 "Combines the effects of DistortBlit and TintBlit.  Each corner can be tinted individually,\n"
                 "using the same algorithm as TintBlit.  The corners, if not the same, are smoothly interpolated\n"
                 "across the image."
             },
 
-            {   (char*)"TintTileBlit",     (PyCFunction)Image_TintTileBlit, METH_VARARGS,
-                (char*)"Image.TintTileBlit(x, y, width, height, tintColour, scalex=1, scaley=1, blendmode=Normal)\n\n"
+            {   "TintTileBlit",     (PyCFunction)Image_TintTileBlit, METH_VARARGS,
+                "Image.TintTileBlit(x, y, width, height, tintColour, scalex=1, scaley=1, blendmode=Normal)\n\n"
                 "\"tile\"-blits the image, just like Video.TileBlit, except it multiplies each pixel by\n"
                 "tintColour, resulting in a colour tint."
             },
@@ -112,8 +112,8 @@ namespace Script {
 #undef SET
 
         PyGetSetDef properties[] = {
-            {   (char*)"width",        (getter)getWidth,       0,  (char*)"Gets the width of the image."  },
-            {   (char*)"height",       (getter)getHeight,      0,  (char*)"Gets the height of the image." },
+            {   "width",        (getter)getWidth,       0,  "Gets the width of the image."  },
+            {   "height",       (getter)getHeight,      0,  "Gets the height of the image." },
             {   0   }
         };
 
@@ -145,7 +145,7 @@ namespace Script {
         }
 
         PyObject* New(PyTypeObject* type, PyObject* args, PyObject* kw) {
-			static char* keywords[] = { (char*)"src", 0 };
+			static char* keywords[] = { "src", 0 };
             PyObject* obj;
 
             if (!PyArg_ParseTupleAndKeywords(args, kw, "O:__new__", keywords, &obj))

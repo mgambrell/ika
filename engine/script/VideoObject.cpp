@@ -8,96 +8,96 @@ namespace Script {
         PyTypeObject type;
         
         PyMethodDef methods[] = {
-            {   (char*)"Blit",         (PyCFunction)Video_Blit,        METH_VARARGS,
-                (char*)"Blit(image, x, y[, blendmode])\n\n"
+            {   "Blit",         (PyCFunction)Video_Blit,        METH_VARARGS,
+                "Blit(image, x, y[, blendmode])\n\n"
                 "Deprecated. Use ika.Image.Blit instead.\n"
             },
             
-            {   (char*)"ClipBlit",         (PyCFunction)Video_ClipBlit,   METH_VARARGS,
-                (char*)"ClipBlit(image, x, y, ix, iy, iw, ih[, blendmode])\n\n"
+            {   "ClipBlit",         (PyCFunction)Video_ClipBlit,   METH_VARARGS,
+                "ClipBlit(image, x, y, ix, iy, iw, ih[, blendmode])\n\n"
                 "Deprecated. Use ika.Image.ClipBlit instead.\n"
             },
 
-            {   (char*)"ScaleBlit",    (PyCFunction)Video_ScaleBlit,   METH_VARARGS,
-                (char*)"ScaleBlit(image, x, y, width, height[, blendmode])\n\n"
+            {   "ScaleBlit",    (PyCFunction)Video_ScaleBlit,   METH_VARARGS,
+                "ScaleBlit(image, x, y, width, height[, blendmode])\n\n"
                 "Deprecated. Use ika.Image.ScaleBlit instead.\n"
             },
 
-            {   (char*)"RotateBlit",    (PyCFunction)Video_RotateBlit,   METH_VARARGS,
-                (char*)"RotateBlit(image, x, y, angle, [scalex[, scaley [, blendmode]]])\n\n"
+            {   "RotateBlit",    (PyCFunction)Video_RotateBlit,   METH_VARARGS,
+                "RotateBlit(image, x, y, angle, [scalex[, scaley [, blendmode]]])\n\n"
                 "Deprecated. Use ika.Image.RotateBlit instead.\n"
             },
             
-            {   (char*)"DistortBlit",  (PyCFunction)Video_DistortBlit, METH_VARARGS,
-                (char*)"DistortBlit(image, (upleftX, upleftY), (uprightX, uprightY), (downrightX, downrightY), (downleftX, downleftY)[, blendmode])\n\n"
+            {   "DistortBlit",  (PyCFunction)Video_DistortBlit, METH_VARARGS,
+                "DistortBlit(image, (upleftX, upleftY), (uprightX, uprightY), (downrightX, downrightY), (downleftX, downleftY)[, blendmode])\n\n"
 				"Deprecated. Use ika.Image.DistortBlit instead.\n"
             },
 
-            {   (char*)"TileBlit",     (PyCFunction)Video_TileBlit,    METH_VARARGS,
-                (char*)"TileBlit(image, x, y, width, height[, scalex[, scaley[, blendmode]]])\n\n"
+            {   "TileBlit",     (PyCFunction)Video_TileBlit,    METH_VARARGS,
+                "TileBlit(image, x, y, width, height[, scalex[, scaley[, blendmode]]])\n\n"
                 "Deprecated. Use ika.Image.TileBlit instead.\n"
             },
 
-            {   (char*)"TintBlit",     (PyCFunction)Video_TintBlit,    METH_VARARGS,
-                (char*)"TintBlit(image, x, y, tintColour[, blendMode])\n\n"
+            {   "TintBlit",     (PyCFunction)Video_TintBlit,    METH_VARARGS,
+                "TintBlit(image, x, y, tintColour[, blendMode])\n\n"
                 "Deprecated. Use ika.Image.TintBlit instead.\n"
 			},
 
-            {   (char*)"TintDistortBlit",  (PyCFunction)Video_TintDistortBlit, METH_VARARGS,
-                (char*)"TintDistortBlit(image, (upleftX, upleftY, upleftTint), (uprightX, uprightY, uprightTint), (downrightX, downrightY, downrightTint), (downleftX, downleftY, downrightTint)[, blendmode])\n\n"
+            {   "TintDistortBlit",  (PyCFunction)Video_TintDistortBlit, METH_VARARGS,
+                "TintDistortBlit(image, (upleftX, upleftY, upleftTint), (uprightX, uprightY, uprightTint), (downrightX, downrightY, downrightTint), (downleftX, downleftY, downrightTint)[, blendmode])\n\n"
                 "Deprecated. Use ika.Image.TintDistortBlit instead.\n"
             },
 
-            {   (char*)"TintTileBlit",     (PyCFunction)Video_TintTileBlit, METH_VARARGS,
-                (char*)"TintTileBlit(image, x, y, width, height, tintColour, scalex=1, scaley=1, blendmode=Normal)\n\n"
+            {   "TintTileBlit",     (PyCFunction)Video_TintTileBlit, METH_VARARGS,
+                "TintTileBlit(image, x, y, width, height, tintColour, scalex=1, scaley=1, blendmode=Normal)\n\n"
                 "Deprecated. Use ika.Image.TintTileBlit instead.\n"
             },
 
-            {   (char*)"DrawPixel",    (PyCFunction)Video_DrawPixel,   METH_VARARGS,
-                (char*)"DrawPixel(x, y, colour[, blendmode])\n\n"
+            {   "DrawPixel",    (PyCFunction)Video_DrawPixel,   METH_VARARGS,
+                "DrawPixel(x, y, colour[, blendmode])\n\n"
                 "Draws a dot at (x, y) with the colour specified."
             },
 
-            {   (char*)"DrawLine",     (PyCFunction)Video_DrawLine,    METH_VARARGS,
-                (char*)"DrawLine(x1, y1, x2, y2, colour[, blendmode])\n\n"
+            {   "DrawLine",     (PyCFunction)Video_DrawLine,    METH_VARARGS,
+                "DrawLine(x1, y1, x2, y2, colour[, blendmode])\n\n"
                 "Draws a straight line from (x1, y1) to (x2, y2) in the colour specified."
             },
 
-            {   (char*)"DrawRect",     (PyCFunction)Video_DrawRect,    METH_VARARGS,
-                (char*)"DrawRect(x1, y1, x2, y2, colour[, fill, blendmode])\n\n"
+            {   "DrawRect",     (PyCFunction)Video_DrawRect,    METH_VARARGS,
+                "DrawRect(x1, y1, x2, y2, colour[, fill, blendmode])\n\n"
                 "Draws a rectangle with (x1, y1) and (x2, y2) as opposite corners.\n"
                 "If fill is omitted or zero, an outline is drawn, else it is filled in."
             },
 
-            {   (char*)"DrawEllipse",  (PyCFunction)Video_DrawEllipse, METH_VARARGS,
-                (char*)"DrawEllipse(cx, cy, rx, ry, colour[, filled, blendmode])\n\n"
+            {   "DrawEllipse",  (PyCFunction)Video_DrawEllipse, METH_VARARGS,
+                "DrawEllipse(cx, cy, rx, ry, colour[, filled, blendmode])\n\n"
                 "Draws an ellipse, centred at (cx, cy), of radius rx and ry on the X and\n"
                 "Y axis, respectively.  If filled is omitted or nonzero, the ellipse is filled in\n"
                 "else it is drawn as an outline."
             },
             
-            {   (char*)"DrawArc",  (PyCFunction)Video_DrawArc, METH_VARARGS,
-                (char*)"DrawArc(cx, cy, rx, ry, irx, iry, start, end, colour[, filled, blendmode])\n\n"
+            {   "DrawArc",  (PyCFunction)Video_DrawArc, METH_VARARGS,
+                "DrawArc(cx, cy, rx, ry, irx, iry, start, end, colour[, filled, blendmode])\n\n"
                 "Draws an arc, centred at (cx, cy), of radius rx and ry and inner radius irx and iry on the X and\n"
                 "Y axis, respectively, from angle start to angle end, in degrees.  If filled is omitted or nonzero, the arc is filled in\n"
                 "else it is drawn as an outline."
             },
             
-            {   (char*)"DrawTriangle", (PyCFunction)Video_DrawTriangle, METH_VARARGS,
-                (char*)"DrawTriangle((x, y, colour), (x, y, colour), (x, y, colour)[, blendmode])\n\n"
+            {   "DrawTriangle", (PyCFunction)Video_DrawTriangle, METH_VARARGS,
+                "DrawTriangle((x, y, colour), (x, y, colour), (x, y, colour)[, blendmode])\n\n"
                 "Draws a filled triangle onscreen.  Each point is drawn in the colour specified, "
                 "and a gradient is applied between the points."
             },
             
-            {   (char*)"DrawQuad", (PyCFunction)Video_DrawQuad, METH_VARARGS,
-                (char*)"DrawQuad((x, y, colour), (x, y, colour), (x, y, colour), (x, y, colour)[, blendmode])\n\n"
+            {   "DrawQuad", (PyCFunction)Video_DrawQuad, METH_VARARGS,
+                "DrawQuad((x, y, colour), (x, y, colour), (x, y, colour), (x, y, colour)[, blendmode])\n\n"
                 "Draws a quad onscreen.  Each point is drawn in the colour specified.\n"
                 "(A quad is two triangles from (p1,p2,p3) and (p2,p3,p4).  Therefore, make sure p2 and p3 are"
                 "opposite corners of the quad.)"
             },
 
-            {   (char*)"DrawLineList", (PyCFunction)Video_DrawLineList, METH_VARARGS,
-                (char*)"DrawLineList(pointlist[, drawmode, blendmode]])\n\n"
+            {   "DrawLineList", (PyCFunction)Video_DrawLineList, METH_VARARGS,
+                "DrawLineList(pointlist[, drawmode, blendmode]])\n\n"
                 "Draws a bunch of points onscreen.  Each argument of pointlist should be a tuple in the format (x,y,colour)."
                 "Each point is drawn in the colour specified, and a gradient is applied between the points.\n"
                 "There is no extra python overhead on this function, so it is much better suited for drawing a lot of lines than"
@@ -109,8 +109,8 @@ namespace Script {
                 "3 - draws lines between each point and every other point."
             },
                         
-            {   (char*)"DrawTriangleList", (PyCFunction)Video_DrawTriangleList, METH_VARARGS,
-                (char*)"DrawTriangleList(pointlist[, drawmode, blendmode]])\n\n"
+            {   "DrawTriangleList", (PyCFunction)Video_DrawTriangleList, METH_VARARGS,
+                "DrawTriangleList(pointlist[, drawmode, blendmode]])\n\n"
                 "Draws a bunch of filled triangles onscreen.  Each argument of pointlist should be a tuple in the format (x,y,colour)."
                 "Each point is drawn in the colour specified, and a gradient is applied between the points.\n"
                 "There is no extra python overhead on this function, so it is much better suited for drawing a lot of triangles than"
@@ -121,36 +121,36 @@ namespace Script {
                 "2 - draws triangles between the first point, the previous point, and the current point, so (p1,p2,p3) (p1,p3,p4) (p1,p4,p5) etc."
             },
 
-            {   (char*)"ClipScreen",   (PyCFunction)Video_ClipScreen, METH_VARARGS,
-                (char*)"ClipScreen(left=0, top=0, right=xres, bottom=yres)\n\n"
+            {   "ClipScreen",   (PyCFunction)Video_ClipScreen, METH_VARARGS,
+                "ClipScreen(left=0, top=0, right=xres, bottom=yres)\n\n"
                 "Clips the video display to the rectangle specfied.  All drawing\n"
                 "operations will be confined to this region.\n\n"
                 "Calling ClipScreen with no arguments will reset the clipping rect\n"
                 "to its default setting. (the whole screen)"
             },
 
-            {   (char*)"GetClipRect",  (PyCFunction)Video_GetClipRect, METH_NOARGS,
-                (char*)"GetClipRect() -> (x, y, x2, y2)\n\n"
+            {   "GetClipRect",  (PyCFunction)Video_GetClipRect, METH_NOARGS,
+                "GetClipRect() -> (x, y, x2, y2)\n\n"
                 "Returns the current clipping rectangle."
             },
 
-            {   (char*)"GrabImage",    (PyCFunction)Video_GrabImage, METH_VARARGS,
-                (char*)"GrabImage(x1, y1, x2, y2) -> image\n\n"
+            {   "GrabImage",    (PyCFunction)Video_GrabImage, METH_VARARGS,
+                "GrabImage(x1, y1, x2, y2) -> image\n\n"
                 "Grabs a rectangle from the screen, copies it to an image, and returns it."
             },
 
-            {   (char*)"GrabCanvas",   (PyCFunction)Video_GrabCanvas, METH_VARARGS,
-                (char*)"GrabCanvas(x1, y1, x2, y2) -> canvas\n\n"
+            {   "GrabCanvas",   (PyCFunction)Video_GrabCanvas, METH_VARARGS,
+                "GrabCanvas(x1, y1, x2, y2) -> canvas\n\n"
                 "Grabs a rectangle from the screen, copies it to a canvas, and returns it."
             },
 
-            {   (char*)"ClearScreen",  (PyCFunction)Video_ClearScreen, METH_NOARGS,
-                (char*)"ClearScreen()\n\n"
+            {   "ClearScreen",  (PyCFunction)Video_ClearScreen, METH_NOARGS,
+                "ClearScreen()\n\n"
                 "Clears the screen. (with blackness)"
             },
 
-            {   (char*)"ShowPage",     (PyCFunction)Video_ShowPage, METH_NOARGS,
-                (char*)"ShowPage()\n\n"
+            {   "ShowPage",     (PyCFunction)Video_ShowPage, METH_NOARGS,
+                "ShowPage()\n\n"
                 "Flips the back and front video buffers.  This must be called after the screen\n"
                 "has been completely drawn, or the scene will never be presented to the player.\n"
                 "This method is not guaranteed to preserve the contents of the screen, so it is\n"
@@ -176,10 +176,10 @@ namespace Script {
 #undef GET
 
         PyGetSetDef properties[] = {
-            {   (char*)"xres",     (getter)getXRes,    0,  (char*)"Gets the horizontal resolution of the current display mode, in pixels."    },
-            {   (char*)"yres",     (getter)getYRes,    0,  (char*)"Gets the vertical resolution of the current display mode, in pixels."      },
-            {   (char*)"colours",  (getter)getColours, 0,  (char*)"Alias for colors."      },
-			{	(char*)"colors",	(getter)getColours, 0,	(char*)"Gets a mapping containing the currently-defined colours by name."		},
+            {   "xres",     (getter)getXRes,    0,  "Gets the horizontal resolution of the current display mode, in pixels."    },
+            {   "yres",     (getter)getYRes,    0,  "Gets the vertical resolution of the current display mode, in pixels."      },
+            {   "colours",  (getter)getColours, 0,  "Alias for colors."      },
+			{	"colors",	(getter)getColours, 0,	"Gets a mapping containing the currently-defined colours by name."		},
             {   0   }
         };
 
@@ -602,7 +602,7 @@ namespace Script {
         
         METHOD(Video_ClipScreen) {
             const char* keywords[] = {
-                (char*)"left", (char*)"top", (char*)"right", (char*)"bottom"
+                "left", "top", "right", "bottom"
             };
             keywords;  // To remove use warning.
 

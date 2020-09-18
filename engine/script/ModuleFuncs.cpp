@@ -40,7 +40,7 @@ namespace Script {
     }
 
     METHOD(ika_exit) {
-        char* message = NULL;
+        char* message="";
 
         if (!PyArg_ParseTuple(args, "|s:exit", &message))
             return 0;
@@ -60,7 +60,7 @@ namespace Script {
     }
 
     METHOD(ika_setcaption) {
-        char* s = NULL;
+        char* s = "";
 
         if (!PyArg_ParseTuple(args, "|s:SetCaption", &s))
             return 0;
@@ -417,7 +417,7 @@ namespace Script {
     }
 
     METHOD(ika_setmappath) {
-        char* s = NULL;
+        char* s = "";
 
         if (!PyArg_ParseTuple(args, "|s:SetMapPath", &s))
             return 0;

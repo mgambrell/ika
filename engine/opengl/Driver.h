@@ -169,9 +169,9 @@ namespace OpenGL {
         int  _xres;
         int  _yres;
         int  _bpp;
-        
-		RGBA _tintColour;
-		bool _fullScreen;        
+        bool _fullScreen;
+
+        RGBA _tintColour;
 
         Video::BlendMode _blendMode;
 
