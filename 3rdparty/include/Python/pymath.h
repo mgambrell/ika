@@ -3,6 +3,10 @@
 
 #include "pyconfig.h" /* include for defines */
 
+#ifdef HAVE_STDINT_H
+#include <stdint.h>
+#endif
+
 /**************************************************************************
 Symbols and macros to supply platform-independent interfaces to mathematical
 functions and constants
@@ -16,10 +20,6 @@ functions and constants
  */
 #ifndef HAVE_COPYSIGN
 extern double copysign(double, double);
-#endif
-
-#ifndef HAVE_ROUND
-extern double round(double);
 #endif
 
 #ifndef HAVE_ACOSH
@@ -90,11 +90,6 @@ PyAPI_FUNC(double) _Py_force_double(double);
 #  else
 #    define Py_FORCE_DOUBLE(X) (X)
 #  endif
-#endif
-
-#ifdef HAVE_GCC_ASM_FOR_X87
-PyAPI_FUNC(unsigned short) _Py_get_387controlword(void);
-PyAPI_FUNC(void) _Py_set_387controlword(unsigned short);
 #endif
 
 /* Py_IS_NAN(X)

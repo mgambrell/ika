@@ -43,8 +43,6 @@ PyAPI_FUNC(int) PyModule_AddStringConstant(PyObject *, const char *, const char 
 #define PyModule_AddIntMacro(m, c) PyModule_AddIntConstant(m, #c, c)
 #define PyModule_AddStringMacro(m, c) PyModule_AddStringConstant(m, #c, c)
 
-#define Py_CLEANUP_SUPPORTED 0x20000
-
 #define PYTHON_API_VERSION 1013
 #define PYTHON_API_STRING "1013"
 /* The API version is maintained (independently from the Python version)
@@ -91,18 +89,42 @@ PyAPI_FUNC(int) PyModule_AddStringConstant(PyObject *, const char *, const char 
    9-Jan-1995	GvR	Initial version (incompatible with older API)
 */
 
-#ifdef Py_TRACE_REFS
- /* When we are tracing reference counts, rename PyModule_Create2 so
-    modules compiled with incompatible settings will generate a
-    link-time error. */
- #define PyModule_Create2 PyModule_Create2TraceRefs
+#ifdef MS_WINDOWS
+/* Special defines for Windows versions used to live here.  Things
+   have changed, and the "Version" is now in a global string variable.
+   Reason for this is that this for easier branding of a "custom DLL"
+   without actually needing a recompile.  */
+#endif /* MS_WINDOWS */
+
+#if SIZEOF_SIZE_T != SIZEOF_INT
+/* On a 64-bit system, rename the Py_InitModule4 so that 2.4
+   modules cannot get loaded into a 2.5 interpreter */
+#define Py_InitModule4 Py_InitModule4_64
 #endif
 
-PyAPI_FUNC(PyObject *) PyModule_Create2(struct PyModuleDef*,
-                                     int apiver);
+#ifdef Py_TRACE_REFS
+ /* When we are tracing reference counts, rename Py_InitModule4 so
+    modules compiled with incompatible settings will generate a
+    link-time error. */
+ #if SIZEOF_SIZE_T != SIZEOF_INT
+ #undef Py_InitModule4
+ #define Py_InitModule4 Py_InitModule4TraceRefs_64
+ #else
+ #define Py_InitModule4 Py_InitModule4TraceRefs
+ #endif
+#endif
 
-#define PyModule_Create(module) \
-	PyModule_Create2(module, PYTHON_API_VERSION)
+PyAPI_FUNC(PyObject *) Py_InitModule4(const char *name, PyMethodDef *methods,
+                                      const char *doc, PyObject *self,
+                                      int apiver);
+
+#define Py_InitModule(name, methods) \
+	Py_InitModule4(name, methods, (char *)NULL, (PyObject *)NULL, \
+		       PYTHON_API_VERSION)
+
+#define Py_InitModule3(name, methods, doc) \
+	Py_InitModule4(name, methods, doc, (PyObject *)NULL, \
+		       PYTHON_API_VERSION)
 
 PyAPI_DATA(char *) _Py_PackageContext;
 

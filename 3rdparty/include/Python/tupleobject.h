@@ -32,7 +32,6 @@ typedef struct {
 } PyTupleObject;
 
 PyAPI_DATA(PyTypeObject) PyTuple_Type;
-PyAPI_DATA(PyTypeObject) PyTupleIter_Type;
 
 #define PyTuple_Check(op) \
                  PyType_FastSubclass(Py_TYPE(op), Py_TPFLAGS_TUPLE_SUBCLASS)
@@ -45,7 +44,6 @@ PyAPI_FUNC(int) PyTuple_SetItem(PyObject *, Py_ssize_t, PyObject *);
 PyAPI_FUNC(PyObject *) PyTuple_GetSlice(PyObject *, Py_ssize_t, Py_ssize_t);
 PyAPI_FUNC(int) _PyTuple_Resize(PyObject **, Py_ssize_t);
 PyAPI_FUNC(PyObject *) PyTuple_Pack(Py_ssize_t, ...);
-PyAPI_FUNC(void) _PyTuple_MaybeUntrack(PyObject *);
 
 /* Macro, trading safety for speed */
 #define PyTuple_GET_ITEM(op, i) (((PyTupleObject *)(op))->ob_item[i])

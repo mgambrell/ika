@@ -10,7 +10,6 @@ extern "C" {
 typedef struct {
     PyObject_HEAD
     int co_argcount;		/* #arguments, except *args */
-    int co_kwonlyargcount;	/* #keyword only arguments */
     int co_nlocals;		/* #local variables */
     int co_stacksize;		/* #entries needed for evaluation stack */
     int co_flags;		/* CO_..., see below */
@@ -20,9 +19,9 @@ typedef struct {
     PyObject *co_varnames;	/* tuple of strings (local variable names) */
     PyObject *co_freevars;	/* tuple of strings (free variable names) */
     PyObject *co_cellvars;      /* tuple of strings (cell variable names) */
-    /* The rest doesn't count for hash or comparisons */
-    PyObject *co_filename;	/* unicode (where it was loaded from) */
-    PyObject *co_name;		/* unicode (name, for reference) */
+    /* The rest doesn't count for hash/cmp */
+    PyObject *co_filename;	/* string (where it was loaded from) */
+    PyObject *co_name;		/* string (name, for reference) */
     int co_firstlineno;		/* first source line number */
     PyObject *co_lnotab;	/* string (encoding addr<->lineno mapping) */
     void *co_zombieframe;     /* for optimization only (see frameobject.c) */
@@ -42,8 +41,8 @@ typedef struct {
 */
 #define CO_NOFREE       0x0040
 
-/* These are no longer used. */
 #if 0
+/* This is no longer used.  Stopped defining in 2.5, do not re-use. */
 #define CO_GENERATOR_ALLOWED    0x1000
 #endif
 #define CO_FUTURE_DIVISION    	0x2000
@@ -52,12 +51,12 @@ typedef struct {
 #define CO_FUTURE_PRINT_FUNCTION  0x10000
 #define CO_FUTURE_UNICODE_LITERALS 0x20000
 
-#define CO_FUTURE_BARRY_AS_BDFL  0x40000
-
 /* This should be defined if a future statement modifies the syntax.
    For example, when a keyword is added.
 */
+#if 1
 #define PY_PARSER_REQUIRES_FUTURE_KEYWORD
+#endif
 
 #define CO_MAXBLOCKS 20 /* Max static block nesting within a function */
 
@@ -68,13 +67,16 @@ PyAPI_DATA(PyTypeObject) PyCode_Type;
 
 /* Public interface */
 PyAPI_FUNC(PyCodeObject *) PyCode_New(
-	int, int, int, int, int, PyObject *, PyObject *,
-	PyObject *, PyObject *, PyObject *, PyObject *,
-	PyObject *, PyObject *, int, PyObject *); 
+	int, int, int, int, PyObject *, PyObject *, PyObject *, PyObject *,
+	PyObject *, PyObject *, PyObject *, PyObject *, int, PyObject *); 
         /* same as struct above */
 PyAPI_FUNC(int) PyCode_Addr2Line(PyCodeObject *, int);
 
 /* for internal use only */
+#define _PyCode_GETCODEPTR(co, pp) \
+	((*Py_TYPE((co)->co_code)->tp_as_buffer->bf_getreadbuffer) \
+	 ((co)->co_code, 0, (void **)(pp)))
+
 typedef struct _addr_pair {
         int ap_lower;
         int ap_upper;

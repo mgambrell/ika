@@ -26,13 +26,15 @@ typedef struct {
 #define FUTURE_WITH_STATEMENT "with_statement"
 #define FUTURE_PRINT_FUNCTION "print_function"
 #define FUTURE_UNICODE_LITERALS "unicode_literals"
-#define FUTURE_BARRY_AS_BDFL "barry_as_FLUFL"
+
 
 struct _mod; /* Declare the existence of this type */
 PyAPI_FUNC(PyCodeObject *) PyAST_Compile(struct _mod *, const char *,
 					PyCompilerFlags *, PyArena *);
 PyAPI_FUNC(PyFutureFeatures *) PyFuture_FromAST(struct _mod *, const char *);
 
+#define ERR_LATE_FUTURE \
+"from __future__ imports must occur at the beginning of the file"
 
 #ifdef __cplusplus
 }
