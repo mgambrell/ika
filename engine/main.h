@@ -18,7 +18,6 @@
 #include "common/types.h"
 #include "video/Driver.h"
 #include "hooklist.h"
-#include "path.h"
 
 // engine components
 #include "common/configfile.h"
@@ -67,7 +66,9 @@ private:
 
 public:
     Entity*                         cameraTarget;                                   ///< Points to the current camera target
-
+    
+	 // Path variables for resource loading.
+    std::string                     _mapPath;   
 	bool                            _isMapLoaded;                                   ///< true if a map is loaded (gah)
 
     std::vector<uint>               renderList;                                     ///< List of layer indeces to draw by default.
@@ -115,7 +116,7 @@ public:
     
     void      DoHook(HookList& hooklist);                                           ///< Calls every function in the list, then flushes any pending adds/removals from said list
 
-    void      Startup(std::string& pathname);                                       ///< Inits the engine
+    void      Startup();                                                            ///< Inits the engine
     void      Shutdown();                                                           ///< deinits the engine
     void      MainLoop();                                                           ///< runs the engine
 

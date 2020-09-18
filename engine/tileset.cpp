@@ -1,7 +1,6 @@
 #include <cassert>
 #include <stdexcept>
 #include "tileset.h"
-#include "path.h"
 
 #include "common/log.h"
 #include "common/utility.h"
@@ -16,8 +15,8 @@ Tileset::Tileset(const std::string& fname, Video::Driver* v)
     CDEBUG("ctileset::loadvsp");
     vsp = new VSP;
     
-    if (!vsp->Load(IkaPath::_game + fname)) {
-        throw std::runtime_error("Unable to load VSP file " + fname + "\n");
+    if (!vsp->Load(fname)) {
+        throw std::runtime_error("Unable to load VSP file " + fname);
     }
     
     frameCount = vsp->NumTiles();

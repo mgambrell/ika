@@ -143,16 +143,8 @@ void ScriptEngine::Shutdown() {
     Py_Finalize();
 }
 
-bool ScriptEngine::LoadSystemScripts(const std::string& pathname) {    
+bool ScriptEngine::LoadSystemScripts(const std::string& /*fname*/) {    
     PyObject*   sysModule;                                              // free it if it's already allocated
-    
-    if(!pathname.empty()) {
-        std::string command = "sys.path = ['";
-        command += pathname;
-        command += "']";
-        PyRun_SimpleString("import sys");
-        PyRun_SimpleString(command.c_str());
-    }
 
     sysModule = PyImport_ImportModule("system");
     

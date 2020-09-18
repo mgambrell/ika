@@ -5,7 +5,6 @@
 #include "common/fileio.h"
 #include "common/utility.h"
 #include "sound.h"
-#include "path.h"
 
 namespace Script {
     namespace Music {
@@ -69,30 +68,29 @@ namespace Script {
         }
 
         PyObject* New(PyTypeObject* type, PyObject* args, PyObject* kw) {
-            MusicObject* sound;            
             char* keywords[] = { (char*)"filename" , 0};
             char* filename;
-            std::string pathname;
 
             if (!PyArg_ParseTupleAndKeywords(args, kw, "s:__init__", keywords, &filename)) {
                 return 0;
             }
-            pathname = IkaPath::_game + filename;            
 
-            if (!File::Exists(pathname)) {
-                PyErr_SetString(PyExc_IOError, va("%s does not exist", pathname.c_str()));
+            MusicObject* sound;
+
+            if (!File::Exists(filename)) {
+                PyErr_SetString(PyExc_IOError, va("%s does not exist", filename));
                 return 0;
             }
 
             sound = PyObject_New(MusicObject, type);
             if (!sound) {
-                PyErr_SetString(PyExc_RuntimeError, va("Can't load %s due to internal Python weirdness!  Very Bad!", pathname.c_str()));
+                PyErr_SetString(PyExc_RuntimeError, va("Can't load %s due to internal Python weirdness!  Very Bad!", filename));
                 return 0;
             }
 
-            sound->music = ::Sound::OpenSound(pathname);
+            sound->music = ::Sound::OpenSound(filename);
             if (!sound->music) {
-                PyErr_SetString(PyExc_IOError, va("Failed to load %s", pathname.c_str()));
+                PyErr_SetString(PyExc_IOError, va("Failed to load %s", filename));
                 return 0;
             }
 

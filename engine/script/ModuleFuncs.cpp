@@ -427,7 +427,7 @@ namespace Script {
         if (!PyArg_ParseTuple(args, "|s:SetMapPath", &s))
             return 0;
 
-        IkaPath::_map = s;
+        engine->_mapPath = s;
 
         Py_INCREF(Py_None);
         return Py_None;

@@ -287,7 +287,7 @@ namespace Script {
                 return 0;
             }
 
-            if (!File::Exists(IkaPath::_game + IkaPath::_map + filename)) {
+            if (!File::Exists(engine->_mapPath + filename)) {
                 PyErr_SetString(PyExc_IOError, va("Unable to load %s", filename));
                 return 0;
             }
