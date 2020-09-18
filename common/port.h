@@ -27,7 +27,7 @@ typedef int32_t s32;
 typedef int64_t s64;
 
 // signed/unsigned ints of whatever size.
-typedef unsigned uint;
+typedef size_t uint;
 //typedef ptrdiff_t sint;
 
 //#if defined(_MSC_VER) && _MSC_VER < 1300
