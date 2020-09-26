@@ -10,6 +10,7 @@ Py_GetVersion(void)
 {
 	static char version[250];
 	PyOS_snprintf(version, sizeof(version), "%.80s (%.80s) %.80s",
-		      PY_VERSION, Py_GetBuildInfo(), Py_GetCompiler());
+		      //PY_VERSION, Py_GetBuildInfo(), Py_GetCompiler());
+		PY_VERSION, "(ika-custom)", Py_GetCompiler());
 	return version;
 }

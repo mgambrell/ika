@@ -1100,100 +1100,100 @@ _check_and_flush (FILE *stream)
   int prev_fail = ferror (stream);
   return fflush (stream) || prev_fail ? EOF : 0;
 }
-
-/* Subversion branch and revision management */
-static const char _patchlevel_revision[] = PY_PATCHLEVEL_REVISION;
-static const char headurl[] = "$HeadURL: http://svn.python.org/projects/python/tags/r267/Python/sysmodule.c $";
-static int svn_initialized;
-static char patchlevel_revision[50]; /* Just the number */
-static char branch[50];
-static char shortbranch[50];
-static const char *svn_revision;
-
-static void
-svnversion_init(void)
-{
-    const char *python, *br_start, *br_end, *br_end2, *svnversion;
-    Py_ssize_t len;
-    int istag;
-
-    if (svn_initialized)
-        return;
-
-    python = strstr(headurl, "/python/");
-    if (!python) {
-        /* XXX quick hack to get bzr working */
-        *patchlevel_revision = '\0';
-        strcpy(branch, "");
-        strcpy(shortbranch, "unknown");
-        svn_revision = "";
-        return;
-        /* Py_FatalError("subversion keywords missing"); */
-    }
-
-    br_start = python + 8;
-    br_end = strchr(br_start, '/');
-    assert(br_end);
-
-    /* Works even for trunk,
-       as we are in trunk/Python/sysmodule.c */
-    br_end2 = strchr(br_end+1, '/');
-
-    istag = strncmp(br_start, "tags", 4) == 0;
-    if (strncmp(br_start, "trunk", 5) == 0) {
-        strcpy(branch, "trunk");
-        strcpy(shortbranch, "trunk");
-
-    }
-    else if (istag || strncmp(br_start, "branches", 8) == 0) {
-        len = br_end2 - br_start;
-        strncpy(branch, br_start, len);
-        branch[len] = '\0';
-
-        len = br_end2 - (br_end + 1);
-        strncpy(shortbranch, br_end + 1, len);
-        shortbranch[len] = '\0';
-    }
-    else {
-        Py_FatalError("bad HeadURL");
-        return;
-    }
-
-
-    svnversion = _Py_svnversion();
-    if (strcmp(svnversion, "Unversioned directory") != 0 && strcmp(svnversion, "exported") != 0)
-        svn_revision = svnversion;
-    else if (istag) {
-        len = strlen(_patchlevel_revision);
-        assert(len >= 13);
-        assert(len < (sizeof(patchlevel_revision) + 13));
-        strncpy(patchlevel_revision, _patchlevel_revision + 11,
-            len - 13);
-        patchlevel_revision[len - 13] = '\0';
-        svn_revision = patchlevel_revision;
-    }
-    else
-        svn_revision = "";
-
-    svn_initialized = 1;
-}
-
-/* Return svnversion output if available.
-   Else return Revision of patchlevel.h if on branch.
-   Else return empty string */
-const char*
-Py_SubversionRevision()
-{
-    svnversion_init();
-    return svn_revision;
-}
-
-const char*
-Py_SubversionShortBranch()
-{
-    svnversion_init();
-    return shortbranch;
-}
+//
+///* Subversion branch and revision management */
+//static const char _patchlevel_revision[] = PY_PATCHLEVEL_REVISION;
+//static const char headurl[] = "$HeadURL: http://svn.python.org/projects/python/tags/r267/Python/sysmodule.c $";
+//static int svn_initialized;
+//static char patchlevel_revision[50]; /* Just the number */
+//static char branch[50];
+//static char shortbranch[50];
+//static const char *svn_revision;
+//
+//static void
+//svnversion_init(void)
+//{
+//    const char *python, *br_start, *br_end, *br_end2, *svnversion;
+//    Py_ssize_t len;
+//    int istag;
+//
+//    if (svn_initialized)
+//        return;
+//
+//    python = strstr(headurl, "/python/");
+//    if (!python) {
+//        /* XXX quick hack to get bzr working */
+//        *patchlevel_revision = '\0';
+//        strcpy(branch, "");
+//        strcpy(shortbranch, "unknown");
+//        svn_revision = "";
+//        return;
+//        /* Py_FatalError("subversion keywords missing"); */
+//    }
+//
+//    br_start = python + 8;
+//    br_end = strchr(br_start, '/');
+//    assert(br_end);
+//
+//    /* Works even for trunk,
+//       as we are in trunk/Python/sysmodule.c */
+//    br_end2 = strchr(br_end+1, '/');
+//
+//    istag = strncmp(br_start, "tags", 4) == 0;
+//    if (strncmp(br_start, "trunk", 5) == 0) {
+//        strcpy(branch, "trunk");
+//        strcpy(shortbranch, "trunk");
+//
+//    }
+//    else if (istag || strncmp(br_start, "branches", 8) == 0) {
+//        len = br_end2 - br_start;
+//        strncpy(branch, br_start, len);
+//        branch[len] = '\0';
+//
+//        len = br_end2 - (br_end + 1);
+//        strncpy(shortbranch, br_end + 1, len);
+//        shortbranch[len] = '\0';
+//    }
+//    else {
+//        Py_FatalError("bad HeadURL");
+//        return;
+//    }
+//
+//
+//    svnversion = _Py_svnversion();
+//    if (strcmp(svnversion, "Unversioned directory") != 0 && strcmp(svnversion, "exported") != 0)
+//        svn_revision = svnversion;
+//    else if (istag) {
+//        len = strlen(_patchlevel_revision);
+//        assert(len >= 13);
+//        assert(len < (sizeof(patchlevel_revision) + 13));
+//        strncpy(patchlevel_revision, _patchlevel_revision + 11,
+//            len - 13);
+//        patchlevel_revision[len - 13] = '\0';
+//        svn_revision = patchlevel_revision;
+//    }
+//    else
+//        svn_revision = "";
+//
+//    svn_initialized = 1;
+//}
+//
+///* Return svnversion output if available.
+//   Else return Revision of patchlevel.h if on branch.
+//   Else return empty string */
+//const char*
+//Py_SubversionRevision()
+//{
+//    svnversion_init();
+//    return svn_revision;
+//}
+//
+//const char*
+//Py_SubversionShortBranch()
+//{
+//    svnversion_init();
+//    return shortbranch;
+//}
 
 
 PyDoc_STRVAR(flags__doc__,
@@ -1348,10 +1348,10 @@ _PySys_Init(void)
                          PyString_FromString(Py_GetVersion()));
     SET_SYS_FROM_STRING("hexversion",
                          PyInt_FromLong(PY_VERSION_HEX));
-    svnversion_init();
-    SET_SYS_FROM_STRING("subversion",
-                         Py_BuildValue("(ssz)", "CPython", branch,
-                                      svn_revision));
+    //svnversion_init();
+    //SET_SYS_FROM_STRING("subversion",
+    //                     Py_BuildValue("(ssz)", "CPython", branch,
+    //                                  svn_revision));
     SET_SYS_FROM_STRING("dont_write_bytecode",
                          PyBool_FromLong(Py_DontWriteBytecodeFlag));
     /*
