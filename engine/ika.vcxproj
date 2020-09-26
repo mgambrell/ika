@@ -105,7 +105,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>.;%(RootDir)%(Directory);$(SolutionDir);$(SolutionDir)/3rdparty/;$(SolutionDir)/common;$(SolutionDir)/3rdparty/audiere/src;$(SolutionDir)/3rdparty/zlib;$(SolutionDir)/3rdparty/libvorbis/include;$(SolutionDir)/3rdparty/libogg/include;$(SolutionDir)/3rdparty/corona/src/libpng-1.5.12;$(SolutionDir)/3rdparty/SDL/include;$(SolutionDir)/3rdparty/SDL/src/audio;$(SolutionDir)/3rdparty/SDL/src/thread;$(SolutionDir)/3rdparty/SDL/src/video;$(SolutionDir)/3rdparty/SDL/src/thread/win32;$(SolutionDir)/3rdparty/SDL/src/timer;$(SolutionDir)/3rdparty/SDL/src;$(SolutionDir)/3rdparty/SDL/src/events;$(SolutionDir)/3rdparty/SDL/src/video/wincommon;$(SolutionDir)/3rdparty/SDL/src/cdrom;$(SolutionDir)/3rdparty/SDL/src/joystick;$(SolutionDir)/3rdparty/Include/Python;$(SolutionDir)/3rdparty/corona/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;%(RootDir)%(Directory);$(SolutionDir);$(SolutionDir)/3rdparty/;$(SolutionDir)/common;$(SolutionDir)/3rdparty/audiere/src;$(SolutionDir)/3rdparty/zlib;$(SolutionDir)/3rdparty/libvorbis/include;$(SolutionDir)/3rdparty/libogg/include;$(SolutionDir)/3rdparty/corona/src/libpng-1.5.12;$(SolutionDir)/3rdparty/SDL/include;$(SolutionDir)/3rdparty/SDL/src/audio;$(SolutionDir)/3rdparty/SDL/src/thread;$(SolutionDir)/3rdparty/SDL/src/video;$(SolutionDir)/3rdparty/SDL/src/thread/win32;$(SolutionDir)/3rdparty/SDL/src/timer;$(SolutionDir)/3rdparty/SDL/src;$(SolutionDir)/3rdparty/SDL/src/events;$(SolutionDir)/3rdparty/SDL/src/video/wincommon;$(SolutionDir)/3rdparty/SDL/src/cdrom;$(SolutionDir)/3rdparty/SDL/src/joystick;$(SolutionDir)/3rdparty/Python/Include;$(SolutionDir)/3rdparty/corona/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>ENABLE_WINDIB;_CRT_SECURE_NO_WARNINGS;_DEBUG;WIN32;_WINDOWS;MSVC;INLINE_ASM;NO_FLAC;NO_SPEEX;NO_DUMB;NO_MP3;NOMINMAX;NO_JPEG;NO_GIF;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -471,6 +471,9 @@
     <Image Include="ika.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\3rdparty\python\PC\VS8.0\pythoncore.vcxproj">
+      <Project>{cf7ac3d1-e2df-41d2-bea6-1e2556cdea26}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\common\common.vcxproj">
       <Project>{7cf113aa-d783-4e94-a0c5-03bc9f6b02a9}</Project>
     </ProjectReference>

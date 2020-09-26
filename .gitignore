@@ -5,3 +5,6 @@
 /rho/obj
 .vs
 *.user
+/Win32-temp-Debug
+/Win32-temp-Release
+/pythoncore.*
