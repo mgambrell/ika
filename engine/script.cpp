@@ -19,6 +19,8 @@ void ScriptEngine::Init(Engine* njin) {
     assert(!_inited);
     _inited = true;
 
+    Py_NoSiteFlag=1;
+
     Py_Initialize();
     PyRun_SimpleString("import sys; sys.path.insert(0, '.')");  // :x
 
