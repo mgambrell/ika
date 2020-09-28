@@ -50,16 +50,29 @@ md5_dealloc(md5object *md5p)
 static PyObject *
 md5_update(md5object *self, PyObject *args)
 {
-    unsigned char *cp;
-    int len;
+    Py_buffer view;
+    Py_ssize_t n;
+    unsigned char *buf;
 
-    if (!PyArg_ParseTuple(args, "s#:update", &cp, &len))
+    if (!PyArg_ParseTuple(args, "s*:update", &view))
         return NULL;
 
-    md5_append(&self->md5, cp, len);
+    n = view.len;
+    buf = (unsigned char *) view.buf;
+    while (n > 0) {
+        Py_ssize_t nbytes;
+        if (n > INT_MAX)
+            nbytes = INT_MAX;
+        else
+            nbytes = n;
+        md5_append(&self->md5, buf,
+                   Py_SAFE_DOWNCAST(nbytes, Py_ssize_t, unsigned int));
+        buf += nbytes;
+        n -= nbytes;
+    }
 
-    Py_INCREF(Py_None);
-    return Py_None;
+    PyBuffer_Release(&view);
+    Py_RETURN_NONE;
 }
 
 PyDoc_STRVAR(update_doc,
@@ -223,7 +236,7 @@ copy() -- return a copy of the current md5 object");
 static PyTypeObject MD5type = {
     PyVarObject_HEAD_INIT(NULL, 0)
     "_md5.md5",                   /*tp_name*/
-    sizeof(md5object),            /*tp_size*/
+    sizeof(md5object),            /*tp_basicsize*/
     0,                            /*tp_itemsize*/
     /* methods */
     (destructor)md5_dealloc,  /*tp_dealloc*/
@@ -261,17 +274,32 @@ static PyObject *
 MD5_new(PyObject *self, PyObject *args)
 {
     md5object *md5p;
-    unsigned char *cp = NULL;
-    int len = 0;
+    Py_buffer view = { 0 };
+    Py_ssize_t n;
+    unsigned char *buf;
 
-    if (!PyArg_ParseTuple(args, "|s#:new", &cp, &len))
+    if (!PyArg_ParseTuple(args, "|s*:new", &view))
         return NULL;
 
-    if ((md5p = newmd5object()) == NULL)
+    if ((md5p = newmd5object()) == NULL) {
+        PyBuffer_Release(&view);
         return NULL;
+    }
 
-    if (cp)
-        md5_append(&md5p->md5, cp, len);
+    n = view.len;
+    buf = (unsigned char *) view.buf;
+    while (n > 0) {
+        Py_ssize_t nbytes;
+        if (n > INT_MAX)
+            nbytes = INT_MAX;
+        else
+            nbytes = n;
+        md5_append(&md5p->md5, buf,
+                   Py_SAFE_DOWNCAST(nbytes, Py_ssize_t, unsigned int));
+        buf += nbytes;
+        n -= nbytes;
+    }
+    PyBuffer_Release(&view);
 
     return (PyObject *)md5p;
 }

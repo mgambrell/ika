@@ -1,6 +1,6 @@
 import unittest
 from ctypes import *
-import re, struct, sys
+import re, sys
 
 if sys.byteorder == "little":
     THIS_ENDIAN = "<"
@@ -8,27 +8,6 @@ if sys.byteorder == "little":
 else:
     THIS_ENDIAN = ">"
     OTHER_ENDIAN = "<"
-
-class memoryview(object):
-    # This class creates a memoryview - like object from data returned
-    # by the private _ctypes._buffer_info() function, just enough for
-    # these tests.
-    #
-    # It can be removed when the py3k memoryview object is backported.
-    def __init__(self, ob):
-        from _ctypes import _buffer_info
-        self.format, self.ndim, self.shape = _buffer_info(ob)
-        if self.shape == ():
-            self.shape = None
-            self.itemsize = sizeof(ob)
-        else:
-            size = sizeof(ob)
-            for dim in self.shape:
-                size //= dim
-            self.itemsize = size
-        self.strides = None
-        self.readonly = False
-        self.size = sizeof(ob)
 
 def normalize(format):
     # Remove current endian specifier and white space from a format
@@ -45,20 +24,23 @@ class Test(unittest.TestCase):
             ob = tp()
             v = memoryview(ob)
             try:
-                self.failUnlessEqual(normalize(v.format), normalize(fmt))
-                self.failUnlessEqual(v.size, sizeof(ob))
-                self.failUnlessEqual(v.itemsize, sizeof(itemtp))
-                self.failUnlessEqual(v.shape, shape)
+                self.assertEqual(normalize(v.format), normalize(fmt))
+                if shape is not None:
+                    self.assertEqual(len(v), shape[0])
+                else:
+                    self.assertEqual(len(v) * sizeof(itemtp), sizeof(ob))
+                self.assertEqual(v.itemsize, sizeof(itemtp))
+                self.assertEqual(v.shape, shape)
                 # ctypes object always have a non-strided memory block
-                self.failUnlessEqual(v.strides, None)
+                self.assertEqual(v.strides, None)
                 # they are always read/write
-                self.failIf(v.readonly)
+                self.assertFalse(v.readonly)
 
                 if v.shape:
                     n = 1
                     for dim in v.shape:
                         n = n * dim
-                    self.failUnlessEqual(v.itemsize * n, v.size)
+                    self.assertEqual(n * v.itemsize, len(v.tobytes()))
             except:
                 # so that we can see the failing type
                 print(tp)
@@ -69,20 +51,23 @@ class Test(unittest.TestCase):
             ob = tp()
             v = memoryview(ob)
             try:
-                self.failUnlessEqual(v.format, fmt)
-                self.failUnlessEqual(v.size, sizeof(ob))
-                self.failUnlessEqual(v.itemsize, sizeof(itemtp))
-                self.failUnlessEqual(v.shape, shape)
+                self.assertEqual(v.format, fmt)
+                if shape is not None:
+                    self.assertEqual(len(v), shape[0])
+                else:
+                    self.assertEqual(len(v) * sizeof(itemtp), sizeof(ob))
+                self.assertEqual(v.itemsize, sizeof(itemtp))
+                self.assertEqual(v.shape, shape)
                 # ctypes object always have a non-strided memory block
-                self.failUnlessEqual(v.strides, None)
+                self.assertEqual(v.strides, None)
                 # they are always read/write
-                self.failIf(v.readonly)
+                self.assertFalse(v.readonly)
 
                 if v.shape:
                     n = 1
                     for dim in v.shape:
                         n = n * dim
-                    self.failUnlessEqual(v.itemsize * n, v.size)
+                    self.assertEqual(n, len(v))
             except:
                 # so that we can see the failing type
                 print(tp)
@@ -107,6 +92,10 @@ class EmptyStruct(Structure):
 class aUnion(Union):
     _fields_ = [("a", c_int)]
 
+class StructWithArrays(Structure):
+    _fields_ = [("x", c_long * 3 * 2), ("y", Point * 4)]
+
+
 class Incomplete(Structure):
     pass
 
@@ -120,6 +109,34 @@ Complete._fields_ = [("a", c_long)]
 # This table contains format strings as they look on little endian
 # machines.  The test replaces '<' with '>' on big endian machines.
 #
+
+# Platform-specific type codes
+s_bool = {1: '?', 2: 'H', 4: 'L', 8: 'Q'}[sizeof(c_bool)]
+s_short = {2: 'h', 4: 'l', 8: 'q'}[sizeof(c_short)]
+s_ushort = {2: 'H', 4: 'L', 8: 'Q'}[sizeof(c_ushort)]
+s_int = {2: 'h', 4: 'i', 8: 'q'}[sizeof(c_int)]
+s_uint = {2: 'H', 4: 'I', 8: 'Q'}[sizeof(c_uint)]
+s_long = {4: 'l', 8: 'q'}[sizeof(c_long)]
+s_ulong = {4: 'L', 8: 'Q'}[sizeof(c_ulong)]
+s_longlong = "q"
+s_ulonglong = "Q"
+s_float = "f"
+s_double = "d"
+s_longdouble = "g"
+
+# Alias definitions in ctypes/__init__.py
+if c_int is c_long:
+    s_int = s_long
+if c_uint is c_ulong:
+    s_uint = s_ulong
+if c_longlong is c_long:
+    s_longlong = s_long
+if c_ulonglong is c_ulong:
+    s_ulonglong = s_ulong
+if c_longdouble is c_double:
+    s_longdouble = s_double
+
+
 native_types = [
     # type                      format                  shape           calc itemsize
 
@@ -128,49 +145,51 @@ native_types = [
     (c_char,                    "<c",                   None,           c_char),
     (c_byte,                    "<b",                   None,           c_byte),
     (c_ubyte,                   "<B",                   None,           c_ubyte),
-    (c_short,                   "<h",                   None,           c_short),
-    (c_ushort,                  "<H",                   None,           c_ushort),
+    (c_short,                   "<" + s_short,          None,           c_short),
+    (c_ushort,                  "<" + s_ushort,         None,           c_ushort),
 
-    # c_int and c_uint may be aliases to c_long
-    #(c_int,                     "<i",                   None,           c_int),
-    #(c_uint,                    "<I",                   None,           c_uint),
+    (c_int,                     "<" + s_int,            None,           c_int),
+    (c_uint,                    "<" + s_uint,           None,           c_uint),
 
-    (c_long,                    "<l",                   None,           c_long),
-    (c_ulong,                   "<L",                   None,           c_ulong),
+    (c_long,                    "<" + s_long,           None,           c_long),
+    (c_ulong,                   "<" + s_ulong,          None,           c_ulong),
 
-    # c_longlong and c_ulonglong are aliases on 64-bit platforms
-    #(c_longlong,                "<q",                   None,           c_longlong),
-    #(c_ulonglong,               "<Q",                   None,           c_ulonglong),
+    (c_longlong,                "<" + s_longlong,       None,           c_longlong),
+    (c_ulonglong,               "<" + s_ulonglong,      None,           c_ulonglong),
 
     (c_float,                   "<f",                   None,           c_float),
     (c_double,                  "<d",                   None,           c_double),
-    # c_longdouble may be an alias to c_double
 
-    (c_bool,                    "<?",                   None,           c_bool),
+    (c_longdouble,              "<" + s_longdouble,     None,           c_longdouble),
+
+    (c_bool,                    "<" + s_bool,           None,           c_bool),
     (py_object,                 "<O",                   None,           py_object),
 
     ## pointers
 
     (POINTER(c_byte),           "&<b",                  None,           POINTER(c_byte)),
-    (POINTER(POINTER(c_long)),  "&&<l",                 None,           POINTER(POINTER(c_long))),
+    (POINTER(POINTER(c_long)),  "&&<" + s_long,         None,           POINTER(POINTER(c_long))),
 
     ## arrays and pointers
 
-    (c_double * 4,              "(4)<d",                (4,),           c_double),
-    (c_float * 4 * 3 * 2,       "(2,3,4)<f",            (2,3,4),        c_float),
-    (POINTER(c_short) * 2,      "(2)&<h",               (2,),           POINTER(c_short)),
-    (POINTER(c_short) * 2 * 3,  "(3,2)&<h",             (3,2,),         POINTER(c_short)),
-    (POINTER(c_short * 2),      "&(2)<h",               None,           POINTER(c_short)),
+    (c_double * 4,              "<d",                   (4,),           c_double),
+    (c_float * 4 * 3 * 2,       "<f",                   (2,3,4),        c_float),
+    (POINTER(c_short) * 2,      "&<" + s_short,         (2,),           POINTER(c_short)),
+    (POINTER(c_short) * 2 * 3,  "&<" + s_short,         (3,2,),         POINTER(c_short)),
+    (POINTER(c_short * 2),      "&(2)<" + s_short,      None,             POINTER(c_short)),
 
     ## structures and unions
 
-    (Point,                     "T{<l:x:<l:y:}",        None,           Point),
+    (Point,                     "T{<l:x:<l:y:}".replace('l', s_long),  None,  Point),
     # packed structures do not implement the pep
-    (PackedPoint,               "B",                    None,           PackedPoint),
-    (Point2,                    "T{<l:x:<l:y:}",        None,           Point2),
-    (EmptyStruct,               "T{}",                  None,           EmptyStruct),
+    (PackedPoint,               "B",                                   None,  PackedPoint),
+    (Point2,                    "T{<l:x:<l:y:}".replace('l', s_long),  None,  Point2),
+    (EmptyStruct,               "T{}",                                 None,  EmptyStruct),
     # the pep does't support unions
-    (aUnion,                    "B",                    None,           aUnion),
+    (aUnion,                    "B",                                   None,  aUnion),
+    # structure with sub-arrays
+    (StructWithArrays, "T{(2,3)<l:x:(4)T{<l:x:<l:y:}:y:}".replace('l', s_long), None, StructWithArrays),
+    (StructWithArrays * 3, "T{(2,3)<l:x:(4)T{<l:x:<l:y:}:y:}".replace('l', s_long), (3,), StructWithArrays),
 
     ## pointer to incomplete structure
     (Incomplete,                "B",                    None,           Incomplete),
@@ -178,7 +197,7 @@ native_types = [
 
     # 'Complete' is a structure that starts incomplete, but is completed after the
     # pointer type to it has been created.
-    (Complete,                  "T{<l:a:}",             None,           Complete),
+    (Complete,                  "T{<l:a:}".replace('l', s_long), None, Complete),
     # Unfortunately the pointer format string is not fixed...
     (POINTER(Complete),         "&B",                   None,           POINTER(Complete)),
 
@@ -201,10 +220,10 @@ class LEPoint(LittleEndianStructure):
 # and little endian machines.
 #
 endian_types = [
-    (BEPoint,                   "T{>l:x:>l:y:}",        None,           BEPoint),
-    (LEPoint,                   "T{<l:x:<l:y:}",        None,           LEPoint),
-    (POINTER(BEPoint),          "&T{>l:x:>l:y:}",       None,           POINTER(BEPoint)),
-    (POINTER(LEPoint),          "&T{<l:x:<l:y:}",       None,           POINTER(LEPoint)),
+    (BEPoint, "T{>l:x:>l:y:}".replace('l', s_long), None, BEPoint),
+    (LEPoint, "T{<l:x:<l:y:}".replace('l', s_long), None, LEPoint),
+    (POINTER(BEPoint), "&T{>l:x:>l:y:}".replace('l', s_long), None, POINTER(BEPoint)),
+    (POINTER(LEPoint), "&T{<l:x:<l:y:}".replace('l', s_long), None, POINTER(LEPoint)),
     ]
 
 if __name__ == "__main__":

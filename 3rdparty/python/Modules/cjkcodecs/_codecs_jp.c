@@ -40,7 +40,7 @@ ENCODER(cp932)
             if (c == 0xf8f0)
                 OUT1(0xa0)
             else
-                OUT1(c - 0xfef1 + 0xfd)
+                OUT1(c - 0xf8f1 + 0xfd)
             NEXT(1, 1)
             continue;
         }
@@ -371,11 +371,11 @@ DECODER(euc_jp)
 
         REQUIRE_OUTBUF(1)
 
-            if (c < 0x80) {
-                OUT1(c)
-                NEXT(1, 1)
-                continue;
-            }
+        if (c < 0x80) {
+            OUT1(c)
+            NEXT(1, 1)
+            continue;
+        }
 
         if (c == 0x8e) {
             /* JIS X 0201 half-width katakana */

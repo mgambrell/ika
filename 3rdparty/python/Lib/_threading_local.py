@@ -57,11 +57,7 @@ You can create custom local objects by subclassing the local class:
 
   >>> class MyLocal(local):
   ...     number = 2
-  ...     initialized = False
   ...     def __init__(self, **kw):
-  ...         if self.initialized:
-  ...             raise SystemError('__init__ called too many times')
-  ...         self.initialized = True
   ...         self.__dict__.update(kw)
   ...     def squared(self):
   ...         return self.number ** 2
@@ -98,7 +94,7 @@ As before, we can access the data in a separate thread:
   >>> thread.start()
   >>> thread.join()
   >>> log
-  [[('color', 'red'), ('initialized', True)], 11]
+  [[('color', 'red')], 11]
 
 without affecting this thread's data:
 
@@ -155,7 +151,7 @@ class _localbase(object):
         object.__setattr__(self, '_local__args', (args, kw))
         object.__setattr__(self, '_local__lock', RLock())
 
-        if args or kw and (cls.__init__ is object.__init__):
+        if (args or kw) and (cls.__init__ is object.__init__):
             raise TypeError("Initialization arguments are not supported")
 
         # We need to create the thread dict in anticipation of
@@ -195,6 +191,10 @@ class local(_localbase):
             lock.release()
 
     def __setattr__(self, name, value):
+        if name == '__dict__':
+            raise AttributeError(
+                "%r object attribute '__dict__' is read-only"
+                % self.__class__.__name__)
         lock = object.__getattribute__(self, '_local__lock')
         lock.acquire()
         try:
@@ -204,6 +204,10 @@ class local(_localbase):
             lock.release()
 
     def __delattr__(self, name):
+        if name == '__dict__':
+            raise AttributeError(
+                "%r object attribute '__dict__' is read-only"
+                % self.__class__.__name__)
         lock = object.__getattribute__(self, '_local__lock')
         lock.acquire()
         try:

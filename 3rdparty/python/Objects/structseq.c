@@ -114,11 +114,11 @@ structseq_subscript(PyStructSequence *self, PyObject *item)
         Py_ssize_t start, stop, step, slicelen, cur, i;
         PyObject *result;
 
-        if (PySlice_GetIndicesEx((PySliceObject *)item,
-                                 VISIBLE_SIZE(self), &start, &stop,
-                                 &step, &slicelen) < 0) {
+        if (_PySlice_Unpack(item, &start, &stop, &step) < 0) {
             return NULL;
         }
+        slicelen = _PySlice_AdjustIndices(VISIBLE_SIZE(self), &start, &stop,
+                                         step);
         if (slicelen <= 0)
             return PyTuple_New(0);
         result = PyTuple_New(slicelen);
@@ -175,32 +175,33 @@ structseq_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
     if (min_len != max_len) {
         if (len < min_len) {
             PyErr_Format(PyExc_TypeError,
-           "%.500s() takes an at least %zd-sequence (%zd-sequence given)",
-                                 type->tp_name, min_len, len);
-                    Py_DECREF(arg);
-                    return NULL;
+                "%.500s() takes an at least %zd-sequence (%zd-sequence given)",
+                type->tp_name, min_len, len);
+            Py_DECREF(arg);
+            return NULL;
         }
 
         if (len > max_len) {
             PyErr_Format(PyExc_TypeError,
-           "%.500s() takes an at most %zd-sequence (%zd-sequence given)",
-                                 type->tp_name, max_len, len);
-                    Py_DECREF(arg);
-                    return NULL;
+                         "%.500s() takes an at most %zd-sequence (%zd-sequence given)",
+                         type->tp_name, max_len, len);
+            Py_DECREF(arg);
+            return NULL;
         }
     }
     else {
         if (len != min_len) {
             PyErr_Format(PyExc_TypeError,
-           "%.500s() takes a %zd-sequence (%zd-sequence given)",
-                                 type->tp_name, min_len, len);
-                    Py_DECREF(arg);
-                    return NULL;
+                         "%.500s() takes a %zd-sequence (%zd-sequence given)",
+                         type->tp_name, min_len, len);
+            Py_DECREF(arg);
+            return NULL;
         }
     }
 
     res = (PyStructSequence*) PyStructSequence_New(type);
     if (res == NULL) {
+        Py_DECREF(arg);
         return NULL;
     }
     for (i = 0; i < len; ++i) {

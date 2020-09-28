@@ -96,7 +96,7 @@ static int floatsleep(double);
 static double floattime(void);
 
 /* For Y2K check */
-static PyObject *moddict;
+static PyObject *moddict = NULL;
 
 /* Exposed in timefuncs.h. */
 time_t
@@ -216,21 +216,27 @@ Delay execution for a given number of seconds.  The argument may be\n\
 a floating point number for subsecond precision.");
 
 static PyStructSequence_Field struct_time_type_fields[] = {
-    {"tm_year", NULL},
-    {"tm_mon", NULL},
-    {"tm_mday", NULL},
-    {"tm_hour", NULL},
-    {"tm_min", NULL},
-    {"tm_sec", NULL},
-    {"tm_wday", NULL},
-    {"tm_yday", NULL},
-    {"tm_isdst", NULL},
+    {"tm_year", "year, for example, 1993"},
+    {"tm_mon", "month of year, range [1, 12]"},
+    {"tm_mday", "day of month, range [1, 31]"},
+    {"tm_hour", "hours, range [0, 23]"},
+    {"tm_min", "minutes, range [0, 59]"},
+    {"tm_sec", "seconds, range [0, 61])"},
+    {"tm_wday", "day of week, range [0, 6], Monday is 0"},
+    {"tm_yday", "day of year, range [1, 366]"},
+    {"tm_isdst", "1 if summer time is in effect, 0 if not, and -1 if unknown"},
     {0}
 };
 
 static PyStructSequence_Desc struct_time_type_desc = {
     "time.struct_time",
-    NULL,
+    "The time value as returned by gmtime(), localtime(), and strptime(), and\n"
+    " accepted by asctime(), mktime() and strftime().  May be considered as a\n"
+    " sequence of 9 integers.\n\n"
+    " Note that several fields' values are not the same as those defined by\n"
+    " the C language standard for struct tm.  For example, the value of the\n"
+    " field tm_year is the actual year, not year - 1900.  See individual\n"
+    " fields' descriptions for details.",
     struct_time_type_fields,
     9,
 };
@@ -382,6 +388,76 @@ gettmarg(PyObject *args, struct tm *p)
     return 1;
 }
 
+/* Check values of the struct tm fields before it is passed to strftime() and
+ * asctime().  Return 1 if all values are valid, otherwise set an exception
+ * and returns 0.
+ */
+static int
+checktm(struct tm* buf)
+{
+    /* Checks added to make sure strftime() and asctime() does not crash Python by
+       indexing blindly into some array for a textual representation
+       by some bad index (fixes bug #897625 and #6608).
+
+       Also support values of zero from Python code for arguments in which
+       that is out of range by forcing that value to the lowest value that
+       is valid (fixed bug #1520914).
+
+       Valid ranges based on what is allowed in struct tm:
+
+       - tm_year: [0, max(int)] (1)
+       - tm_mon: [0, 11] (2)
+       - tm_mday: [1, 31]
+       - tm_hour: [0, 23]
+       - tm_min: [0, 59]
+       - tm_sec: [0, 60]
+       - tm_wday: [0, 6] (1)
+       - tm_yday: [0, 365] (2)
+       - tm_isdst: [-max(int), max(int)]
+
+       (1) gettmarg() handles bounds-checking.
+       (2) Python's acceptable range is one greater than the range in C,
+       thus need to check against automatic decrement by gettmarg().
+    */
+    if (buf->tm_mon == -1)
+        buf->tm_mon = 0;
+    else if (buf->tm_mon < 0 || buf->tm_mon > 11) {
+        PyErr_SetString(PyExc_ValueError, "month out of range");
+        return 0;
+    }
+    if (buf->tm_mday == 0)
+        buf->tm_mday = 1;
+    else if (buf->tm_mday < 0 || buf->tm_mday > 31) {
+        PyErr_SetString(PyExc_ValueError, "day of month out of range");
+        return 0;
+    }
+    if (buf->tm_hour < 0 || buf->tm_hour > 23) {
+        PyErr_SetString(PyExc_ValueError, "hour out of range");
+        return 0;
+    }
+    if (buf->tm_min < 0 || buf->tm_min > 59) {
+        PyErr_SetString(PyExc_ValueError, "minute out of range");
+        return 0;
+    }
+    if (buf->tm_sec < 0 || buf->tm_sec > 61) {
+        PyErr_SetString(PyExc_ValueError, "seconds out of range");
+        return 0;
+    }
+    /* tm_wday does not need checking of its upper-bound since taking
+    ``% 7`` in gettmarg() automatically restricts the range. */
+    if (buf->tm_wday < 0) {
+        PyErr_SetString(PyExc_ValueError, "day of week out of range");
+        return 0;
+    }
+    if (buf->tm_yday == -1)
+        buf->tm_yday = 0;
+    else if (buf->tm_yday < 0 || buf->tm_yday > 365) {
+        PyErr_SetString(PyExc_ValueError, "day of year out of range");
+        return 0;
+    }
+    return 1;
+}
+
 #ifdef HAVE_STRFTIME
 static PyObject *
 time_strftime(PyObject *self, PyObject *args)
@@ -401,12 +477,14 @@ time_strftime(PyObject *self, PyObject *args)
     if (tup == NULL) {
         time_t tt = time(NULL);
         buf = *localtime(&tt);
-    } else if (!gettmarg(tup, &buf))
+    } else if (!gettmarg(tup, &buf)
+               || !checktm(&buf)) {
         return NULL;
+    }
 
     /* Checks added to make sure strftime() does not crash Python by
-        indexing blindly into some array for a textual representation
-        by some bad index (fixes bug #897625).
+       indexing blindly into some array for a textual representation
+       by some bad index (fixes bug #897625).
 
         Also support values of zero from Python code for arguments in which
         that is out of range by forcing that value to the lowest value that
@@ -432,13 +510,13 @@ time_strftime(PyObject *self, PyObject *args)
         buf.tm_mon = 0;
     else if (buf.tm_mon < 0 || buf.tm_mon > 11) {
         PyErr_SetString(PyExc_ValueError, "month out of range");
-                    return NULL;
+            return NULL;
     }
     if (buf.tm_mday == 0)
         buf.tm_mday = 1;
     else if (buf.tm_mday < 0 || buf.tm_mday > 31) {
         PyErr_SetString(PyExc_ValueError, "day of month out of range");
-                    return NULL;
+            return NULL;
     }
     if (buf.tm_hour < 0 || buf.tm_hour > 23) {
         PyErr_SetString(PyExc_ValueError, "hour out of range");
@@ -464,11 +542,30 @@ time_strftime(PyObject *self, PyObject *args)
         PyErr_SetString(PyExc_ValueError, "day of year out of range");
         return NULL;
     }
-    if (buf.tm_isdst < -1 || buf.tm_isdst > 1) {
-        PyErr_SetString(PyExc_ValueError,
-                        "daylight savings flag out of range");
-        return NULL;
+    /* Normalize tm_isdst just in case someone foolishly implements %Z
+       based on the assumption that tm_isdst falls within the range of
+       [-1, 1] */
+    if (buf.tm_isdst < -1)
+        buf.tm_isdst = -1;
+    else if (buf.tm_isdst > 1)
+        buf.tm_isdst = 1;
+
+#ifdef MS_WINDOWS
+    /* check that the format string contains only valid directives */
+    for(outbuf = strchr(fmt, '%');
+        outbuf != NULL;
+        outbuf = strchr(outbuf+2, '%'))
+    {
+        if (outbuf[1]=='#')
+            ++outbuf; /* not documented by python, */
+        if (outbuf[1]=='\0' ||
+            !strchr("aAbBcdHIjmMpSUwWxXyYzZ%", outbuf[1]))
+        {
+            PyErr_SetString(PyExc_ValueError, "Invalid format string");
+            return 0;
+        }
     }
+#endif
 
     fmtlen = strlen(fmt);
 
@@ -519,8 +616,9 @@ time_strptime(PyObject *self, PyObject *args)
     PyObject *strptime_result;
 
     if (!strptime_module)
-    return NULL;
-    strptime_result = PyObject_CallMethod(strptime_module, "_strptime_time", "O", args);
+        return NULL;
+    strptime_result = PyObject_CallMethod(strptime_module,
+                                            "_strptime_time", "O", args);
     Py_DECREF(strptime_module);
     return strptime_result;
 }
@@ -533,26 +631,50 @@ See the library reference manual for formatting codes (same as strftime()).");
 
 
 static PyObject *
+_asctime(struct tm *timeptr)
+{
+    /* Inspired by Open Group reference implementation available at
+     * http://pubs.opengroup.org/onlinepubs/009695399/functions/asctime.html */
+    static const char wday_name[7][4] = {
+        "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
+    };
+    static const char mon_name[12][4] = {
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    };
+    PyObject *unicode, *str;
+    /* PyString_FromString() cannot be used because it doesn't support %3d */
+    unicode = PyUnicode_FromFormat(
+        "%s %s%3d %.2d:%.2d:%.2d %d",
+        wday_name[timeptr->tm_wday],
+        mon_name[timeptr->tm_mon],
+        timeptr->tm_mday, timeptr->tm_hour,
+        timeptr->tm_min, timeptr->tm_sec,
+        1900 + timeptr->tm_year);
+    if (unicode == NULL) {
+        return NULL;
+    }
+
+    str = PyUnicode_AsASCIIString(unicode);
+    Py_DECREF(unicode);
+    return str;
+}
+
+static PyObject *
 time_asctime(PyObject *self, PyObject *args)
 {
     PyObject *tup = NULL;
     struct tm buf;
-    char *p;
     if (!PyArg_UnpackTuple(args, "asctime", 0, 1, &tup))
         return NULL;
     if (tup == NULL) {
         time_t tt = time(NULL);
         buf = *localtime(&tt);
-    } else if (!gettmarg(tup, &buf))
-        return NULL;
-    p = asctime(&buf);
-    if (p == NULL) {
-        PyErr_SetString(PyExc_ValueError, "invalid time");
+    } else if (!gettmarg(tup, &buf)
+               || !checktm(&buf)) {
         return NULL;
     }
-    if (p[24] == '\n')
-        p[24] = '\0';
-    return PyString_FromString(p);
+    return _asctime(&buf);
 }
 
 PyDoc_STRVAR(asctime_doc,
@@ -567,7 +689,7 @@ time_ctime(PyObject *self, PyObject *args)
 {
     PyObject *ot = NULL;
     time_t tt;
-    char *p;
+    struct tm *buf;
 
     if (!PyArg_UnpackTuple(args, "ctime", 0, 1, &ot))
         return NULL;
@@ -581,14 +703,16 @@ time_ctime(PyObject *self, PyObject *args)
         if (tt == (time_t)-1 && PyErr_Occurred())
             return NULL;
     }
-    p = ctime(&tt);
-    if (p == NULL) {
-        PyErr_SetString(PyExc_ValueError, "unconvertible time");
-        return NULL;
+    buf = localtime(&tt);
+    if (buf == NULL) {
+#ifdef EINVAL
+        if (errno == 0) {
+            errno = EINVAL;
+        }
+#endif
+        return PyErr_SetFromErrno(PyExc_ValueError);
     }
-    if (p[24] == '\n')
-        p[24] = '\0';
-    return PyString_FromString(p);
+    return _asctime(buf);
 }
 
 PyDoc_STRVAR(ctime_doc,
@@ -606,8 +730,11 @@ time_mktime(PyObject *self, PyObject *tup)
     time_t tt;
     if (!gettmarg(tup, &buf))
         return NULL;
+    buf.tm_wday = -1;  /* sentinel; original value ignored */
     tt = mktime(&buf);
-    if (tt == (time_t)(-1)) {
+    /* Return value of -1 does not necessarily mean an error, but tm_wday
+     * cannot remain set to -1 if mktime succeeded. */
+    if (tt == (time_t)(-1) && buf.tm_wday == -1) {
         PyErr_SetString(PyExc_OverflowError,
                         "mktime argument out of range");
         return NULL;
@@ -645,7 +772,7 @@ time_tzset(PyObject *self, PyObject *unused)
 }
 
 PyDoc_STRVAR(tzset_doc,
-"tzset(zone)\n\
+"tzset()\n\
 \n\
 Initialize, or reinitialize, the local timezone to the value stored in\n\
 os.environ['TZ']. The TZ environment variable should be specified in\n\
@@ -829,6 +956,11 @@ inittime(void)
     /* Accept 2-digit dates unless PYTHONY2K is set and non-empty */
     p = Py_GETENV("PYTHONY2K");
     PyModule_AddIntConstant(m, "accept2dyear", (long) (!p || !*p));
+    /* If an embedded interpreter is shutdown and reinitialized the old
+       moddict was not decrefed on shutdown and the next import of this
+       module leads to a leak.  Conditionally decref here to prevent that.
+    */
+    Py_XDECREF(moddict);
     /* Squirrel away the module's dictionary for the y2k check */
     moddict = PyModule_GetDict(m);
     Py_INCREF(moddict);
@@ -1022,4 +1154,9 @@ floatsleep(double secs)
     return 0;
 }
 
-
+/* export floattime to socketmodule.c */
+PyAPI_FUNC(double)
+_PyTime_FloatTime(void)
+{
+    return floattime();
+}

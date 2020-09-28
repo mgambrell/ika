@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-#
 #-----------------------------------------------------------------------
 # A test suite for the table interface built on bsddb.db
 #-----------------------------------------------------------------------
@@ -18,13 +16,17 @@
 #
 #   --  Gregory P. Smith <greg@krypto.org>
 #
-# $Id: test_dbtables.py 83562 2010-08-02 20:19:21Z ezio.melotti $
+# $Id$
 
-import os, re
-try:
-    import cPickle
-    pickle = cPickle
-except ImportError:
+import os, re, sys
+
+if sys.version_info[0] < 3 :
+    try:
+        import cPickle
+        pickle = cPickle
+    except ImportError:
+        import pickle
+else :
     import pickle
 
 import unittest
@@ -80,8 +82,8 @@ class TableDBTestCase(unittest.TestCase):
             colval = pickle.loads(values[0][colname])
         else :
             colval = pickle.loads(bytes(values[0][colname], "iso8859-1"))
-        self.assert_(colval > 3.141)
-        self.assert_(colval < 3.142)
+        self.assertGreater(colval, 3.141)
+        self.assertLess(colval, 3.142)
 
 
     def test02(self):

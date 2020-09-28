@@ -13,6 +13,7 @@ from ..fixer_util import (Comma, Name, Call, LParen, RParen, Dot, Node,
 
 
 class FixExecfile(fixer_base.BaseFix):
+    BM_compatible = True
 
     PATTERN = """
     power< 'execfile' trailer< '(' arglist< filename=any [',' globals=any [',' locals=any ] ] > ')' > >
@@ -30,7 +31,8 @@ class FixExecfile(fixer_base.BaseFix):
         # call.
         execfile_paren = node.children[-1].children[-1].clone()
         # Construct open().read().
-        open_args = ArgList([filename.clone()], rparen=execfile_paren)
+        open_args = ArgList([filename.clone(), Comma(), String('"rb"', ' ')],
+                            rparen=execfile_paren)
         open_call = Node(syms.power, [Name(u"open"), open_args])
         read = [Node(syms.trailer, [Dot(), Name(u'read')]),
                 Node(syms.trailer, [LParen(), RParen()])]

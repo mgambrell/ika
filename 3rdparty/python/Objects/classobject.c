@@ -4,7 +4,7 @@
 #include "Python.h"
 #include "structmember.h"
 
-/* Free list for method objects to safe malloc/free overhead
+/* Free list for method objects to save malloc/free overhead
  * The im_self element is used to chain the elements.
  */
 static PyMethodObject *free_list;
@@ -88,9 +88,9 @@ PyClass_New(PyObject *bases, PyObject *dict, PyObject *name)
             base = PyTuple_GET_ITEM(bases, i);
             if (!PyClass_Check(base)) {
                 if (PyCallable_Check(
-                    (PyObject *) base->ob_type))
+                        (PyObject *) Py_TYPE(base)))
                     return PyObject_CallFunctionObjArgs(
-                        (PyObject *) base->ob_type,
+                        (PyObject *) Py_TYPE(base),
                         name, bases, dict, NULL);
                 PyErr_SetString(PyExc_TypeError,
                     "PyClass_New: base must be a class");
@@ -123,6 +123,7 @@ alloc_error:
     op->cl_dict = dict;
     Py_XINCREF(name);
     op->cl_name = name;
+    op->cl_weakreflist = NULL;
 
     op->cl_getattr = class_lookup(op, getattrstr, &dummy);
     op->cl_setattr = class_lookup(op, setattrstr, &dummy);
@@ -188,6 +189,8 @@ static void
 class_dealloc(PyClassObject *op)
 {
     _PyObject_GC_UNTRACK(op);
+    if (op->cl_weakreflist != NULL)
+        PyObject_ClearWeakRefs((PyObject *) op);
     Py_DECREF(op->cl_bases);
     Py_DECREF(op->cl_dict);
     Py_XDECREF(op->cl_name);
@@ -222,10 +225,16 @@ static PyObject *
 class_getattr(register PyClassObject *op, PyObject *name)
 {
     register PyObject *v;
-    register char *sname = PyString_AsString(name);
+    register char *sname;
     PyClassObject *klass;
     descrgetfunc f;
 
+    if (!PyString_Check(name)) {
+        PyErr_SetString(PyExc_TypeError, "attribute name must be a string");
+        return NULL;
+    }
+
+    sname = PyString_AsString(name);
     if (sname[0] == '_' && sname[1] == '_') {
         if (strcmp(sname, "__dict__") == 0) {
             if (PyEval_GetRestricted()) {
@@ -256,7 +265,7 @@ class_getattr(register PyClassObject *op, PyObject *name)
                      PyString_AS_STRING(op->cl_name), sname);
         return NULL;
     }
-    f = TP_DESCR_GET(v->ob_type);
+    f = TP_DESCR_GET(Py_TYPE(v));
     if (f == NULL)
         Py_INCREF(v);
     else
@@ -331,6 +340,10 @@ class_setattr(PyClassObject *op, PyObject *name, PyObject *v)
     if (PyEval_GetRestricted()) {
         PyErr_SetString(PyExc_RuntimeError,
                    "classes are read-only in restricted mode");
+        return -1;
+    }
+    if (!PyString_Check(name)) {
+        PyErr_SetString(PyExc_TypeError, "attribute name must be a string");
         return -1;
     }
     sname = PyString_AsString(name);
@@ -429,8 +442,7 @@ class_traverse(PyClassObject *o, visitproc visit, void *arg)
 }
 
 PyTypeObject PyClass_Type = {
-    PyObject_HEAD_INIT(&PyType_Type)
-    0,
+    PyVarObject_HEAD_INIT(&PyType_Type, 0)
     "classobj",
     sizeof(PyClassObject),
     0,
@@ -454,7 +466,7 @@ PyTypeObject PyClass_Type = {
     (traverseproc)class_traverse,               /* tp_traverse */
     0,                                          /* tp_clear */
     0,                                          /* tp_richcompare */
-    0,                                          /* tp_weaklistoffset */
+    offsetof(PyClassObject, cl_weakreflist), /* tp_weaklistoffset */
     0,                                          /* tp_iter */
     0,                                          /* tp_iternext */
     0,                                          /* tp_methods */
@@ -626,9 +638,9 @@ instance_dealloc(register PyInstanceObject *inst)
         PyObject_ClearWeakRefs((PyObject *) inst);
 
     /* Temporarily resurrect the object. */
-    assert(inst->ob_type == &PyInstance_Type);
-    assert(inst->ob_refcnt == 0);
-    inst->ob_refcnt = 1;
+    assert(Py_TYPE(inst) == &PyInstance_Type);
+    assert(Py_REFCNT(inst) == 0);
+    Py_REFCNT(inst) = 1;
 
     /* Save the current exception, if any. */
     PyErr_Fetch(&error_type, &error_value, &error_traceback);
@@ -652,8 +664,8 @@ instance_dealloc(register PyInstanceObject *inst)
     /* Undo the temporary resurrection; can't use DECREF here, it would
      * cause a recursive call.
      */
-    assert(inst->ob_refcnt > 0);
-    if (--inst->ob_refcnt == 0) {
+    assert(Py_REFCNT(inst) > 0);
+    if (--Py_REFCNT(inst) == 0) {
 
         /* New weakrefs could be created during the finalizer call.
             If this occurs, clear them out without calling their
@@ -669,12 +681,12 @@ instance_dealloc(register PyInstanceObject *inst)
         PyObject_GC_Del(inst);
     }
     else {
-        Py_ssize_t refcnt = inst->ob_refcnt;
+        Py_ssize_t refcnt = Py_REFCNT(inst);
         /* __del__ resurrected it!  Make it look like the original
          * Py_DECREF never happened.
          */
         _Py_NewReference((PyObject *)inst);
-        inst->ob_refcnt = refcnt;
+        Py_REFCNT(inst) = refcnt;
         _PyObject_GC_TRACK(inst);
         /* If Py_REF_DEBUG, _Py_NewReference bumped _Py_RefTotal, so
          * we need to undo that. */
@@ -686,8 +698,8 @@ instance_dealloc(register PyInstanceObject *inst)
          * undone.
          */
 #ifdef COUNT_ALLOCS
-        --inst->ob_type->tp_frees;
-        --inst->ob_type->tp_allocs;
+        --Py_TYPE(inst)->tp_frees;
+        --Py_TYPE(inst)->tp_allocs;
 #endif
     }
 }
@@ -696,7 +708,14 @@ static PyObject *
 instance_getattr1(register PyInstanceObject *inst, PyObject *name)
 {
     register PyObject *v;
-    register char *sname = PyString_AsString(name);
+    register char *sname;
+
+    if (!PyString_Check(name)) {
+        PyErr_SetString(PyExc_TypeError, "attribute name must be a string");
+        return NULL;
+    }
+
+    sname = PyString_AsString(name);
     if (sname[0] == '_' && sname[1] == '_') {
         if (strcmp(sname, "__dict__") == 0) {
             if (PyEval_GetRestricted()) {
@@ -736,7 +755,7 @@ instance_getattr2(register PyInstanceObject *inst, PyObject *name)
     v = class_lookup(inst->in_class, name, &klass);
     if (v != NULL) {
         Py_INCREF(v);
-        f = TP_DESCR_GET(v->ob_type);
+        f = TP_DESCR_GET(Py_TYPE(v));
         if (f != NULL) {
             PyObject *w = f(v, (PyObject *)inst,
                             (PyObject *)(inst->in_class));
@@ -807,7 +826,14 @@ static int
 instance_setattr(PyInstanceObject *inst, PyObject *name, PyObject *v)
 {
     PyObject *func, *args, *res, *tmp;
-    char *sname = PyString_AsString(name);
+    char *sname;
+
+    if (!PyString_Check(name)) {
+        PyErr_SetString(PyExc_TypeError, "attribute name must be a string");
+        return -1;
+    }
+
+    sname = PyString_AsString(name);
     if (sname[0] == '_' && sname[1] == '_') {
         Py_ssize_t n = PyString_Size(name);
         if (sname[n-1] == '_' && sname[n-2] == '_') {
@@ -983,9 +1009,9 @@ instance_hash(PyInstanceObject *inst)
     Py_DECREF(func);
     if (res == NULL)
         return -1;
-    if (PyInt_Check(res) || PyLong_Check(res))
+    if (_PyAnyInt_Check(res))
         /* This already converts a -1 result to -2. */
-        outcome = res->ob_type->tp_hash(res);
+        outcome = Py_TYPE(res)->tp_hash(res);
     else {
         PyErr_SetString(PyExc_TypeError,
                         "__hash__() should return an int");
@@ -1218,7 +1244,7 @@ instance_ass_item(PyInstanceObject *inst, Py_ssize_t i, PyObject *item)
     if (func == NULL)
         return -1;
     if (item == NULL)
-        arg = PyInt_FromSsize_t(i);
+        arg = Py_BuildValue("(n)", i);
     else
         arg = Py_BuildValue("(nO)", i, item);
     if (arg == NULL) {
@@ -1473,7 +1499,7 @@ half_binop(PyObject *v, PyObject *w, char *opname, binaryfunc thisfunc,
     }
     v1 = PyTuple_GetItem(coerced, 0);
     w = PyTuple_GetItem(coerced, 1);
-    if (v1->ob_type == v->ob_type && PyInstance_Check(v)) {
+    if (Py_TYPE(v1) == Py_TYPE(v) && PyInstance_Check(v)) {
         /* prevent recursion if __coerce__ returns self as the first
          * argument */
         result = generic_binary_op(v1, w, opname);
@@ -2050,7 +2076,7 @@ instance_getiter(PyInstanceObject *self)
             PyErr_Format(PyExc_TypeError,
                          "__iter__ returned non-iterator "
                          "of type '%.100s'",
-                         res->ob_type->tp_name);
+                         Py_TYPE(res)->tp_name);
             Py_DECREF(res);
             res = NULL;
         }
@@ -2174,8 +2200,7 @@ static PyNumberMethods instance_as_number = {
 };
 
 PyTypeObject PyInstance_Type = {
-    PyObject_HEAD_INIT(&PyType_Type)
-    0,
+    PyVarObject_HEAD_INIT(&PyType_Type, 0)
     "instance",
     sizeof(PyInstanceObject),
     0,
@@ -2226,14 +2251,10 @@ PyObject *
 PyMethod_New(PyObject *func, PyObject *self, PyObject *klass)
 {
     register PyMethodObject *im;
-    if (!PyCallable_Check(func)) {
-        PyErr_BadInternalCall();
-        return NULL;
-    }
     im = free_list;
     if (im != NULL) {
         free_list = (PyMethodObject *)(im->im_self);
-        PyObject_INIT(im, &PyMethod_Type);
+        (void)PyObject_INIT(im, &PyMethod_Type);
         numfree--;
     }
     else {
@@ -2298,7 +2319,7 @@ static PyObject *
 instancemethod_getattro(PyObject *obj, PyObject *name)
 {
     PyMethodObject *im = (PyMethodObject *)obj;
-    PyTypeObject *tp = obj->ob_type;
+    PyTypeObject *tp = Py_TYPE(obj);
     PyObject *descr = NULL;
 
     if (PyType_HasFeature(tp, Py_TPFLAGS_HAVE_CLASS)) {
@@ -2310,9 +2331,9 @@ instancemethod_getattro(PyObject *obj, PyObject *name)
     }
 
     if (descr != NULL) {
-        descrgetfunc f = TP_DESCR_GET(descr->ob_type);
+        descrgetfunc f = TP_DESCR_GET(Py_TYPE(descr));
         if (f != NULL)
-            return f(descr, obj, (PyObject *)obj->ob_type);
+            return f(descr, obj, (PyObject *)Py_TYPE(obj));
         else {
             Py_INCREF(descr);
             return descr;
@@ -2515,7 +2536,7 @@ getinstclassname(PyObject *inst, char *buf, int bufsize)
     if (klass == NULL) {
         /* This function cannot return an exception */
         PyErr_Clear();
-        klass = (PyObject *)(inst->ob_type);
+        klass = (PyObject *)Py_TYPE(inst);
         Py_INCREF(klass);
     }
     getclassname(klass, buf, bufsize);
@@ -2608,8 +2629,7 @@ instancemethod_descr_get(PyObject *meth, PyObject *obj, PyObject *cls)
 }
 
 PyTypeObject PyMethod_Type = {
-    PyObject_HEAD_INIT(&PyType_Type)
-    0,
+    PyVarObject_HEAD_INIT(&PyType_Type, 0)
     "instancemethod",
     sizeof(PyMethodObject),
     0,

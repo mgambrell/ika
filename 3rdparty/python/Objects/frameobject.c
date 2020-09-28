@@ -20,11 +20,37 @@ static PyMemberDef frame_memberlist[] = {
     {"f_builtins",      T_OBJECT,       OFF(f_builtins),RO},
     {"f_globals",       T_OBJECT,       OFF(f_globals), RO},
     {"f_lasti",         T_INT,          OFF(f_lasti),   RO},
-    {"f_exc_type",      T_OBJECT,       OFF(f_exc_type)},
-    {"f_exc_value",     T_OBJECT,       OFF(f_exc_value)},
-    {"f_exc_traceback", T_OBJECT,       OFF(f_exc_traceback)},
     {NULL}      /* Sentinel */
 };
+
+#define WARN_GET_SET(NAME) \
+static PyObject * frame_get_ ## NAME(PyFrameObject *f) { \
+    if (PyErr_WarnPy3k(#NAME " has been removed in 3.x", 2) < 0) \
+        return NULL; \
+    if (f->NAME) { \
+        Py_INCREF(f->NAME); \
+        return f->NAME; \
+    } \
+    Py_RETURN_NONE;     \
+} \
+static int frame_set_ ## NAME(PyFrameObject *f, PyObject *new) { \
+    if (PyErr_WarnPy3k(#NAME " has been removed in 3.x", 2) < 0) \
+        return -1; \
+    if (f->NAME) { \
+        Py_CLEAR(f->NAME); \
+    } \
+    if (new == Py_None) \
+        new = NULL; \
+    Py_XINCREF(new); \
+    f->NAME = new; \
+    return 0; \
+}
+
+
+WARN_GET_SET(f_exc_traceback)
+WARN_GET_SET(f_exc_type)
+WARN_GET_SET(f_exc_value)
+
 
 static PyObject *
 frame_getlocals(PyFrameObject *f, void *closure)
@@ -34,17 +60,19 @@ frame_getlocals(PyFrameObject *f, void *closure)
     return f->f_locals;
 }
 
+int
+PyFrame_GetLineNumber(PyFrameObject *f)
+{
+    if (f->f_trace)
+        return f->f_lineno;
+    else
+        return PyCode_Addr2Line(f->f_code, f->f_lasti);
+}
+
 static PyObject *
 frame_getlineno(PyFrameObject *f, void *closure)
 {
-    int lineno;
-
-    if (f->f_trace)
-        lineno = f->f_lineno;
-    else
-        lineno = PyCode_Addr2Line(f->f_code, f->f_lasti);
-
-    return PyInt_FromLong(lineno);
+    return PyInt_FromLong(PyFrame_GetLineNumber(f));
 }
 
 /* Setter for f_lineno - you can set f_lineno from within a trace function in
@@ -61,6 +89,9 @@ frame_getlineno(PyFrameObject *f, void *closure)
  *  o 'try'/'for'/'while' blocks can't be jumped into because the blockstack
  *    needs to be set up before their code runs, and for 'for' loops the
  *    iterator needs to be on the stack.
+ *  o Jumps cannot be made from within a trace function invoked with a
+ *    'return' or 'exception' event since the eval loop has been exited at
+ *    that time.
  */
 static int
 frame_setlineno(PyFrameObject *f, PyObject* p_new_lineno)
@@ -86,8 +117,11 @@ frame_setlineno(PyFrameObject *f, PyObject* p_new_lineno)
     int in_finally[CO_MAXBLOCKS];       /* (ditto) */
     int blockstack_top = 0;             /* (ditto) */
     unsigned char setup_op = 0;         /* (ditto) */
-    char *tmp;
 
+    if (p_new_lineno == NULL) {
+        PyErr_SetString(PyExc_AttributeError, "cannot delete attribute");
+        return -1;
+    }
     /* f_lineno must be an integer. */
     if (!PyInt_Check(p_new_lineno)) {
         PyErr_SetString(PyExc_ValueError,
@@ -95,12 +129,32 @@ frame_setlineno(PyFrameObject *f, PyObject* p_new_lineno)
         return -1;
     }
 
+    /* Upon the 'call' trace event of a new frame, f->f_lasti is -1 and
+     * f->f_trace is NULL, check first on the first condition.
+     * Forbidding jumps from the 'call' event of a new frame is a side effect
+     * of allowing to set f_lineno only from trace functions. */
+    if (f->f_lasti == -1) {
+        PyErr_Format(PyExc_ValueError,
+                     "can't jump from the 'call' trace event of a new frame");
+        return -1;
+    }
+
     /* You can only do this from within a trace function, not via
      * _getframe or similar hackery. */
-    if (!f->f_trace)
-    {
+    if (!f->f_trace) {
         PyErr_Format(PyExc_ValueError,
                      "f_lineno can only be set by a trace function");
+        return -1;
+    }
+
+    /* Forbid jumps upon a 'return' trace event (except after executing a
+     * YIELD_VALUE opcode, f_stacktop is not NULL in that case) and upon an
+     * 'exception' trace event.
+     * Jumps from 'call' trace events have already been forbidden above for new
+     * frames, so this check does not change anything for 'call' events. */
+    if (f->f_stacktop == NULL) {
+        PyErr_SetString(PyExc_ValueError,
+                "can only jump from a 'line' trace event");
         return -1;
     }
 
@@ -112,22 +166,28 @@ frame_setlineno(PyFrameObject *f, PyObject* p_new_lineno)
                      new_lineno);
         return -1;
     }
-
-    /* Find the bytecode offset for the start of the given line, or the
-     * first code-owning line after it. */
-    PyString_AsStringAndSize(f->f_code->co_lnotab,
-                             &tmp, &lnotab_len);
-    lnotab = (unsigned char *) tmp;
-    addr = 0;
-    line = f->f_code->co_firstlineno;
-    new_lasti = -1;
-    for (offset = 0; offset < lnotab_len; offset += 2) {
-        addr += lnotab[offset];
-        line += lnotab[offset+1];
-        if (line >= new_lineno) {
-            new_lasti = addr;
-            new_lineno = line;
-            break;
+    else if (new_lineno == f->f_code->co_firstlineno) {
+        new_lasti = 0;
+        new_lineno = f->f_code->co_firstlineno;
+    }
+    else {
+        /* Find the bytecode offset for the start of the given
+         * line, or the first code-owning line after it. */
+        char *tmp;
+        PyString_AsStringAndSize(f->f_code->co_lnotab,
+                                 &tmp, &lnotab_len);
+        lnotab = (unsigned char *) tmp;
+        addr = 0;
+        line = f->f_code->co_firstlineno;
+        new_lasti = -1;
+        for (offset = 0; offset < lnotab_len; offset += 2) {
+            addr += lnotab[offset];
+            line += lnotab[offset+1];
+            if (line >= new_lineno) {
+                new_lasti = addr;
+                new_lineno = line;
+                break;
+            }
         }
     }
 
@@ -143,6 +203,15 @@ frame_setlineno(PyFrameObject *f, PyObject* p_new_lineno)
     PyString_AsStringAndSize(f->f_code->co_code, (char **)&code, &code_len);
     min_addr = MIN(new_lasti, f->f_lasti);
     max_addr = MAX(new_lasti, f->f_lasti);
+
+    /* The trace function is called with a 'return' trace event after the
+     * execution of a yield statement. */
+    assert(f->f_lasti != -1);
+    if (code[f->f_lasti] == YIELD_VALUE) {
+        PyErr_SetString(PyExc_ValueError,
+                "can't jump from a yield statement");
+        return -1;
+    }
 
     /* You can't jump onto a line with an 'except' statement on it -
      * they expect to have an exception on the top of the stack, which
@@ -180,6 +249,7 @@ frame_setlineno(PyFrameObject *f, PyObject* p_new_lineno)
         case SETUP_LOOP:
         case SETUP_EXCEPT:
         case SETUP_FINALLY:
+        case SETUP_WITH:
             blockstack[blockstack_top++] = addr;
             in_finally[blockstack_top-1] = 0;
             break;
@@ -187,7 +257,7 @@ frame_setlineno(PyFrameObject *f, PyObject* p_new_lineno)
         case POP_BLOCK:
             assert(blockstack_top > 0);
             setup_op = code[blockstack[blockstack_top-1]];
-            if (setup_op == SETUP_FINALLY) {
+            if (setup_op == SETUP_FINALLY || setup_op == SETUP_WITH) {
                 in_finally[blockstack_top-1] = 1;
             }
             else {
@@ -202,7 +272,7 @@ frame_setlineno(PyFrameObject *f, PyObject* p_new_lineno)
              * be seeing such an END_FINALLY.) */
             if (blockstack_top > 0) {
                 setup_op = code[blockstack[blockstack_top-1]];
-                if (setup_op == SETUP_FINALLY) {
+                if (setup_op == SETUP_FINALLY || setup_op == SETUP_WITH) {
                     blockstack_top--;
                 }
             }
@@ -264,6 +334,7 @@ frame_setlineno(PyFrameObject *f, PyObject* p_new_lineno)
         case SETUP_LOOP:
         case SETUP_EXCEPT:
         case SETUP_FINALLY:
+        case SETUP_WITH:
             delta_iblock++;
             break;
 
@@ -304,6 +375,11 @@ frame_setlineno(PyFrameObject *f, PyObject* p_new_lineno)
             PyObject *v = (*--f->f_stacktop);
             Py_DECREF(v);
         }
+        if (b->b_type == SETUP_WITH) {
+            /* Pop the exit function. */
+            PyObject *v = (*--f->f_stacktop);
+            Py_DECREF(v);
+        }
     }
 
     /* Finally set the new f_lineno and f_lasti and return OK. */
@@ -329,16 +405,12 @@ static int
 frame_settrace(PyFrameObject *f, PyObject* v, void *closure)
 {
     /* We rely on f_lineno being accurate when f_trace is set. */
+    f->f_lineno = PyFrame_GetLineNumber(f);
 
-    PyObject* old_value = f->f_trace;
-
+    if (v == Py_None)
+        v = NULL;
     Py_XINCREF(v);
-    f->f_trace = v;
-
-    if (v != NULL)
-        f->f_lineno = PyCode_Addr2Line(f->f_code, f->f_lasti);
-
-    Py_XDECREF(old_value);
+    Py_XSETREF(f->f_trace, v);
 
     return 0;
 }
@@ -355,6 +427,12 @@ static PyGetSetDef frame_getsetlist[] = {
                     (setter)frame_setlineno, NULL},
     {"f_trace",         (getter)frame_gettrace, (setter)frame_settrace, NULL},
     {"f_restricted",(getter)frame_getrestricted,NULL, NULL},
+    {"f_exc_traceback", (getter)frame_get_f_exc_traceback,
+                    (setter)frame_set_f_exc_traceback, NULL},
+    {"f_exc_type",  (getter)frame_get_f_exc_type,
+                    (setter)frame_set_f_exc_type, NULL},
+    {"f_exc_value", (getter)frame_get_f_exc_value,
+                    (setter)frame_set_f_exc_value, NULL},
     {0}
 };
 
@@ -819,8 +897,7 @@ dict_to_map(PyObject *map, Py_ssize_t nmap, PyObject *dict, PyObject **values,
             }
         } else if (values[j] != value) {
             Py_XINCREF(value);
-            Py_XDECREF(values[j]);
-            values[j] = value;
+            Py_XSETREF(values[j], value);
         }
         Py_XDECREF(value);
     }

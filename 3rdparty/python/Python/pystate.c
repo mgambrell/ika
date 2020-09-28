@@ -22,6 +22,9 @@ the expense of doing their own locking).
 #endif
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #ifdef WITH_THREAD
 #include "pythread.h"
@@ -29,10 +32,6 @@ static PyThread_type_lock head_mutex = NULL; /* Protects interp->tstate_head */
 #define HEAD_INIT() (void)(head_mutex || (head_mutex = PyThread_allocate_lock()))
 #define HEAD_LOCK() PyThread_acquire_lock(head_mutex, WAIT_LOCK)
 #define HEAD_UNLOCK() PyThread_release_lock(head_mutex)
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 /* The single PyInterpreterState used by this process'
    GILState implementation
@@ -193,6 +192,9 @@ new_threadstate(PyInterpreterState *interp, int init)
         tstate->c_profileobj = NULL;
         tstate->c_traceobj = NULL;
 
+        tstate->trash_delete_nesting = 0;
+        tstate->trash_delete_later = NULL;
+
         if (init)
             _PyThreadState_Init(tstate);
 
@@ -298,7 +300,7 @@ PyThreadState_Delete(PyThreadState *tstate)
         Py_FatalError("PyThreadState_Delete: tstate is still current");
     tstate_delete_common(tstate);
 #ifdef WITH_THREAD
-    if (autoTLSkey && PyThread_get_key_value(autoTLSkey) == tstate)
+    if (autoInterpreterState && PyThread_get_key_value(autoTLSkey) == tstate)
         PyThread_delete_key_value(autoTLSkey);
 #endif /* WITH_THREAD */
 }
@@ -313,9 +315,9 @@ PyThreadState_DeleteCurrent()
         Py_FatalError(
             "PyThreadState_DeleteCurrent: no current tstate");
     _PyThreadState_Current = NULL;
-    tstate_delete_common(tstate);
-    if (autoTLSkey && PyThread_get_key_value(autoTLSkey) == tstate)
+    if (autoInterpreterState && PyThread_get_key_value(autoTLSkey) == tstate)
         PyThread_delete_key_value(autoTLSkey);
+    tstate_delete_common(tstate);
     PyEval_ReleaseLock();
 }
 #endif /* WITH_THREAD */
@@ -463,7 +465,7 @@ _PyThread_CurrentFrames(void)
     /* for i in all interpreters:
      *     for t in all of i's thread states:
      *          if t's frame isn't NULL, map t's id to its frame
-     * Because these lists can mutute even when the GIL is held, we
+     * Because these lists can mutate even when the GIL is held, we
      * need to grab head_mutex for the duration.
      */
     HEAD_LOCK();
@@ -534,7 +536,6 @@ void
 _PyGILState_Fini(void)
 {
     PyThread_delete_key(autoTLSkey);
-    autoTLSkey = 0;
     autoInterpreterState = NULL;
 }
 
@@ -546,10 +547,10 @@ _PyGILState_Fini(void)
 static void
 _PyGILState_NoteThreadState(PyThreadState* tstate)
 {
-    /* If autoTLSkey is 0, this must be the very first threadstate created
-       in Py_Initialize().  Don't do anything for now (we'll be back here
-       when _PyGILState_Init is called). */
-    if (!autoTLSkey)
+    /* If autoTLSkey isn't initialized, this must be the very first
+       threadstate created in Py_Initialize().  Don't do anything for now
+       (we'll be back here when _PyGILState_Init is called). */
+    if (!autoInterpreterState)
         return;
 
     /* Stick the thread state for this thread in thread local storage.
@@ -577,7 +578,7 @@ _PyGILState_NoteThreadState(PyThreadState* tstate)
 PyThreadState *
 PyGILState_GetThisThreadState(void)
 {
-    if (autoInterpreterState == NULL || autoTLSkey == 0)
+    if (autoInterpreterState == NULL)
         return NULL;
     return (PyThreadState *)PyThread_get_key_value(autoTLSkey);
 }
@@ -587,6 +588,8 @@ PyGILState_Ensure(void)
 {
     int current;
     PyThreadState *tcur;
+    int need_init_threads = 0;
+
     /* Note that we do not auto-init Python here - apart from
        potential races with 2 threads auto-initializing, pep-311
        spells out other issues.  Embedders are expected to have
@@ -595,6 +598,8 @@ PyGILState_Ensure(void)
     assert(autoInterpreterState); /* Py_Initialize() hasn't been called! */
     tcur = (PyThreadState *)PyThread_get_key_value(autoTLSkey);
     if (tcur == NULL) {
+        need_init_threads = 1;
+
         /* Create a new thread state for this thread */
         tcur = PyThreadState_New(autoInterpreterState);
         if (tcur == NULL)
@@ -604,16 +609,28 @@ PyGILState_Ensure(void)
         tcur->gilstate_counter = 0;
         current = 0; /* new thread state is never current */
     }
-    else
+    else {
         current = PyThreadState_IsCurrent(tcur);
-    if (current == 0)
+    }
+
+    if (current == 0) {
         PyEval_RestoreThread(tcur);
+    }
+
     /* Update our counter in the thread-state - no need for locks:
        - tcur will remain valid as we hold the GIL.
        - the counter is safe as we are the only thread "allowed"
          to modify this value
     */
     ++tcur->gilstate_counter;
+
+    if (need_init_threads) {
+        /* At startup, Python has no concrete GIL. If PyGILState_Ensure() is
+           called from a new thread for the first time, we need the create the
+           GIL. */
+        PyEval_InitThreads();
+    }
+
     return current ? PyGILState_LOCKED : PyGILState_UNLOCKED;
 }
 
@@ -655,10 +672,10 @@ PyGILState_Release(PyGILState_STATE oldstate)
         PyEval_SaveThread();
 }
 
+#endif /* WITH_THREAD */
+
 #ifdef __cplusplus
 }
 #endif
-
-#endif /* WITH_THREAD */
 
 

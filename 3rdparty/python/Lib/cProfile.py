@@ -36,7 +36,7 @@ def run(statement, filename=None, sort=-1):
             result = prof.print_stats(sort)
     return result
 
-def runctx(statement, globals, locals, filename=None):
+def runctx(statement, globals, locals, filename=None, sort=-1):
     """Run statement under profiler, supplying your own globals and locals,
     optionally saving results in filename.
 
@@ -53,7 +53,7 @@ def runctx(statement, globals, locals, filename=None):
         if filename is not None:
             prof.dump_stats(filename)
         else:
-            result = prof.print_stats()
+            result = prof.print_stats(sort)
     return result
 
 # Backwards compatibility.
@@ -64,11 +64,11 @@ def help():
 # ____________________________________________________________
 
 class Profile(_lsprof.Profiler):
-    """Profile(custom_timer=None, time_unit=None, subcalls=True, builtins=True)
+    """Profile(timer=None, timeunit=None, subcalls=True, builtins=True)
 
     Builds a profiler object using the specified timer function.
     The default timer is a fast built-in one based on real time.
-    For custom timer functions returning integers, time_unit can
+    For custom timer functions returning integers, timeunit can
     be a float specifying a scale (i.e. how long each integer unit
     is, in seconds).
     """
@@ -161,7 +161,7 @@ def label(code):
 # ____________________________________________________________
 
 def main():
-    import os, sys
+    import os, sys, pstats
     from optparse import OptionParser
     usage = "cProfile.py [-o output_file_path] [-s sort] scriptfile [arg] ..."
     parser = OptionParser(usage=usage)
@@ -169,7 +169,9 @@ def main():
     parser.add_option('-o', '--outfile', dest="outfile",
         help="Save stats to <outfile>", default=None)
     parser.add_option('-s', '--sort', dest="sort",
-        help="Sort order when printing to stdout, based on pstats.Stats class", default=-1)
+        help="Sort order when printing to stdout, based on pstats.Stats class",
+        default=-1,
+        choices=sorted(pstats.Stats.sort_arg_dict_default))
 
     if not sys.argv[1:]:
         parser.print_usage()
@@ -178,9 +180,17 @@ def main():
     (options, args) = parser.parse_args()
     sys.argv[:] = args
 
-    if (len(sys.argv) > 0):
-        sys.path.insert(0, os.path.dirname(sys.argv[0]))
-        run('execfile(%r)' % (sys.argv[0],), options.outfile, options.sort)
+    if len(args) > 0:
+        progname = args[0]
+        sys.path.insert(0, os.path.dirname(progname))
+        with open(progname, 'rb') as fp:
+            code = compile(fp.read(), progname, 'exec')
+        globs = {
+            '__file__': progname,
+            '__name__': '__main__',
+            '__package__': None,
+        }
+        runctx(code, globs, None, options.outfile, options.sort)
     else:
         parser.print_usage()
     return parser

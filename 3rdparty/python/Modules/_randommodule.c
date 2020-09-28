@@ -2,11 +2,11 @@
 
 /* ------------------------------------------------------------------
    The code in this module was based on a download from:
-      http://www.math.keio.ac.jp/~matumoto/MT2002/emt19937ar.html
+      http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/MT2002/emt19937ar.html
 
    It was modified in 2002 by Raymond Hettinger as follows:
 
-    * the principal computational lines untouched except for tabbing.
+    * the principal computational lines untouched.
 
     * renamed genrand_res53() to random_random() and wrapped
       in python calling/return code.
@@ -60,8 +60,8 @@
 
 
    Any feedback is very welcome.
-   http://www.math.keio.ac.jp/matumoto/emt.html
-   email: matumoto@math.keio.ac.jp
+   http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html
+   email: m-mat @ math.sci.hiroshima-u.ac.jp (remove space)
 */
 
 /* ---------------------------------------------------------------*/
@@ -230,9 +230,15 @@ random_seed(RandomObject *self, PyObject *args)
     }
     /* If the arg is an int or long, use its absolute value; else use
      * the absolute value of its hash code.
+     * Calling int.__abs__() or long.__abs__() prevents calling arg.__abs__(),
+     * which might return an invalid value. See issue #31478.
      */
-    if (PyInt_Check(arg) || PyLong_Check(arg))
-        n = PyNumber_Absolute(arg);
+    if (PyInt_Check(arg)) {
+        n = PyInt_Type.tp_as_number->nb_absolute(arg);
+    }
+    else if (PyLong_Check(arg)) {
+        n = PyLong_Type.tp_as_number->nb_absolute(arg);
+    }
     else {
         long hash = PyObject_Hash(arg);
         if (hash == -1)
@@ -341,6 +347,7 @@ random_setstate(RandomObject *self, PyObject *state)
     int i;
     unsigned long element;
     long index;
+    unsigned long new_state[N];
 
     if (!PyTuple_Check(state)) {
         PyErr_SetString(PyExc_TypeError,
@@ -357,13 +364,19 @@ random_setstate(RandomObject *self, PyObject *state)
         element = PyLong_AsUnsignedLong(PyTuple_GET_ITEM(state, i));
         if (element == (unsigned long)-1 && PyErr_Occurred())
             return NULL;
-        self->state[i] = element & 0xffffffffUL; /* Make sure we get sane state */
+        new_state[i] = element & 0xffffffffUL; /* Make sure we get sane state */
     }
 
     index = PyLong_AsLong(PyTuple_GET_ITEM(state, i));
     if (index == -1 && PyErr_Occurred())
         return NULL;
+    if (index < 0 || index > N) {
+        PyErr_SetString(PyExc_ValueError, "invalid state");
+        return NULL;
+    }
     self->index = (int)index;
+    for (i = 0; i < N; i++)
+        self->state[i] = new_state[i];
 
     Py_INCREF(Py_None);
     return Py_None;
@@ -400,9 +413,9 @@ random_jumpahead(RandomObject *self, PyObject *n)
     long i, j;
     PyObject *iobj;
     PyObject *remobj;
-    unsigned long *mt, tmp;
+    unsigned long *mt, tmp, nonzero;
 
-    if (!PyInt_Check(n) && !PyLong_Check(n)) {
+    if (!_PyAnyInt_Check(n)) {
         PyErr_Format(PyExc_TypeError, "jumpahead requires an "
                      "integer, not '%s'",
                      Py_TYPE(n)->tp_name);
@@ -427,8 +440,23 @@ random_jumpahead(RandomObject *self, PyObject *n)
         mt[j] = tmp;
     }
 
-    for (i = 0; i < N; i++)
+    nonzero = 0;
+    for (i = 1; i < N; i++) {
         mt[i] += i+1;
+        mt[i] &= 0xffffffffUL; /* for WORDSIZE > 32 machines */
+        nonzero |= mt[i];
+    }
+
+    /* Ensure the state is nonzero: in the unlikely event that mt[1] through
+       mt[N-1] are all zero, set the MSB of mt[0] (see issue #14591). In the
+       normal case, we fall back to the pre-issue 14591 behaviour for mt[0]. */
+    if (nonzero) {
+        mt[0] += 1;
+        mt[0] &= 0xffffffffUL; /* for WORDSIZE > 32 machines */
+    }
+    else {
+        mt[0] = 0x80000000UL;
+    }
 
     self->index = N;
     Py_INCREF(Py_None);

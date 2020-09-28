@@ -244,15 +244,6 @@
     <ClCompile Include="..\3rdparty\zlib\deflate.c">
       <Filter>3rdparty\zlib</Filter>
     </ClCompile>
-    <ClCompile Include="..\3rdparty\zlib\gzio.c">
-      <Filter>3rdparty\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\3rdparty\zlib\infblock.c">
-      <Filter>3rdparty\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\3rdparty\zlib\infcodes.c">
-      <Filter>3rdparty\zlib</Filter>
-    </ClCompile>
     <ClCompile Include="..\3rdparty\zlib\inffast.c">
       <Filter>3rdparty\zlib</Filter>
     </ClCompile>
@@ -260,9 +251,6 @@
       <Filter>3rdparty\zlib</Filter>
     </ClCompile>
     <ClCompile Include="..\3rdparty\zlib\inftrees.c">
-      <Filter>3rdparty\zlib</Filter>
-    </ClCompile>
-    <ClCompile Include="..\3rdparty\zlib\infutil.c">
       <Filter>3rdparty\zlib</Filter>
     </ClCompile>
     <ClCompile Include="..\3rdparty\zlib\trees.c">
@@ -670,6 +658,9 @@
     <ClCompile Include="..\3rdparty\SDL\src\audio\windib\SDL_dibaudio.c">
       <Filter>3rdparty\SDL\src\audio</Filter>
     </ClCompile>
+    <ClCompile Include="..\3rdparty\zlib\infback.c">
+      <Filter>3rdparty\zlib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animscript.h">
@@ -753,12 +744,6 @@
     <ClInclude Include="..\3rdparty\zlib\deflate.h">
       <Filter>3rdparty\zlib</Filter>
     </ClInclude>
-    <ClInclude Include="..\3rdparty\zlib\infblock.h">
-      <Filter>3rdparty\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\3rdparty\zlib\infcodes.h">
-      <Filter>3rdparty\zlib</Filter>
-    </ClInclude>
     <ClInclude Include="..\3rdparty\zlib\inffast.h">
       <Filter>3rdparty\zlib</Filter>
     </ClInclude>
@@ -766,9 +751,6 @@
       <Filter>3rdparty\zlib</Filter>
     </ClInclude>
     <ClInclude Include="..\3rdparty\zlib\inftrees.h">
-      <Filter>3rdparty\zlib</Filter>
-    </ClInclude>
-    <ClInclude Include="..\3rdparty\zlib\infutil.h">
       <Filter>3rdparty\zlib</Filter>
     </ClInclude>
     <ClInclude Include="..\3rdparty\zlib\trees.h">

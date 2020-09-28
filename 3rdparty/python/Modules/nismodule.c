@@ -124,6 +124,7 @@ nis_foreach (int instatus, char *inkey, int inkeylen, char *inval,
             PyErr_Clear();
             Py_XDECREF(key);
             Py_XDECREF(val);
+            indata->state = PyEval_SaveThread();
             return 1;
         }
         err = PyDict_SetItem(indata->dict, key, val);
@@ -404,6 +405,7 @@ nis_maps (PyObject *self, PyObject *args, PyObject *kwdict)
         PyObject *str = PyString_FromString(maps->map);
         if (!str || PyList_Append(list, str) < 0)
         {
+            Py_XDECREF(str);
             Py_DECREF(list);
             list = NULL;
             break;

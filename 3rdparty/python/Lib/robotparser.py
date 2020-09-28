@@ -7,7 +7,8 @@
     2) PSF license for Python 2.2
 
     The robots.txt Exclusion Protocol is implemented as specified in
-    http://info.webcrawler.com/mak/projects/robots/norobots-rfc.html
+    http://www.robotstxt.org/norobots-rfc.txt
+
 """
 import urlparse
 import urllib
@@ -60,7 +61,7 @@ class RobotFileParser:
         self.errcode = opener.errcode
         if self.errcode in (401, 403):
             self.disallow_all = True
-        elif self.errcode >= 400:
+        elif self.errcode >= 400 and self.errcode < 500:
             self.allow_all = True
         elif self.errcode == 200 and lines:
             self.parse(lines)
@@ -86,6 +87,7 @@ class RobotFileParser:
         linenumber = 0
         entry = Entry()
 
+        self.modified()
         for line in lines:
             linenumber += 1
             if not line:
@@ -131,9 +133,22 @@ class RobotFileParser:
             return False
         if self.allow_all:
             return True
+
+        # Until the robots.txt file has been read or found not
+        # to exist, we must assume that no url is allowable.
+        # This prevents false positives when a user erroneously
+        # calls can_fetch() before calling read().
+        if not self.last_checked:
+            return False
+
         # search for given user agent matches
         # the first match counts
-        url = urllib.quote(urlparse.urlparse(urllib.unquote(url))[2]) or "/"
+        parsed_url = urlparse.urlparse(urllib.unquote(url))
+        url = urlparse.urlunparse(('', '', parsed_url.path,
+            parsed_url.params, parsed_url.query, parsed_url.fragment))
+        url = urllib.quote(url)
+        if not url:
+            url = "/"
         for entry in self.entries:
             if entry.applies_to(useragent):
                 return entry.allowance(url)
@@ -145,7 +160,10 @@ class RobotFileParser:
 
 
     def __str__(self):
-        return ''.join([str(entry) + "\n" for entry in self.entries])
+        entries = self.entries
+        if self.default_entry is not None:
+            entries = entries + [self.default_entry]
+        return '\n'.join(map(str, entries)) + '\n'
 
 
 class RuleLine:
@@ -155,6 +173,7 @@ class RuleLine:
         if path == '' and not allowance:
             # an empty value means allow all
             allowance = True
+        path = urlparse.urlunparse(urlparse.urlparse(path))
         self.path = urllib.quote(path)
         self.allowance = allowance
 

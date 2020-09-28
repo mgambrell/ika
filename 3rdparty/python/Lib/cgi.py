@@ -37,7 +37,6 @@ __version__ = "2.6"
 from operator import attrgetter
 import sys
 import os
-import urllib
 import UserDict
 import urlparse
 
@@ -45,10 +44,10 @@ from warnings import filterwarnings, catch_warnings, warn
 with catch_warnings():
     if sys.py3kwarning:
         filterwarnings("ignore", ".*mimetools has been removed",
-                        DeprecationWarning)
+                       DeprecationWarning)
+        filterwarnings("ignore", ".*rfc822 has been removed",
+                       DeprecationWarning)
     import mimetools
-    if sys.py3kwarning:
-        filterwarnings("ignore", ".*rfc822 has been removed", DeprecationWarning)
     import rfc822
 
 try:
@@ -132,7 +131,7 @@ def parse(fp=None, environ=os.environ, keep_blank_values=0, strict_parsing=0):
         environ         : environment dictionary; default: os.environ
 
         keep_blank_values: flag indicating whether blank values in
-            URL encoded forms should be treated as blank strings.
+            percent-encoded forms should be treated as blank strings.
             A true value indicates that blanks should be retained as
             blank strings.  The default false value indicates that
             blank values are to be ignored and treated as if they were
@@ -176,20 +175,21 @@ def parse(fp=None, environ=os.environ, keep_blank_values=0, strict_parsing=0):
 
 
 # parse query string function called from urlparse,
-# this is done in order to maintain backward compatiblity.
+# this is done in order to maintain backward compatibility.
 
 def parse_qs(qs, keep_blank_values=0, strict_parsing=0):
     """Parse a query given as a string argument."""
-    warn("cgi.parse_qs is deprecated, use urlparse.parse_qs \
-            instead", PendingDeprecationWarning, 2)
+    warn("cgi.parse_qs is deprecated, use urlparse.parse_qs instead",
+         PendingDeprecationWarning, 2)
     return urlparse.parse_qs(qs, keep_blank_values, strict_parsing)
 
 
-def parse_qsl(qs, keep_blank_values=0, strict_parsing=0):
+def parse_qsl(qs, keep_blank_values=0, strict_parsing=0, max_num_fields=None):
     """Parse a query given as a string argument."""
     warn("cgi.parse_qsl is deprecated, use urlparse.parse_qsl instead",
          PendingDeprecationWarning, 2)
-    return urlparse.parse_qsl(qs, keep_blank_values, strict_parsing)
+    return urlparse.parse_qsl(qs, keep_blank_values, strict_parsing,
+                              max_num_fields)
 
 def parse_multipart(fp, pdict):
     """Parse multipart input.
@@ -293,7 +293,7 @@ def _parseparam(s):
     while s[:1] == ';':
         s = s[1:]
         end = s.find(';')
-        while end > 0 and s.count('"', 0, end) % 2:
+        while end > 0 and (s.count('"', 0, end) - s.count('\\"', 0, end)) % 2:
             end = s.find(';', end + 1)
         if end < 0:
             end = len(s)
@@ -394,7 +394,8 @@ class FieldStorage:
     """
 
     def __init__(self, fp=None, headers=None, outerboundary="",
-                 environ=os.environ, keep_blank_values=0, strict_parsing=0):
+                 environ=os.environ, keep_blank_values=0, strict_parsing=0,
+                 max_num_fields=None):
         """Constructor.  Read multipart/* until last part.
 
         Arguments, all optional:
@@ -411,7 +412,7 @@ class FieldStorage:
         environ         : environment dictionary; default: os.environ
 
         keep_blank_values: flag indicating whether blank values in
-            URL encoded forms should be treated as blank strings.
+            percent-encoded forms should be treated as blank strings.
             A true value indicates that blanks should be retained as
             blank strings.  The default false value indicates that
             blank values are to be ignored and treated as if they were
@@ -421,10 +422,14 @@ class FieldStorage:
             If false (the default), errors are silently ignored.
             If true, errors raise a ValueError exception.
 
+        max_num_fields: int. If set, then __init__ throws a ValueError
+            if there are more than n fields read by parse_qsl().
+
         """
         method = 'GET'
         self.keep_blank_values = keep_blank_values
         self.strict_parsing = strict_parsing
+        self.max_num_fields = max_num_fields
         if 'REQUEST_METHOD' in environ:
             method = environ['REQUEST_METHOD'].upper()
         self.qs_on_post = None
@@ -607,10 +612,9 @@ class FieldStorage:
         qs = self.fp.read(self.length)
         if self.qs_on_post:
             qs += '&' + self.qs_on_post
-        self.list = list = []
-        for key, value in urlparse.parse_qsl(qs, self.keep_blank_values,
-                                            self.strict_parsing):
-            list.append(MiniFieldStorage(key, value))
+        query = urlparse.parse_qsl(qs, self.keep_blank_values,
+                                   self.strict_parsing, self.max_num_fields)
+        self.list = [MiniFieldStorage(key, value) for key, value in query]
         self.skip_lines()
 
     FieldStorageClass = None
@@ -622,19 +626,38 @@ class FieldStorage:
             raise ValueError, 'Invalid boundary in multipart form: %r' % (ib,)
         self.list = []
         if self.qs_on_post:
-            for key, value in urlparse.parse_qsl(self.qs_on_post,
-                                self.keep_blank_values, self.strict_parsing):
-                self.list.append(MiniFieldStorage(key, value))
+            query = urlparse.parse_qsl(self.qs_on_post,
+                                       self.keep_blank_values,
+                                       self.strict_parsing,
+                                       self.max_num_fields)
+            self.list.extend(MiniFieldStorage(key, value)
+                             for key, value in query)
             FieldStorageClass = None
+
+        # Propagate max_num_fields into the sub class appropriately
+        max_num_fields = self.max_num_fields
+        if max_num_fields is not None:
+            max_num_fields -= len(self.list)
 
         klass = self.FieldStorageClass or self.__class__
         part = klass(self.fp, {}, ib,
-                     environ, keep_blank_values, strict_parsing)
+                     environ, keep_blank_values, strict_parsing,
+                     max_num_fields)
+
         # Throw first part away
         while not part.done:
             headers = rfc822.Message(self.fp)
             part = klass(self.fp, headers, ib,
-                         environ, keep_blank_values, strict_parsing)
+                         environ, keep_blank_values, strict_parsing,
+                         max_num_fields)
+
+            if max_num_fields is not None:
+                max_num_fields -= 1
+                if part.list:
+                    max_num_fields -= len(part.list)
+                if max_num_fields < 0:
+                    raise ValueError('Max number of fields exceeded')
+
             self.list.append(part)
         self.skip_lines()
 
@@ -698,6 +721,9 @@ class FieldStorage:
             if not line:
                 self.done = -1
                 break
+            if delim == "\r":
+                line = delim + line
+                delim = ""
             if line[:2] == "--" and last_line_lfend:
                 strippedline = line.strip()
                 if strippedline == next:
@@ -714,6 +740,12 @@ class FieldStorage:
                 delim = "\n"
                 line = line[:-1]
                 last_line_lfend = True
+            elif line[-1] == "\r":
+                # We may interrupt \r\n sequences if they span the 2**16
+                # byte boundary
+                delim = "\r"
+                line = line[:-1]
+                last_line_lfend = False
             else:
                 delim = ""
                 last_line_lfend = False

@@ -136,6 +136,9 @@ typedef struct _ffi_type
   /*@null@*/ struct _ffi_type **elements;
 } ffi_type;
 
+int can_return_struct_as_int(size_t);
+int can_return_struct_as_sint64(size_t);
+
 /* These are defined in types.c */
 extern ffi_type ffi_type_void;
 extern ffi_type ffi_type_uint8;
@@ -221,11 +224,15 @@ typedef struct {
   void      *user_data;
 } ffi_closure;
 
+void ffi_closure_free(void *);
+void *ffi_closure_alloc (size_t size, void **code);
+
 ffi_status
-ffi_prep_closure (ffi_closure*,
+ffi_prep_closure_loc (ffi_closure*,
 		  ffi_cif *,
 		  void (*fun)(ffi_cif*,void*,void**,void*),
-		  void *user_data);
+		  void *user_data,
+		  void *codeloc);
 
 typedef struct {
   char tramp[FFI_TRAMPOLINE_SIZE];

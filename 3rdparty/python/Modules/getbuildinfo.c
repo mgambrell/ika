@@ -20,33 +20,48 @@
 #endif
 #endif
 
-/* on unix, SVNVERSION is passed on the command line.
- * on Windows, the string is interpolated using
- * subwcrev.exe
- */
-#ifndef SVNVERSION
-#define SVNVERSION "$WCRANGE$$WCMODS?M:$"
+/* XXX Only unix build process has been tested */
+#ifndef GITVERSION
+#define GITVERSION ""
+#endif
+#ifndef GITTAG
+#define GITTAG ""
+#endif
+#ifndef GITBRANCH
+#define GITBRANCH ""
 #endif
 
 const char *
 Py_GetBuildInfo(void)
 {
-    static char buildinfo[50];
-    const char *revision = Py_SubversionRevision();
+    static char buildinfo[50 + sizeof(GITVERSION) +
+                          ((sizeof(GITTAG) > sizeof(GITBRANCH)) ?
+                           sizeof(GITTAG) : sizeof(GITBRANCH))];
+    const char *revision = _Py_gitversion();
     const char *sep = *revision ? ":" : "";
-    const char *branch = Py_SubversionShortBranch();
+    const char *gitid = _Py_gitidentifier();
+    if (!(*gitid))
+        gitid = "default";
     PyOS_snprintf(buildinfo, sizeof(buildinfo),
-                  "%s%s%s, %.20s, %.9s", branch, sep, revision,
+                  "%s%s%s, %.20s, %.9s", gitid, sep, revision,
                   DATE, TIME);
     return buildinfo;
 }
 
 const char *
-_Py_svnversion(void)
+_Py_gitversion(void)
 {
-    /* the following string can be modified by subwcrev.exe */
-    static const char svnversion[] = SVNVERSION;
-    if (svnversion[0] != '$')
-        return svnversion; /* it was interpolated, or passed on command line */
-    return "Unversioned directory";
+    return GITVERSION;
+}
+
+const char *
+_Py_gitidentifier(void)
+{
+    const char *gittag, *gitid;
+    gittag = GITTAG;
+    if ((*gittag) && strcmp(gittag, "undefined") != 0)
+        gitid = gittag;
+    else
+        gitid = GITBRANCH;
+    return gitid;
 }

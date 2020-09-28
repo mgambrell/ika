@@ -31,7 +31,7 @@ enum_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
             Py_DECREF(en);
             return NULL;
         }
-        assert(PyInt_Check(start) || PyLong_Check(start));
+        assert(_PyAnyInt_Check(start));
         en->en_index = PyInt_AsSsize_t(start);
         if (en->en_index == -1 && PyErr_Occurred()) {
             PyErr_Clear();
@@ -87,19 +87,25 @@ enum_next_long(enumobject *en, PyObject* next_item)
 
     if (en->en_longindex == NULL) {
         en->en_longindex = PyInt_FromSsize_t(PY_SSIZE_T_MAX);
-        if (en->en_longindex == NULL)
+        if (en->en_longindex == NULL) {
+            Py_DECREF(next_item);
             return NULL;
+        }
     }
     if (one == NULL) {
         one = PyInt_FromLong(1);
-        if (one == NULL)
+        if (one == NULL) {
+            Py_DECREF(next_item);
             return NULL;
+        }
     }
     next_index = en->en_longindex;
     assert(next_index != NULL);
     stepped_up = PyNumber_Add(next_index, one);
-    if (stepped_up == NULL)
+    if (stepped_up == NULL) {
+        Py_DECREF(next_item);
         return NULL;
+    }
     en->en_longindex = stepped_up;
 
     if (result->ob_refcnt == 1) {
@@ -223,7 +229,8 @@ static PyObject *
 reversed_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
 {
     Py_ssize_t n;
-    PyObject *seq;
+    PyObject *seq, *reversed_meth;
+    static PyObject *reversed_cache = NULL;
     reversedobject *ro;
 
     if (type == &PyReversed_Type && !_PyArg_NoKeywords("reversed()", kwds))
@@ -232,8 +239,26 @@ reversed_new(PyTypeObject *type, PyObject *args, PyObject *kwds)
     if (!PyArg_UnpackTuple(args, "reversed", 1, 1, &seq) )
         return NULL;
 
-    if (PyObject_HasAttrString(seq, "__reversed__"))
-        return PyObject_CallMethod(seq, "__reversed__", NULL);
+    if (PyInstance_Check(seq)) {
+        reversed_meth = PyObject_GetAttrString(seq, "__reversed__");
+        if (reversed_meth == NULL) {
+            if (PyErr_ExceptionMatches(PyExc_AttributeError))
+                PyErr_Clear();
+            else
+                return NULL;
+        }
+    }
+    else {
+        reversed_meth = _PyObject_LookupSpecial(seq, "__reversed__",
+                                                &reversed_cache);
+        if (reversed_meth == NULL && PyErr_Occurred())
+            return NULL;
+    }
+    if (reversed_meth != NULL) {
+        PyObject *res = PyObject_CallFunctionObjArgs(reversed_meth, NULL);
+        Py_DECREF(reversed_meth);
+        return res;
+    }
 
     if (!PySequence_Check(seq)) {
         PyErr_SetString(PyExc_TypeError,
